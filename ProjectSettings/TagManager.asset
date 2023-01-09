@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - CandleLight
+  - Enemy
+  - Scenery
+  - Lightable
+  - ClusterEnemy
+  - PlayerProjectile
+  - SlipperyFloor
+  - BelowGround
+  - EnemyProjectile
+  - UnCollidable
+  - Interactable
+  - Breakable
+  - PickUp
+  - Wall
+  - Door
+  - PlayerBoxCollider
+  - Staircase
+  - Trap
+  - Shield
+  - EnemyBarrier
+  - TeleporterPad
+  - MovementTile
+  - CharacterProjectileBarrier
+  - EnemyGeometryCollider
+  - MechanicalHatch
+  - EventTrigger
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Ground
+  - EnemyBarrier
+  - Enemy
+  - Player Projectiles
+  - Lighting Internal (Game)
+  - Lighting Internal (Scene)
+  - Enemy Projectiles
+  - Geometry Colliders
+  - PickUps
+  - Scenery
+  - Projectile Barrier
+  - Character Barrier
+  - Trap
+  - Shield
+  - Character Projectile Barrier
+  - GroundTriggers
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Distortion
+  m_SortingLayers:
+  - name: Ground
+    uniqueID: 2679955727
+    locked: 0
+  - name: Walls
+    uniqueID: 120433317
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Platforms
+    uniqueID: 2734613687
+    locked: 0
+  - name: MainCharacter
+    uniqueID: 4101474345
+    locked: 0
+  - name: Doors
+    uniqueID: 803500737
+    locked: 0
+  - name: TileMap_AboveCharacter
+    uniqueID: 747697987
+    locked: 0
+  - name: CeilingAndRoof
+    uniqueID: 3964868537
+    locked: 0
+  - name: UnderUI
+    uniqueID: 1576394171
+    locked: 0
+  - name: Lighting
+    uniqueID: 1220565467
+    locked: 0
+  - name: UI
+    uniqueID: 4065974151
+    locked: 0
