@@ -65,7 +65,7 @@ public class SwordAndShield_Interactable : A_Interactable, I_DiscoverableItem
         }
 
         // radialLight.enabled = true;
-        HideInteractionText(true);
+        HideInteractionPrompt(true);
         Interactable = false;
         swordSprite.SetActive(false);
         sheildSprite.SetActive(false);

@@ -83,7 +83,7 @@ public class Chest : A_Interactable, IUnlocklableObject
         closedChestObject.SetActive(false);
         openChestObject.SetActive(true);
         Interactable = false;
-        HideInteractionText(true);
+        HideInteractionPrompt(true);
         opened = true;
         GameMaster.Instance.audioSource.PlayOneShot(chestOpenSound);
         DOVirtual.DelayedCall(.25f, ()=>{GameMaster.Instance.audioSource.PlayOneShot(itemGetSound);});

@@ -8,8 +8,8 @@ public interface I_Interactable
         get;
     }
     public bool Interact();
-    public void DisplayInteractionText(bool immediate = false);
-    public void HideInteractionText(bool immediate = false);
+    public void DisplayInteractionPrompt(bool immediate = false);
+    public void HideInteractionPrompt(bool immediate = false);
     public bool Interactable{
         get;
     }

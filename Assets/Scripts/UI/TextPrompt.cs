@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class TextPrompt : MonoBehaviour
+public class TextPrompt : MonoBehaviour, I_ControlsSwapUI
 {
     [SerializeField] TextMeshProUGUI textObject;
     [SerializeField] Image backgroundImage;
@@ -47,44 +47,9 @@ public class TextPrompt : MonoBehaviour
     {
         
     }
-
-    // public void ShowPrompt(string text, float scaling = 1f, float fadeDuration = .75f){
-    //     gameObject.SetActive(true);
-    //     Color newColor = backgroundImage.color;
-    //     newColor.a = 0f;
-    //     backgroundImage.color = newColor;
-    //     backgroundImage.DOFade(1f, fadeDuration);
-    //     textObject.alpha = 0f;
-    //     textObject.DOFade(1f, fadeDuration);
-    //     textObject.fontSize = originalTextFontSize * scaling;
-
-    //     textObject.transform.DOMoveY(textObject.transform.position.y - backgroundImage.rectTransform.rect.height / 10f, fadeDuration)
-    //         .From()
-    //         .SetEase(Ease.OutBack).easeOvershootOrAmplitude = easeOvershootOrAmplitude;
-    //     backgroundImage.transform.DOMoveY(backgroundImage.transform.position.y - backgroundImage.rectTransform.rect.height / 10f, fadeDuration)
-    //         .From()
-    //         .SetEase(Ease.OutBack)
-    //         .easeOvershootOrAmplitude = easeOvershootOrAmplitude;
-
-    //     SetText(text);
-
-    //     buttonImage.transform.localScale = originalButtonScale * scaling;
-    //     buttonTextObject.fontSize = originalButtonTexFontSize * scaling;
-    //     buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, 0f);
-    //     buttonTextObject.alpha = 0f;
-    //     buttonImage.DOFade(1f, fadeDuration);
-    //     buttonTextObject.DOFade(1f, fadeDuration);
-
-    //     if(buttonTween == null){
-
-    //         buttonTween = buttonImage.transform.DOScale(originalButtonScale * scaling * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
-    //         buttonTextTween = DOTween.To(()=> buttonTextObject.fontSize, x => buttonTextObject.fontSize = x, originalButtonTexFontSize * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
-    //         // buttonTextTween = buttonTextObject.transform.DOScale(1.25f, 1f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
-    //     }
-
-    //     buttonTween.Restart(false);
-    //     buttonTextTween.Restart(false);
-    // }
+    public void UpdateControlsUI(){
+        buttonImage.sprite = ControlsManager.Instance.GetCurrentInteractSprite();
+    }
 
     public void ShowPrompt(List<(GameObject character, string text)> dialogueTupleList, float scaling = 1f, float fadeDuration = .75f){
         gameObject.SetActive(true);
@@ -161,3 +126,42 @@ public class TextPrompt : MonoBehaviour
         return true;
     }
 }
+
+
+    // public void ShowPrompt(string text, float scaling = 1f, float fadeDuration = .75f){
+    //     gameObject.SetActive(true);
+    //     Color newColor = backgroundImage.color;
+    //     newColor.a = 0f;
+    //     backgroundImage.color = newColor;
+    //     backgroundImage.DOFade(1f, fadeDuration);
+    //     textObject.alpha = 0f;
+    //     textObject.DOFade(1f, fadeDuration);
+    //     textObject.fontSize = originalTextFontSize * scaling;
+
+    //     textObject.transform.DOMoveY(textObject.transform.position.y - backgroundImage.rectTransform.rect.height / 10f, fadeDuration)
+    //         .From()
+    //         .SetEase(Ease.OutBack).easeOvershootOrAmplitude = easeOvershootOrAmplitude;
+    //     backgroundImage.transform.DOMoveY(backgroundImage.transform.position.y - backgroundImage.rectTransform.rect.height / 10f, fadeDuration)
+    //         .From()
+    //         .SetEase(Ease.OutBack)
+    //         .easeOvershootOrAmplitude = easeOvershootOrAmplitude;
+
+    //     SetText(text);
+
+    //     buttonImage.transform.localScale = originalButtonScale * scaling;
+    //     buttonTextObject.fontSize = originalButtonTexFontSize * scaling;
+    //     buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, 0f);
+    //     buttonTextObject.alpha = 0f;
+    //     buttonImage.DOFade(1f, fadeDuration);
+    //     buttonTextObject.DOFade(1f, fadeDuration);
+
+    //     if(buttonTween == null){
+
+    //         buttonTween = buttonImage.transform.DOScale(originalButtonScale * scaling * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+    //         buttonTextTween = DOTween.To(()=> buttonTextObject.fontSize, x => buttonTextObject.fontSize = x, originalButtonTexFontSize * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+    //         // buttonTextTween = buttonTextObject.transform.DOScale(1.25f, 1f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+    //     }
+
+    //     buttonTween.Restart(false);
+    //     buttonTextTween.Restart(false);
+    // }

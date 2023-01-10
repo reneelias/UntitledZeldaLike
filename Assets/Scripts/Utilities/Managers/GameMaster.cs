@@ -157,11 +157,11 @@ public class GameMaster : Singleton<GameMaster>
     }
 
     public void InputSchemeChange(string scheme){
-        if(scheme == "Gamepad"){
+        // if(scheme == "Gamepad"){
 
-        } else if(scheme == "Keyboard_Mouse"){
+        // } else if(scheme == "Keyboard_Mouse"){
 
-        }
+        // }
 
         crosshair.SetInputeScheme(scheme);
     }

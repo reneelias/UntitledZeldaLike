@@ -40,7 +40,7 @@ MonoBehaviour:
           sorting: 0
       lightLayers:
         list:
-        - id: 0
+        - id: 2
           type: 0
           sorting: 0
   lightPresets:

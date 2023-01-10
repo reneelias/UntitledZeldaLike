@@ -814,9 +814,12 @@ public class CharacterControls : MonoBehaviour
 
     public void ControlsChanged(PlayerInput playerInput){
         GameMaster.Instance.InputSchemeChange(playerInput.currentControlScheme);
-        if(Gamepad.current != null){
-            Debug.Log($"Gamepad name: {Gamepad.current.name}");
-        }
+        // if(Gamepad.current != null){
+        //     Debug.Log($"Gamepad name: {Gamepad.current.name}");
+        // }
+
+        string controlType = playerInput.currentControlScheme == "Gamepad" ? Gamepad.current.name : "Keyboard_Mouse";
+        ControlsManager.Instance.SetCurrentControlType(controlType);
     }
 
     public virtual void SetCharacterDirection(CharacterDirection characterDirection, bool setVelocityToZero = false){
@@ -1401,7 +1404,7 @@ public class CharacterControls : MonoBehaviour
                    break; 
                 }
                 withinInteractRange = true;
-                interactableObject.GetComponent<I_Interactable>().DisplayInteractionText();
+                interactableObject.GetComponent<I_Interactable>().DisplayInteractionPrompt();
                 // if(interactableObject.Interact()){
                 //     // PauseForInteraction(other.gameObject);
                 // }
@@ -1421,7 +1424,7 @@ public class CharacterControls : MonoBehaviour
                 if(interactableObject == null || interactableObject.GetComponent<I_Interactable>() == null || !interactableObject.GetComponent<I_Interactable>().Interactable){
                    break;
                 }
-                interactableObject.GetComponent<I_Interactable>().HideInteractionText();
+                interactableObject.GetComponent<I_Interactable>().HideInteractionPrompt();
                 // if(interactableObject.Interact()){
                 //     // PauseForInteraction(other.gameObject);
                 // }
