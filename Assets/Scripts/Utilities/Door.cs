@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] bool isLocked = false;
 
-    public GameObject lockedDoorObject;
+    public LockedDoor lockedDoorObject;
     public Sprite alternateLockSprite;
     [SerializeField] AudioClip unlockDoorAudioClip;
     [SerializeField] AudioClip lockDoorAudioClip;
@@ -38,7 +38,8 @@ public class Door : MonoBehaviour
 
         // cameraBehavior = activeCamera.GetComponent<CameraBehavior>();
         if(!player){
-            player = GameObject.FindWithTag("Player");
+            // player = GameObject.FindWithTag("Player");
+            player = GameMaster.Instance.Player.gameObject;
         }
 
         if(isLocked){
@@ -110,16 +111,20 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void LockDoor(){
-        lockedDoorObject.SetActive(true);
+    public void LockDoor(bool nonKeyLock = false){
+        lockedDoorObject.gameObject.SetActive(true);
         
         if(!initialSetup){
             GameMaster.Instance.audioSource.PlayOneShot(lockDoorAudioClip);
         }
+
+        if(nonKeyLock){
+            lockedDoorObject.SetNonKeyLock();
+        }
     }
 
     public void UnlockDoor(bool playAudio = true){
-        lockedDoorObject.SetActive(false);
+        lockedDoorObject.gameObject.SetActive(false);
 
         if(!initialSetup && playAudio){
             GameMaster.Instance.audioSource.PlayOneShot(unlockDoorAudioClip);

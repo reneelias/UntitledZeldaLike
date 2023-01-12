@@ -763,6 +763,13 @@ public class CharacterControls : MonoBehaviour
                     break;
                 }
             }
+
+            /*Not allowing players to dodge through MovementTiles*/
+            if(raycastHit.collider.tag == "MovementTile"){
+                currentDodgeMagnitude = dodgeMagnitude * .5f;
+            }
+
+            /*Shortening dodge distance if players are going to run into an obstacle*/
             if(!tagsToIgnore.Contains(raycastHit.collider.tag) && raycastHit.distance < dodgeMagnitude){
             // if(raycastHit.distance < dodgeMagnitude){
                 currentDodgeMagnitude = raycastHit.distance - .25f;

@@ -121,7 +121,11 @@ public class Crosshair : MonoBehaviour
         Cursor.visible = visible;
     }
 
-    public void SetCrosshairVisible(bool visible = true){
+    public void SetCrosshairVisible(bool visible = true, bool overrideScheme = false){
+        if(!overrideScheme && characterControls.CurrentWeaponType == CharacterControls.WeaponType.Sword){
+            return;
+        }
+        
         gameObject.GetComponent<Renderer>().enabled = visible;
     }
 }

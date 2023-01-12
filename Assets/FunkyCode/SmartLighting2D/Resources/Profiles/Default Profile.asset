@@ -56,7 +56,7 @@ MonoBehaviour:
           shadowEffectLayer: 0
           maskLit: 1
           maskLitDistance: 1
-        - layerID: 0
+        - layerID: 1
           type: 0
           sorting: 0
           sortingIgnore: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
     colliderLayers:
       names:
       - Default
+      - SpriteCollider
     lightLayers:
       names:
       - Default

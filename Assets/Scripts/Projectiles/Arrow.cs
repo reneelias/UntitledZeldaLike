@@ -18,7 +18,7 @@ public class Arrow : MonoBehaviour
     public bool shouldAttachToTargets = true;
     GameObject attachedBody;
     Vector3 relativePositionToAttachedBody;
-    List<string> nonCollidingTags;
+    [SerializeField] List<string> nonCollidingTags;
     [SerializeField] int floorLevel = 1;
     public int FloorLevel{
         get => floorLevel;
@@ -29,13 +29,7 @@ public class Arrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nonCollidingTags = new List<string>();
-        nonCollidingTags.Add("PlayerProjectile");
-        nonCollidingTags.Add("EnemyProjectile");
-        nonCollidingTags.Add("UnCollidable");
-        nonCollidingTags.Add("SlipperyFloor");
-        nonCollidingTags.Add("BelowGround");
-        nonCollidingTags.Add("EnemyBarrier");
+        
     }
 
     public void SetColliderToIgnore(Collider2D other){

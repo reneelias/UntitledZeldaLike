@@ -865,7 +865,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
     maxTextureSize: 2048
@@ -901,7 +901,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
@@ -1560,10 +1560,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -39, y: 60}
+      - - {x: -41, y: 31}
         - {x: -41, y: -41}
         - {x: 41, y: -41}
-        - {x: 41, y: 60}
+        - {x: 41, y: 31}
       tessellationDetail: 0
       bones: []
       spriteID: 740d841ab69d43c4f8959e1be39d8e7d
@@ -6356,24 +6356,24 @@ TextureImporter:
       DungeonColor3@128x128_110: 21300220
       DungeonColor3@128x128_141: 21300282
       DungeonColor3@128x128_181: 21300362
-      DungeonColor3@128x128_154: 21300308
+      DungeonColor3@128x128_209: 21300418
       DungeonColor3@128x128_78: 21300156
       DungeonColor3@128x128_224: 21300448
+      DungeonColor3@128x128_154: 21300308
       DungeonColor3@128x128_96: 21300192
       DungeonColor3@128x128_4: 21300008
       DungeonColor3@128x128_146: 21300292
-      DungeonColor3@128x128_209: 21300418
       DungeonColor3@128x128_221: 21300442
       DungeonColor3@128x128_250: 21300500
       DungeonColor3@128x128_40: 21300080
       DungeonColor3@128x128_104: 21300208
       DungeonColor3@128x128_73: 21300146
-      DungeonColor3@128x128_106: 21300212
-      DungeonColor3@128x128_157: 21300314
       DungeonColor3@128x128_111: 21300222
-      DungeonColor3@128x128_171: 21300342
-      DungeonColor3@128x128_132: 21300264
+      DungeonColor3@128x128_157: 21300314
       DungeonColor3@128x128_150: 21300300
+      DungeonColor3@128x128_106: 21300212
+      DungeonColor3@128x128_132: 21300264
+      DungeonColor3@128x128_171: 21300342
       DungeonColor3@128x128_26: 21300052
       DungeonColor3@128x128_119: 21300238
       DungeonColor3@128x128_10: 21300020

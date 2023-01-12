@@ -30,6 +30,7 @@ TagManager:
   - EnemyGeometryCollider
   - MechanicalHatch
   - EventTrigger
+  - Sword
   layers:
   - Default
   - TransparentFX

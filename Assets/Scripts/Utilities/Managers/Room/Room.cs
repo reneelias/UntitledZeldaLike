@@ -502,7 +502,7 @@ public class Room : MonoBehaviour
     void LockDoors(){
         if(lockDoorsOnFirstEntry && firstEntry){
             foreach(Door door in doors){
-                door.LockDoor();
+                door.LockDoor(true);
             }
 
             firstEntry = false;
