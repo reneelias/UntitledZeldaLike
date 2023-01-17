@@ -419,7 +419,8 @@ MonoBehaviour:
   particleEmitter: {fileID: 2742307756164961285}
   discoverMessages:
   - You found the <color=#ff3300>Sword of Restoration</color> and <color=#006600>Shield
-    of Patience</color>! Switch between your sword and your staff by pressing "<color=#0066ff>F</color>".
+    of Patience</color>! You can now switch back and forth between your staff and
+    sword!
   fontScaling: 0.9
   spriteObject: {fileID: 906813604065332106}
   swordSprite: {fileID: 6333325502864953394}

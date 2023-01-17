@@ -820,6 +820,9 @@ public class CharacterControls : MonoBehaviour
     }
 
     public void ControlsChanged(PlayerInput playerInput){
+        if(GameMaster.Instance == null){
+            return;
+        }
         GameMaster.Instance.InputSchemeChange(playerInput.currentControlScheme);
         // if(Gamepad.current != null){
         //     Debug.Log($"Gamepad name: {Gamepad.current.name}");

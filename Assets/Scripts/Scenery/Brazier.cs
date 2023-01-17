@@ -107,7 +107,7 @@ public class Brazier : LightableObject, ISwitchable
         flameSprite.SetActive(on);
 
         if(useDistortionEffect){
-            distortionObject.SetActive(true);
+            distortionObject.SetActive(on);
         }
 
         if(flipOthers){
