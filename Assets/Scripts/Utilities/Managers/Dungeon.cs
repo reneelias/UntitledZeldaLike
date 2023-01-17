@@ -189,7 +189,7 @@ public class Dungeon : MonoBehaviour
             CurrentRoom.DeathRoomReset();
         });
     
-        DOVirtual.DelayedCall(resetDelay * 1f, ()=>{
+        DOVirtual.DelayedCall(resetDelay * 1.5f, ()=>{
             CurrentRoom = deathRoom.RespawnRoom;
             // characterControls.SetPlayerDirection(deathRoom.RespawnPlayerDirection);
             CurrentRoom.ActivateRoom();

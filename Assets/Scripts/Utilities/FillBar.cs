@@ -132,6 +132,22 @@ public class FillBar : MonoBehaviour
             return;
         }
 
+        if(GameMaster.Instance.GameOver){
+            if(flashing){
+                if(innerBarFlash){
+                    flashingTween_innerBar.Pause();
+                }
+
+                if(outerBarFlash){
+                    colorFlashTween_outerBar.Pause();
+                }
+
+                flashing = false;
+            }
+
+            return;
+        }
+
         if(FillPercent <= lowFlashPercentage){
             if(!flashing){
                 if(innerBarFlash){
@@ -166,6 +182,10 @@ public class FillBar : MonoBehaviour
                 }
 
                 flashing = false;
+            }
+
+            if(!flashing && outerBar.GetComponent<SpriteRenderer>().color != outerBarOgColor){
+                outerBar.GetComponent<SpriteRenderer>().color = outerBarOgColor;
             }
         }
     }

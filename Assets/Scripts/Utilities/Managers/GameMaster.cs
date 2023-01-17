@@ -226,6 +226,7 @@ public class GameMaster : Singleton<GameMaster>
                     });
                 gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().alpha = 0f; 
                 gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().DOFade(1f, fadeTime);
+
             }
         });
     }
