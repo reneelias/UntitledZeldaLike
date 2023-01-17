@@ -125,6 +125,10 @@ public class TextPrompt : MonoBehaviour, I_ControlsSwapUI
 
         return true;
     }
+
+    public void SetSprite(Sprite sprite){
+        
+    }
 }
 
 
