@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class FillBar : MonoBehaviour
 {
@@ -20,10 +21,21 @@ public class FillBar : MonoBehaviour
     [SerializeField] GameObject parentObject;
     [SerializeField] bool alwaysStayUpright = true;
     float distanceFromUprightObject;
-
+    [Header("Flash When Low Settings")]
+    [SerializeField] bool flashWhenLow = false;
+    [SerializeField] bool innerBarFlash = true;
+    [SerializeField] bool outerBarFlash = true;
+    [SerializeField] float lowFlashPercentage = .2f;
+    [SerializeField] Color outerBarFlashColor = Color.yellow;
+    [SerializeField] float flashTweenDuration = .25f;
+    Color outerBarOgColor;
+    bool flashing = false;
+    Tween flashingTween_innerBar;
+    Tween alphaRestoreTween_innerBar;
+    Tween colorFlashTween_outerBar;
+    Tween colorRestoreTween_outerBar;
     GameObject UI_Camera;
-
-    public bool isUI = false;
+    [SerializeField] bool isUI = false;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -46,6 +58,13 @@ public class FillBar : MonoBehaviour
         if(alwaysStayUpright){
             distanceFromUprightObject = (transform.position - parentObject.transform.position).magnitude;
         }
+
+        flashingTween_innerBar = innerBar.GetComponent<SpriteRenderer>().DOFade(0f, flashTweenDuration).SetLoops(-1, LoopType.Yoyo);
+        flashingTween_innerBar.Pause();
+        outerBarOgColor = outerBar.GetComponent<SpriteRenderer>().color;
+        colorFlashTween_outerBar = outerBar.GetComponent<SpriteRenderer>().DOColor(outerBarFlashColor, flashTweenDuration).SetLoops(-1, LoopType.Yoyo);
+        colorFlashTween_outerBar.Pause();
+        // Color innerBarColor = innerBar.GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame
@@ -57,6 +76,7 @@ public class FillBar : MonoBehaviour
         }
 
         UpdateStayUpright();
+        UpdateLowFlashing();
     }
 
     void FixedUpdate()
@@ -105,5 +125,48 @@ public class FillBar : MonoBehaviour
         canvas.sortingOrder = parentObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
         outerBar.GetComponent<SpriteRenderer>().sortingOrder = parentObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
         innerBar.GetComponent<SpriteRenderer>().sortingOrder = parentObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
+    }
+
+    private void UpdateLowFlashing(){
+        if(!flashWhenLow){
+            return;
+        }
+
+        if(FillPercent <= lowFlashPercentage){
+            if(!flashing){
+                if(innerBarFlash){
+                    Color innerBarColor = innerBar.GetComponent<SpriteRenderer>().color;
+                    innerBarColor.a = 1f;
+                    if(alphaRestoreTween_innerBar != null){
+                        alphaRestoreTween_innerBar.Kill();
+                    }
+                    flashingTween_innerBar.Restart();
+                }
+
+                if(outerBarFlash){
+                    outerBar.GetComponent<SpriteRenderer>().color = outerBarOgColor;
+                    if(colorRestoreTween_outerBar != null){
+                        colorRestoreTween_outerBar.Kill();
+                    }
+                    colorFlashTween_outerBar.Restart();
+                }
+
+                flashing = true;
+            }
+        } else {
+            if(flashing){
+                if(innerBarFlash){
+                    flashingTween_innerBar.Pause();
+                    alphaRestoreTween_innerBar = innerBar.GetComponent<SpriteRenderer>().DOFade(1f, flashTweenDuration);
+                }
+
+                if(outerBarFlash){
+                    colorFlashTween_outerBar.Pause();
+                    colorRestoreTween_outerBar = outerBar.GetComponent<SpriteRenderer>().DOColor(outerBarOgColor, flashTweenDuration);
+                }
+
+                flashing = false;
+            }
+        }
     }
 }
