@@ -74,4 +74,8 @@ public class MenuScript : MonoBehaviour
     public void ShowControlsGUI(bool show){
         Controls_UI.gameObject.SetActive(show);
     }
+
+    public void SetVSync(bool on){
+        QualitySettings.vSyncCount = on ? 1 : 0;
+    }
 }
