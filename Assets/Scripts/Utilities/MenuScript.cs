@@ -76,6 +76,13 @@ public class MenuScript : MonoBehaviour
     }
 
     public void SetVSync(bool on){
-        QualitySettings.vSyncCount = on ? 1 : 0;
+        if(on){
+            QualitySettings.vSyncCount = 1;
+            Application.targetFrameRate = 60;
+        } else {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = -1;
+            // QualitySettings.
+        }
     }
 }
