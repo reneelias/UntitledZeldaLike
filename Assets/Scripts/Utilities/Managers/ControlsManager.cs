@@ -9,6 +9,8 @@ public class ControlsManager : Singleton<ControlsManager>
     [SerializeField] Sprite playstation_InteractSprite;
     [SerializeField] Sprite xbox_InteractSprite;
     [SerializeField] Sprite nintendo_InteractSprite;
+    [SerializeField] Sprite keyboardMouse_BackgroundSprite;
+    [SerializeField] Sprite controller_BackgroundSprite;
     Dictionary<ControlType, Sprite> interactSpriteDictionary;
     ControlType currentControlType = ControlType.KEYBOARD_MOUSE;
     public ControlType CurrentControlType{
@@ -58,6 +60,10 @@ public class ControlsManager : Singleton<ControlsManager>
 
     public Sprite GetCurrentInteractSprite(){
         return interactSpriteDictionary[currentControlType];
+    }
+
+    public Sprite GetCurrentBackgroundSprite(){
+        return currentControlType == ControlType.KEYBOARD_MOUSE ? keyboardMouse_BackgroundSprite : controller_BackgroundSprite;
     }
 }
 

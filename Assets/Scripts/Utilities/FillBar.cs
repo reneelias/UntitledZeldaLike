@@ -132,7 +132,7 @@ public class FillBar : MonoBehaviour
             return;
         }
 
-        if(GameMaster.Instance.GameOver){
+        if(GameMaster.Instance.GameOver || GameMaster.Instance.UI_FadedOut){
             if(flashing){
                 if(innerBarFlash){
                     flashingTween_innerBar.Pause();

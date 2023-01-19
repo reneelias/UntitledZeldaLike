@@ -19,14 +19,17 @@ public class TextPrompt : MonoBehaviour, I_ControlsSwapUI
     }
     [SerializeField] float easeOvershootOrAmplitude = 1.25f;
     [SerializeField] Image buttonImage;
+    [SerializeField] Image buttonImage_Background;
     [SerializeField] TextMeshProUGUI buttonTextObject;
     Tween buttonTween;
+    Tween buttonBackgroundTween;
     Tween buttonTextTween;
     [SerializeField] float buttonTweenDuration = 1f;
     [SerializeField] float buttonTweenScaler = 1.2f;
     float originalTextFontSize;
-    float originalButtonTexFontSize;
+    float originalButtonTextFontSize;
     Vector3 originalButtonScale;
+    Vector3 originalButtonBackgroundScale;
     List<(GameObject character, string text)> dialogueTupleList;
     int textIndex = 0;
     void Start()
@@ -34,8 +37,9 @@ public class TextPrompt : MonoBehaviour, I_ControlsSwapUI
         originalTextPosition = textObject.transform.position;
         originalBackgroundPosition = backgroundImage.transform.position;
         originalTextFontSize = textObject.fontSize;
-        originalButtonTexFontSize = buttonTextObject.fontSize;
+        originalButtonTextFontSize = buttonTextObject.fontSize;
         originalButtonScale = buttonImage.transform.localScale;
+        originalButtonBackgroundScale = buttonImage_Background.transform.localScale;
 
         if(!active){
             gameObject.SetActive(false);
@@ -48,7 +52,16 @@ public class TextPrompt : MonoBehaviour, I_ControlsSwapUI
         
     }
     public void UpdateControlsUI(){
-        buttonImage.sprite = ControlsManager.Instance.GetCurrentInteractSprite();
+        buttonImage_Background.sprite = ControlsManager.Instance.GetCurrentBackgroundSprite();
+
+        if(ControlsManager.Instance.CurrentControlType == ControlType.KEYBOARD_MOUSE){
+            buttonImage.gameObject.SetActive(false);
+            buttonTextObject.gameObject.SetActive(true);
+        } else {
+            buttonImage.gameObject.SetActive(true);
+            buttonImage.sprite = ControlsManager.Instance.GetCurrentInteractSprite();
+            buttonTextObject.gameObject.SetActive(false);
+        }
     }
 
     public void ShowPrompt(List<(GameObject character, string text)> dialogueTupleList, float scaling = 1f, float fadeDuration = .75f){
@@ -73,20 +86,25 @@ public class TextPrompt : MonoBehaviour, I_ControlsSwapUI
         SetText(dialogueTupleList);
 
         buttonImage.transform.localScale = originalButtonScale * scaling;
-        buttonTextObject.fontSize = originalButtonTexFontSize * scaling;
+        buttonImage_Background.transform.localScale = originalButtonBackgroundScale * scaling;
+        buttonTextObject.fontSize = originalButtonTextFontSize * scaling;
         buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, 0f);
+        buttonImage_Background.color = new Color(buttonImage_Background.color.r, buttonImage_Background.color.g, buttonImage_Background.color.b, 0f);
         buttonTextObject.alpha = 0f;
         buttonImage.DOFade(1f, fadeDuration);
+        buttonImage_Background.DOFade(1f, fadeDuration);
         buttonTextObject.DOFade(1f, fadeDuration);
 
         if(buttonTween == null){
 
             buttonTween = buttonImage.transform.DOScale(originalButtonScale * scaling * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
-            buttonTextTween = DOTween.To(()=> buttonTextObject.fontSize, x => buttonTextObject.fontSize = x, originalButtonTexFontSize * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+            buttonBackgroundTween = buttonImage_Background.transform.DOScale(originalButtonBackgroundScale * scaling * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+            buttonTextTween = DOTween.To(()=> buttonTextObject.fontSize, x => buttonTextObject.fontSize = x, originalButtonTextFontSize * buttonTweenScaler, buttonTweenDuration).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
             // buttonTextTween = buttonTextObject.transform.DOScale(1.25f, 1f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
         }
 
         buttonTween.Restart(false);
+        buttonBackgroundTween.Restart(false);
         buttonTextTween.Restart(false);
         Active = true;
     }
@@ -107,6 +125,7 @@ public class TextPrompt : MonoBehaviour, I_ControlsSwapUI
             })
             .easeOvershootOrAmplitude = easeOvershootOrAmplitude;
         buttonImage.DOFade(0f, fadeDuration / 2f);
+        buttonImage_Background.DOFade(0f, fadeDuration / 2f);
         buttonTextObject.DOFade(0f, fadeDuration / 2f);
         Active = false;
     }

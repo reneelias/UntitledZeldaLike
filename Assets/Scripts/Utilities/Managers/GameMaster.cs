@@ -49,6 +49,10 @@ public class GameMaster : Singleton<GameMaster>
         protected set => eventSystem = value;
         get => eventSystem;
     }
+    public bool UI_FadedOut{
+        protected set;
+        get;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -93,18 +97,21 @@ public class GameMaster : Singleton<GameMaster>
 
     public void ResetGameOver(){
         dungeon.ResetAfterDeath(gameOverResetDelay * .5f);
+        foreach(GameObject gameObject in UI_buttonsToFadeIn_gameOver){
+            gameObject.GetComponent<Button>().interactable = false;
+        }
 
         DOVirtual.DelayedCall(gameOverResetDelay, ()=>{        
             GameOver = false;
             SetBlackOverlay(false);
             FadeInUI(.25f);
             
-            foreach(GameObject gameObject in UI_buttonsToFadeIn_gameOver){
-                gameObject.SetActive(false);
+            foreach(GameObject buttonObject in UI_buttonsToFadeIn_gameOver){
+                buttonObject.SetActive(false);
             }
 
-            foreach(GameObject gameObject in UI_textToFadeIn_gameOver){
-                gameObject.SetActive(false);
+            foreach(GameObject textObject in UI_textToFadeIn_gameOver){
+                textObject.SetActive(false);
             }
 
             dungeon.Camera.SetCameraOnPlayerPosition();
@@ -181,6 +188,7 @@ public class GameMaster : Singleton<GameMaster>
         }
 
         crosshair.GetComponent<SpriteRenderer>().DOFade(0f, fadeTime);
+        UI_FadedOut = true;
     }
 
     public void FadeInUI(float fadeTime = 1f){
@@ -193,6 +201,7 @@ public class GameMaster : Singleton<GameMaster>
         }
 
         crosshair.GetComponent<SpriteRenderer>().DOFade(1f, fadeTime);
+        UI_FadedOut = false;
     }
 
     public void FadeInUI_GameOver(float fadeTime = 1f){
@@ -214,19 +223,19 @@ public class GameMaster : Singleton<GameMaster>
             gameObject.GetComponent<TextMeshProUGUI>().DOFade(1f,fadeTime);
         }
 
-        DOVirtual.DelayedCall(fadeTime, ()=>{
-            foreach(GameObject gameObject in UI_buttonsToFadeIn_gameOver){
-                gameObject.SetActive(true);
-                Color currColor = gameObject.GetComponent<Image>().color;
+        DOVirtual.DelayedCall(fadeTime * 2f, ()=>{
+            foreach(GameObject buttonObject in UI_buttonsToFadeIn_gameOver){
+                buttonObject.SetActive(true);
+                Color currColor = buttonObject.GetComponent<Image>().color;
                 currColor.a = 0f; 
-                gameObject.GetComponent<Image>().color = currColor;
-                gameObject.GetComponent<Image>().DOFade(1f, fadeTime)
+                buttonObject.GetComponent<Image>().color = currColor;
+                buttonObject.GetComponent<Image>().DOFade(1f, fadeTime)
                     .OnComplete(()=>{
                         eventSystem.SetSelectedGameObject(restartButton);
                     });
-                gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().alpha = 0f; 
-                gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().DOFade(1f, fadeTime);
-
+                buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().alpha = 0f; 
+                buttonObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().DOFade(1f, fadeTime);
+                buttonObject.GetComponent<Button>().interactable = true;
             }
         });
     }
