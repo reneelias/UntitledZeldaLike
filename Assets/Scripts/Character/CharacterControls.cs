@@ -114,6 +114,9 @@ public class CharacterControls : MonoBehaviour
     [SerializeField] float stairMovementSlowMultiplier = .5f;
     protected Vector2 moveInput;
     [SerializeField] protected StaffLightSprite staffLightSprite;
+    public StaffLightSprite StaffLightSprite{
+        get => staffLightSprite;
+    }
     protected bool attackHeldDown = false;
     [SerializeField] protected Staff staff;
     [SerializeField] protected Sword sword;

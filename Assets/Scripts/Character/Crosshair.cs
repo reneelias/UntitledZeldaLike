@@ -20,6 +20,9 @@ public class Crosshair : MonoBehaviour
     Vector3 relativePositionToObject;
     Gamepad gamepad;
     string currentInputScheme = "Keyboard_Mouse";
+    Color originalColor;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] bool useTargetRaycasting = true;
 
     void Awake()
     {
@@ -34,6 +37,7 @@ public class Crosshair : MonoBehaviour
         // controls.Gameplay.Aiming.performed += ctx => aimingInput = ctx.ReadValue<Vector2>();
         // controls.Gameplay.Aiming.performed += ctx => AimTriggered();
         // controls.Gameplay.Aiming.canceled += ctx => aimingInput = Vector2.zero;
+        originalColor = spriteRenderer.color;
     }
 
     // Update is called once per frame
@@ -99,12 +103,27 @@ public class Crosshair : MonoBehaviour
         }
         
         if(currentInputScheme == "Gamepad"){
-            if(inputDetected){
-                transform.position = targetPosition;
-                relativePositionToObject = transform.position - originObject.transform.position;
-            } else {
-                transform.position = originObject.transform.position + relativePositionToObject;
+
+            if(useTargetRaycasting){
+                GameObject raycastObj = characterControls.StaffLightSprite.GetNearestRaycastObject(targetPosition);
+
+                if(raycastObj != null){
+                    float newMagnitude = (raycastObj.transform.position - originObject.transform.position).magnitude;
+                    targetPosition = originObject.transform.position + (targetPosition - originObject.transform.position).normalized * newMagnitude;
+                    // spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+                    spriteRenderer.color = Color.red;
+                    Debug.Log($"Enemy Target Name: {raycastObj.transform.name}");
+                }  else {
+                    spriteRenderer.color = originalColor;
+                }
             }
+
+            if(inputDetected){
+                    transform.position = targetPosition;
+                    relativePositionToObject = transform.position - originObject.transform.position;
+                } else {
+                    transform.position = originObject.transform.position + relativePositionToObject;
+                }
         } else {
                 transform.position = targetPosition;
         }

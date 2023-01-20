@@ -73,6 +73,11 @@ public class StaffLightSprite : MonoBehaviour
     [Header("Heat Distortion")]
     [SerializeField] GameObject distortionObject;
     [SerializeField] bool useDistortionEffect = true;
+    [Header("Targets Raycast Settings")]
+    [Tooltip("How wide of an angle to scan.")]
+    [SerializeField] float rayCast_angleRange = 15f;
+    [Tooltip("How many angle checks for raycasting")]
+    [SerializeField] int rayCast_totalAngleChecks = 4;
 
     void Awake()
     {
@@ -295,6 +300,34 @@ public class StaffLightSprite : MonoBehaviour
         // }
 
     }
+
+    public GameObject GetNearestRaycastObject(Vector3 directionPosition){
+        Vector2 directionVector = (directionPosition - transform.position).normalized;
+        float originalAngle = Mathf.Atan2(directionVector.y, directionVector.x) * Mathf.Rad2Deg;
+        float startingAngle = originalAngle - rayCast_angleRange / 2f;
+        float angleIncrement = rayCast_angleRange / rayCast_totalAngleChecks;
+        float currAngle = startingAngle * Mathf.Deg2Rad;
+
+        LayerMask layerMask = LayerMask.GetMask(new string[]{"Enemy"});
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(transform.position, directionVector, 20f, layerMask);
+        if(raycastHit2D.transform != null && raycastHit2D.transform.gameObject.GetComponent<Enemy>().FloorLevel == characterControls.FloorLevel && Camera.main.GetComponent<CameraBehavior>().IsInCamera(raycastHit2D.collider.bounds)){
+            return raycastHit2D.transform.gameObject;
+        }
+
+        for(int i = 0; i < rayCast_totalAngleChecks; i++){
+            directionVector = new Vector2(Mathf.Cos(currAngle), Mathf.Sin(currAngle));
+
+            raycastHit2D = Physics2D.Raycast(transform.position, directionVector, 20f, layerMask);
+            if(raycastHit2D.transform != null && raycastHit2D.transform.gameObject.GetComponent<Enemy>().FloorLevel == characterControls.FloorLevel && Camera.main.GetComponent<CameraBehavior>().IsInCamera(raycastHit2D.collider.bounds)){
+                return raycastHit2D.transform.gameObject;
+            }
+
+            currAngle += angleIncrement;
+        }
+
+        return null;
+    }
+
     // void UpdateMainStaffBeam(){
     bool CreateStaffBeam(){
         if(!clicked || onCooldown){
