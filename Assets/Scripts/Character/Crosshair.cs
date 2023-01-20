@@ -22,7 +22,7 @@ public class Crosshair : MonoBehaviour
     string currentInputScheme = "Keyboard_Mouse";
     Color originalColor;
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] bool useTargetRaycasting = true;
+    [SerializeField] bool useControllerTargetSnapping = true;
 
     void Awake()
     {
@@ -102,17 +102,17 @@ public class Crosshair : MonoBehaviour
             targetPosition.z = 0f;
         }
         
-        if(currentInputScheme == "Gamepad"){
+        if(currentInputScheme == "Gamepad" && !GameMaster.Instance.GameOver && !GameMaster.Instance.UI_FadedOut){
 
-            if(useTargetRaycasting){
+            if(useControllerTargetSnapping){
                 GameObject raycastObj = characterControls.StaffLightSprite.GetNearestRaycastObject(targetPosition);
 
                 if(raycastObj != null){
                     float newMagnitude = (raycastObj.transform.position - originObject.transform.position).magnitude;
                     targetPosition = originObject.transform.position + (targetPosition - originObject.transform.position).normalized * newMagnitude;
-                    // spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
-                    spriteRenderer.color = Color.red;
-                    Debug.Log($"Enemy Target Name: {raycastObj.transform.name}");
+                    spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+                    // spriteRenderer.color = Color.red;
+                    // Debug.Log($"Enemy Target Name: {raycastObj.transform.name}");
                 }  else {
                     spriteRenderer.color = originalColor;
                 }
@@ -146,5 +146,9 @@ public class Crosshair : MonoBehaviour
         }
         
         gameObject.GetComponent<Renderer>().enabled = visible;
+    }
+
+    public void SetControllerCrosshairSnapping(bool snapping){
+        useControllerTargetSnapping = snapping;
     }
 }

@@ -53,6 +53,11 @@ public class GameMaster : Singleton<GameMaster>
         protected set;
         get;
     }
+    [SerializeField] float darknessMultiplier = 1f;
+    [SerializeField] float darknessSliderRange = .12f;
+    public float DarknessSliderRange{
+        get => darknessSliderRange;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -149,6 +154,10 @@ public class GameMaster : Singleton<GameMaster>
         } else {
             blackOverlay.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 1f);
         }
+    }
+
+    public void SetDarknessMultiplier(float darknessMultiplier){
+        dungeon.SetDarknessValue(darknessMultiplier);
     }
 
     public void ResetScene(){

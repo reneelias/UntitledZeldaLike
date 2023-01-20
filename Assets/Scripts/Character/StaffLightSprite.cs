@@ -305,7 +305,7 @@ public class StaffLightSprite : MonoBehaviour
         Vector2 directionVector = (directionPosition - transform.position).normalized;
         float originalAngle = Mathf.Atan2(directionVector.y, directionVector.x) * Mathf.Rad2Deg;
         float startingAngle = originalAngle - rayCast_angleRange / 2f;
-        float angleIncrement = rayCast_angleRange / rayCast_totalAngleChecks;
+        float angleIncrement = rayCast_angleRange * Mathf.Deg2Rad / rayCast_totalAngleChecks;
         float currAngle = startingAngle * Mathf.Deg2Rad;
 
         LayerMask layerMask = LayerMask.GetMask(new string[]{"Enemy"});

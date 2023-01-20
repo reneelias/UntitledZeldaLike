@@ -37,6 +37,8 @@ public class Dungeon : MonoBehaviour
     public bool UseCustomDarknessColor{
         get { return useCustomDungeonDarkness; }
     }
+    float originalDarknessAmount;
+    float originalDarknessAmount_Pass2;
     [SerializeField] int currentFloor = 1;
     public int CurrentFloor{
         get{ return currentFloor; } 
@@ -83,6 +85,9 @@ public class Dungeon : MonoBehaviour
             darknessColor = Lighting2D.DarknessColor;
             darknessColor_Pass2 = Lighting2D.LightmapPresets[1].darknessColor;
         }
+
+        originalDarknessAmount = darknessColor.a;
+        originalDarknessAmount_Pass2 = darknessColor.a;
 
         PlayDungeonMusic();
 
@@ -194,5 +199,10 @@ public class Dungeon : MonoBehaviour
             // characterControls.SetPlayerDirection(deathRoom.RespawnPlayerDirection);
             CurrentRoom.ActivateRoom();
         });
+    }
+
+    public void SetDarknessValue(float darknessMultiplier){
+        // darknessColor.a = originalDarknessAmount - GameMaster.Instance.DarknessSliderRange / 2f + GameMaster.Instance.DarknessSliderRange * darknessMultiplier;
+        // CurrentRoom
     }
 }
