@@ -281,9 +281,9 @@ public class Enemy : MonoBehaviour, IDefeatable
         CharacterDirection = characterDirection;
     }
 
-    public virtual void HitWithSword(int swordSlashNum, Vector3 swordForceVector, int deltaHP){
+    public virtual bool HitWithSword(int swordSlashNum, Vector3 swordForceVector, int deltaHP){
         if(swordSlashNum == this.swordSlashNum){
-            return;
+            return false;
         }
 
         // Debug.Log($"Hit enemy with sword, force magnitude: {swordForceVector.magnitude}");
@@ -295,6 +295,8 @@ public class Enemy : MonoBehaviour, IDefeatable
         // m_Rigidbody2D.AddForce(swordForceVector, ForceMode2D.Impulse);
         this.swordSlashNum = swordSlashNum;
         ChangeHP(deltaHP);
+
+        return true;
     }
 
     public void EnableRenderer(bool enable){

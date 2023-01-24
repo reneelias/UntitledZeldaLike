@@ -15,6 +15,9 @@ public class SkullEnemy : Enemy
     [SerializeField] bool particleEmitterEnabled = true;
     Tween deactivationTween;
     [SerializeField] GameObject flames;
+    [Header("Distortion Sprite")]
+    [SerializeField] bool useDistortionEffect = true;
+    [SerializeField] GameObject distortionSprite;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -35,6 +38,8 @@ public class SkullEnemy : Enemy
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("WizardBoxCollider").GetComponent<Collider2D>());
 
         particleEmitter.SetActive(particleEmitterEnabled);
+
+        distortionSprite.SetActive(useDistortionEffect);
     }
 
     // Update is called once per frame
@@ -88,6 +93,9 @@ public class SkullEnemy : Enemy
         particleEmitter.GetComponent<ParticleEmitter>().activelySpawning = true;
         flames.SetActive(true);
         flames.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+        if(useDistortionEffect){
+            distortionSprite.SetActive(true);
+        }
     }
 
     private void DieAnimation(){
@@ -106,6 +114,9 @@ public class SkullEnemy : Enemy
         EnableRenderer(false);
         light2D.color.a = 0;
         flames.SetActive(false);
+        if(useDistortionEffect){
+            distortionSprite.SetActive(false);
+        }
         // HPBar.active = false;
         // HPBar.GetComponent<Renderer>().enabled = false;
         // GetComponent<Rigidbody2D>().Sleep();

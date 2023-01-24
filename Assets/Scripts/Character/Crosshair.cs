@@ -20,9 +20,13 @@ public class Crosshair : MonoBehaviour
     Vector3 relativePositionToObject;
     Gamepad gamepad;
     string currentInputScheme = "Keyboard_Mouse";
-    Color originalColor;
+    [SerializeField] Color originalColor;
+    [SerializeField] Color targetLockColor;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] bool useControllerTargetSnapping = true;
+    float noControlInputDT = 0f;
+    [SerializeField] float noControlFadeTime = 2f;
+    [SerializeField] float noControlInputAlpha = 0f;
 
     void Awake()
     {
@@ -37,7 +41,6 @@ public class Crosshair : MonoBehaviour
         // controls.Gameplay.Aiming.performed += ctx => aimingInput = ctx.ReadValue<Vector2>();
         // controls.Gameplay.Aiming.performed += ctx => AimTriggered();
         // controls.Gameplay.Aiming.canceled += ctx => aimingInput = Vector2.zero;
-        originalColor = spriteRenderer.color;
     }
 
     // Update is called once per frame
@@ -110,7 +113,8 @@ public class Crosshair : MonoBehaviour
                 if(raycastObj != null){
                     float newMagnitude = (raycastObj.transform.position - originObject.transform.position).magnitude;
                     targetPosition = originObject.transform.position + (targetPosition - originObject.transform.position).normalized * newMagnitude;
-                    spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+                    // spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+                    spriteRenderer.color = targetLockColor;
                     // spriteRenderer.color = Color.red;
                     // Debug.Log($"Enemy Target Name: {raycastObj.transform.name}");
                 }  else {
@@ -119,11 +123,21 @@ public class Crosshair : MonoBehaviour
             }
 
             if(inputDetected){
-                    transform.position = targetPosition;
-                    relativePositionToObject = transform.position - originObject.transform.position;
-                } else {
-                    transform.position = originObject.transform.position + relativePositionToObject;
+                transform.position = targetPosition;
+                relativePositionToObject = transform.position - originObject.transform.position;
+                if(!useControllerTargetSnapping){
+                    spriteRenderer.color = originalColor;
                 }
+
+                noControlInputDT = 0f;
+            } else {
+                transform.position = originObject.transform.position + relativePositionToObject;
+
+                noControlInputDT += Time.deltaTime;
+                if(noControlInputDT >= noControlFadeTime){
+                    spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, noControlInputAlpha);
+                }
+            }
         } else {
                 transform.position = targetPosition;
         }

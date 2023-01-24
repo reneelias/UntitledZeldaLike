@@ -259,9 +259,9 @@ public class StaffLightSprite : MonoBehaviour
     public void ShootBeam()
     {
         if(onCooldown || characterControls.Falling || SuspendShooting || GameMaster.Instance.GameOver || playableCharacter.Stamina < beamStaminaCost || MenuScript.GamePaused){
-            // Debug.Log($"clicked && !onCooldown: {clicked && !onCooldown}");
-            // Debug.Log($"onCooldown: {onCooldown}");
-            // Debug.Log("Not finding new angle");
+            if(playableCharacter.Stamina <= 0){
+                characterControls.PlayStaminaOutAudio();
+            }
             return;
         } else {
             // Debug.Log("NOT ON COOLDOWN");

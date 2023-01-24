@@ -90,7 +90,8 @@ public class CharacterControls : MonoBehaviour
     [SerializeField] protected Sprite backSprite;
     [SerializeField] protected Sprite leftSprite;
     [SerializeField] protected Sprite rightSprite;
-        protected Sprite prevSprite;
+    protected Sprite prevSprite;
+    [Header("Sword")]
     [SerializeField] protected AudioClip swordSound;
     [SerializeField] protected GameObject swordHitboxes;
     protected GameObject currentSwordColliderParent;
@@ -105,6 +106,13 @@ public class CharacterControls : MonoBehaviour
         protected set => swordDamage = value;
         get => swordDamage;
     }
+    [Header("Shield")]
+    [SerializeField] Shield shield;
+    protected bool shielding = false;
+    [SerializeField] float shieldingMovementMultiplier = .5f;
+    [SerializeField] float shieldingMass = 5f;
+    protected bool defensiveButtonHeldDown = false;
+    [Header("Floors")]
     [SerializeField] int floorLevel = 1;
     public int FloorLevel{
         get => floorLevel;
@@ -121,6 +129,7 @@ public class CharacterControls : MonoBehaviour
     [SerializeField] protected Staff staff;
     [SerializeField] protected Sword sword;
     [SerializeField] protected WizardFloorLight wizardFloorLight;
+    [Header("Dodging")]
     [SerializeField] protected float dodgeMagnitude = 2.5f;
     protected bool dodging = false;
     [SerializeField] protected float dodgeTime = .2f;
@@ -139,11 +148,6 @@ public class CharacterControls : MonoBehaviour
     protected Tween physicalDodgeTween;
     protected Tween timerDodgeTween;
     protected Dictionary<CharacterDirection, Vector2> directionVectorsDictionary;
-    [SerializeField] Shield shield;
-    protected bool shielding = false;
-    [SerializeField] float shieldingMovementMultiplier = .5f;
-    [SerializeField] float shieldingMass = 5f;
-    protected bool defensiveButtonHeldDown = false;
     public int SortingOrder{
         get => spriteRenderer.sortingOrder;
     }
@@ -169,6 +173,9 @@ public class CharacterControls : MonoBehaviour
         protected set;
         get;
     }
+    [Header("Stamina Out Audio")]
+    [SerializeField] bool playStaminaOutClip = false;
+    [SerializeField] AudioClip staminaOutClip;
 
     void Awake()
     {
@@ -657,7 +664,11 @@ public class CharacterControls : MonoBehaviour
     }
     protected void SlashWeapon(){
         if(swordSlashing || NormalControlsSuspended || interactionPause || Falling || currentWeaponType != WeaponType.Sword || animatingWeaponSwitch || playableCharacter.Stamina <= 0 || eventControlsSuspended){
-            return;       
+            if(playableCharacter.Stamina <= 0){
+                PlayStaminaOutAudio();
+            }
+            
+            return;
         }
 
         if(shielding){
@@ -725,6 +736,7 @@ public class CharacterControls : MonoBehaviour
     }
     protected virtual void Dodge(){
         if(playableCharacter.Stamina < dodgeStaminaCost){
+            PlayStaminaOutAudio();
             return;
         }
 
@@ -849,6 +861,7 @@ public class CharacterControls : MonoBehaviour
 
     protected virtual void Shield(){
         if(playableCharacter.Stamina == 0){
+            PlayStaminaOutAudio();
             return;
         }
 
@@ -1122,7 +1135,11 @@ public class CharacterControls : MonoBehaviour
             case "Enemy":
                 Enemy targetEnemy = targetObject.GetComponent<Enemy>();
                 Vector3 swordForceVector = (targetObject.transform.position - transform.position).normalized * targetEnemy.SwordHitKnockForceMagnitude;
-                targetEnemy.HitWithSword(SlashNum, swordForceVector, -swordDamage);
+                
+                if(targetEnemy.HitWithSword(SlashNum, swordForceVector, -swordDamage)){
+                    playableCharacter.ChangeStamina(-targetObject.GetComponent<Enemy>().PlayerSwordHitStaminaCost);
+                }
+                
                 break;
             case "PickUp":
                 IPickup pickUpItem = targetObject.GetComponent<IPickup>();
@@ -1150,6 +1167,13 @@ public class CharacterControls : MonoBehaviour
                 // }
                 break;
         }
+    }
+    public void PlayStaminaOutAudio(){
+        if(!playStaminaOutClip){
+            return;
+        }
+
+        GameMaster.Instance.audioSource.PlayOneShot(staminaOutClip);
     }
 
     public void ChangeFloorLevel(int floorLevel){

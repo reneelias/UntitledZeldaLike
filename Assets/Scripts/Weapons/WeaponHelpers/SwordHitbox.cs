@@ -36,9 +36,6 @@ public class SwordHitbox : MonoBehaviour
             case "Breakable":
             case "Scenery":
                 characterControls.WeaponHitTarget(other.gameObject);
-                if(other.tag == "Enemy"){
-                    playableCharacter.ChangeStamina(-other.gameObject.GetComponent<Enemy>().PlayerSwordHitStaminaCost);
-                }
             break;
         }
     }

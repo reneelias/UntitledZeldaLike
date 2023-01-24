@@ -53,8 +53,6 @@ public class PlayableCharacter : MonoBehaviour
     [SerializeField] float staminaRechargeTime = 1f;
     [SerializeField] int staminaRechargeRate = 2;
     bool staminaRecharging = false;
-    [SerializeField] bool playStaminaOutClip = false;
-    [SerializeField] AudioClip staminaOutClip;
     public bool Alive{
         get;
         protected set;
@@ -189,10 +187,6 @@ public class PlayableCharacter : MonoBehaviour
         stamina = (int)Mathf.Clamp(stamina, 0, maxStamina);
         staminaBar.FillPercent = (float)stamina/maxStamina;
         staminaBar.UpdateText($"{stamina}/{maxStamina}");
-
-        if(stamina <= 0f && playStaminaOutClip){
-            GameMaster.Instance.audioSource.PlayOneShot(staminaOutClip);
-        }
 
         if(resetRechargeTimer){
             staminaRechargeBeginDT = 0f;
