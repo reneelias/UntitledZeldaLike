@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,15 +47,17 @@ MonoBehaviour:
   numberOfParticles: 60
   particlePrefab: {fileID: 5377741126164537002, guid: 37fdd76c16178d442a4bef1f27ef7ed6, type: 3}
   objectToFollow: {fileID: 0}
+  orderParentObject: {fileID: 0}
   alternateMaterial: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0.98039216, g: 0.5176471, b: 0, a: 0}
   keepParticlesBehindObject: 1
+  spawnInFrontOfObject: 0
   particleSpawnTime: 0.05
   particleSpawnAmount: 3
-  spawnRangeX: 0
-  spawnRangeY: 0
   spawnOffsetX: 0
   spawnOffsetY: 0
+  spawnRangeX: 0
+  spawnRangeY: 0
   timeBase: 0.5
   timeRange: 0.5
   xDisplacementRangeMin: 0
@@ -65,3 +68,6 @@ MonoBehaviour:
   activelySpawning: 0
   particleScale: 1
   particleScaleRange: 0.5
+  particleLightsEnabled: 1
+  considerObjectRotation: 1
+  useSortingOrderByY: 0

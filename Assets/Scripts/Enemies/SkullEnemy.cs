@@ -11,7 +11,7 @@ public class SkullEnemy : Enemy
     float baseLightAlpha;
     
     [Header("Skull")]
-    [SerializeField] GameObject particleEmitter;
+    [SerializeField] ParticleEmitter particleEmitter;
     [SerializeField] bool particleEmitterEnabled = true;
     Tween deactivationTween;
     [SerializeField] GameObject flames;
@@ -25,6 +25,13 @@ public class SkullEnemy : Enemy
         base.Start();
         light2D = GetComponent<Light2D>();
         baseLightAlpha = light2D.color.a;
+        light2D.color = flames.GetComponent<SpriteRenderer>().color;
+
+        particleEmitter.gameObject.SetActive(particleEmitterEnabled);
+        particleEmitter.color = flames.GetComponent<SpriteRenderer>().color;
+
+        flames.GetComponent<Animator>().Play("Base Layer.FlamingSkull_Flames", 0, Random.Range(0f, 1f));
+        // light2D.color.a = baseLightAlpha;
 
         float currentScale = transform.localScale.x;
         idleScaleTween = transform.DOScale(new Vector3(currentScale * 1.15f, currentScale * 1.15f, 1f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(Random.Range(0f, .5f));
@@ -37,7 +44,6 @@ public class SkullEnemy : Enemy
     
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("WizardBoxCollider").GetComponent<Collider2D>());
 
-        particleEmitter.SetActive(particleEmitterEnabled);
 
         distortionSprite.SetActive(useDistortionEffect);
     }
