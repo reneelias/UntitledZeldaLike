@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyWavesRoom : Room
 {
@@ -24,6 +25,7 @@ public class EnemyWavesRoom : Room
     int enemiesSpawnedThisWave = 0;
     int enemiesDefeatedThisWave = 0;
     List<Enemy> currentEnemies;
+    List<Enemy> previousEnemies;
     [SerializeField] GameObject enemySpawnPositions;
     [Header("Spawnable Items")]
     [SerializeField] GameObject[] spawnableItemsPerRound;
@@ -36,7 +38,8 @@ public class EnemyWavesRoom : Room
     {
         base.Start();
 
-        currentEnemies = new List<Enemy>();   
+        currentEnemies = new List<Enemy>();
+        previousEnemies = new List<Enemy>();
     }
 
     // Update is called once per frame
@@ -95,7 +98,7 @@ public class EnemyWavesRoom : Room
     }
 
     protected virtual void StartNextWave(){
-        Debug.Log("Starting next wave");
+        // Debug.Log("Starting next wave");
         braziersToLight[currentWaveNumber].SetOn(true);
 
         enemiesSpawnedThisWave = 0;
@@ -107,11 +110,13 @@ public class EnemyWavesRoom : Room
     }
 
     protected virtual void EndCurrentWave(){
-        Debug.Log("Ending current wave");
+        // Debug.Log("Ending current wave");
         foreach(Enemy enemy in currentEnemies){
-            GameObject.Destroy(enemy.gameObject);
+            previousEnemies.Add(enemy);
         }
+        
         currentEnemies.Clear();
+        DOVirtual.DelayedCall(2f, DestroyPreviousEnemies);
 
         currentWaveNumber++;
 
@@ -127,7 +132,7 @@ public class EnemyWavesRoom : Room
     }
 
     protected virtual void SpawnNextEnemy(){
-        Debug.Log("Spawning Next Enemy");
+        // Debug.Log("Spawning Next Enemy");
         Enemy newEnemy = GameObject.Instantiate(enemyTypesToSpawn[Random.Range(0, enemyTypesToSpawn.Length)]);
         newEnemy.transform.position = enemySpawnPositions.transform.GetChild(Random.Range(0, enemySpawnPositions.transform.childCount)).transform.position;
         newEnemy.SetSpawnItems(new GameObject[]{spawnableItemsPerRound[currentWaveNumber]}, dropPercentPerRound[currentWaveNumber]);
@@ -140,6 +145,18 @@ public class EnemyWavesRoom : Room
         if(enemiesSpawnedThisWave >= enemiesPerWave[currentWaveNumber]){
             enemySpawningActive = false;
         }
+    }
+
+    protected virtual void DestroyPreviousEnemies(){
+        for(int i = previousEnemies.Count - 1; i >= 0; i--){
+            GameObject.Destroy(previousEnemies[i].gameObject);
+        }
+        // foreach(Enemy enemy in previousEnemies){
+        //     Debug.Log($"Deleting Enemy: {enemy.gameObject.name}");
+        //     GameObject.Destroy(enemy.gameObject);
+        // }
+
+        previousEnemies.Clear();
     }
 
     protected void OnTriggerEnter2D(Collider2D other)
