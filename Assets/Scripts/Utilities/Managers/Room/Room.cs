@@ -344,7 +344,7 @@ public class Room : MonoBehaviour
         UnlockObjects();
     }
 
-    void UnlockObjects(){
+    protected void UnlockObjects(){
         if(lockDoorsOnFirstEntry){
             foreach(Door door in doors){
                 door.UnlockDoor();

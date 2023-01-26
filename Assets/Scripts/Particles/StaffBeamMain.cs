@@ -331,9 +331,10 @@ public class StaffBeamMain : MonoBehaviour, IParticle
                     break;
                 case "Lightable":
                     LightableObject lightableObject = collision.gameObject.GetComponent<LightableObject>();
-                    // if(!lightableObject.On){
+
+                    if(lightableObject.LightableByBeam){
                         lightableObject.SetOn(true);
-                    // }
+                    }
                     break;
                 case "Breakable":
                     IBreakable breakableObj = collision.gameObject.GetComponent<IBreakable>();

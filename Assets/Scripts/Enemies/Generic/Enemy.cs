@@ -263,6 +263,7 @@ public class Enemy : MonoBehaviour, IDefeatable
         HPBar.FillPercent = (float)hp/maxHP;
         HPBar.UpdateText($"{hp}/wa{maxHP}");
     }
+
     public virtual void SetCharacterDirection(CharacterDirection characterDirection, bool setVelocityToZero = false){
         if(!hasCharacterDirections){
             return;
@@ -370,6 +371,12 @@ public class Enemy : MonoBehaviour, IDefeatable
         SetCharacterDirection(spawnCharacterDirection);
     }
 
+    public virtual void SetSpawnItems(GameObject[] spawnableItemTypes, float dropPercent = 1f, int itemSpawnAmount = 1){
+        this.spawnableItemTypes = spawnableItemTypes;
+        this.dropPercent = dropPercent;
+        this.itemSpawnAmount = itemSpawnAmount;
+    }
+
     protected virtual void SpawnItems(){
         for(int i = 0; i < itemSpawnAmount; i++){
             float randNum = Random.Range(0, 1f);
@@ -389,7 +396,21 @@ public class Enemy : MonoBehaviour, IDefeatable
                     GameMaster.Instance.dungeon.CurrentRoom.AddObjToDesapwn(dropItem);
                 }
             }
-        }
+        }   
+    }
+ //
+        // Summary:
+        //     The Transform attached to this GameObject.
+    public void SetEngagement(bool engaged, GameObject objectToFollow, float engagedTime = -1){
+        followScript.objectToFollow = objectToFollow;
+        this.engagedTime = engagedTime;
+        Engaged = engaged;
+    }
+
+
+    public void SetEngagement(bool engaged, GameObject objectToFollow, float engagedTime = -1, float engagementRange = 5f){
+        SetEngagement(engaged, objectToFollow, engagedTime);
+        this.engagementRange = engagementRange;
     }
 
     public virtual void ResetOnRoomLeave(){

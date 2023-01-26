@@ -601,6 +601,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3476367732741432868}
     m_Modifications:
+    - target: {fileID: 4953823558455219395, guid: 261f3aa76f845f84ebf5e300b1d5d3d8, type: 3}
+      propertyPath: materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5196207254669429453, guid: 261f3aa76f845f84ebf5e300b1d5d3d8, type: 3}
       propertyPath: m_Name
       value: Distortion Sprite
@@ -615,7 +619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479619124064577689, guid: 261f3aa76f845f84ebf5e300b1d5d3d8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.12
+      value: 0.124680005
       objectReference: {fileID: 0}
     - target: {fileID: 8479619124064577689, guid: 261f3aa76f845f84ebf5e300b1d5d3d8, type: 3}
       propertyPath: m_LocalScale.y
@@ -627,7 +631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8479619124064577689, guid: 261f3aa76f845f84ebf5e300b1d5d3d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.394
+      value: 0.3753
       objectReference: {fileID: 0}
     - target: {fileID: 8479619124064577689, guid: 261f3aa76f845f84ebf5e300b1d5d3d8, type: 3}
       propertyPath: m_LocalPosition.z

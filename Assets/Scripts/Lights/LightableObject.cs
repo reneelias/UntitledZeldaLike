@@ -12,6 +12,11 @@ public abstract class LightableObject : MonoBehaviour
     public float GlobalDarknessModifier{
         get { return globalDarknessModifier; }
     }
+    [SerializeField] bool lightableByBeam = true;
+    public bool LightableByBeam{
+        protected set => lightableByBeam = value;
+        get => lightableByBeam;
+    }
     // Start is called before the first frame update
     void Start()
     {
