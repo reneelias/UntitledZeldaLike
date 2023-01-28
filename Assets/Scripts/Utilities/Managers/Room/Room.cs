@@ -97,18 +97,18 @@ public class Room : MonoBehaviour
     bool canResetLastTimeRespawned = true;
     List<GameObject> objsToDespawn;
     [Header("Music")]
-    [SerializeField] bool pauseDungeonMusicOnEntrance = false;
-    [SerializeField] bool playRoomMusicOnEntrance = false;
-    [SerializeField] bool playRoomMusicOnEnemyEngage = false;
-    [SerializeField] AudioClip roomMusic;
-    [Range(0, 1f)] [SerializeField] float musicVolume = .5f;
-    [SerializeField] Enemy[] musicEngageEnemies;
-    [SerializeField] bool stopRoomMusicAfterEnemyDeath = false;
-    [SerializeField] float dungeonMusicRestartDelay = 1f;
-    [SerializeField] AudioClip enemyDefeatSound;
-    [SerializeField] bool playEnemyDefeatSound = false;
-    bool musicEnemiesKilled = false;
-    bool musicPlaying = false;
+    [SerializeField] protected bool pauseDungeonMusicOnEntrance = false;
+    [SerializeField] protected bool playRoomMusicOnEntrance = false;
+    [SerializeField] protected bool playRoomMusicOnEnemyEngage = false;
+    [SerializeField] protected AudioClip roomMusic;
+    [Range(0, 1f)] [SerializeField] protected float musicVolume = .5f;
+    [SerializeField] protected Enemy[] musicEngageEnemies;
+    [SerializeField] protected bool stopRoomMusicAfterEnemyDeath = false;
+    [SerializeField] protected float dungeonMusicRestartDelay = 1f;
+    [SerializeField] protected AudioClip enemyDefeatSound;
+    [SerializeField] protected bool playEnemyDefeatSound = false;
+    protected bool musicEnemiesKilled = false;
+    protected bool musicPlaying = false;
     [Header("Character Respawn")]
     [SerializeField] GameObject respawnPosition;
     public Vector3 RespawnPosition{
@@ -434,7 +434,7 @@ public class Room : MonoBehaviour
         canResetLastTimeRespawned = true;
     }
 
-    public void DeathRoomReset(){
+    public virtual void DeathRoomReset(){
         if(active){
             DeactivateRoom();
         }
@@ -509,7 +509,7 @@ public class Room : MonoBehaviour
         }
     }
 
-    public void DeactivateRoom(bool initialRoomSet = false){
+    public virtual void DeactivateRoom(bool initialRoomSet = false){
         active = false;
         DOVirtual.DelayedCall(RoomTransitionTime * .5f, ()=>DeactivateChildrenEnemies(enemies, initialRoomSet));
         // DeactivateChildrenEnemies(enemies, initialRoomSet);

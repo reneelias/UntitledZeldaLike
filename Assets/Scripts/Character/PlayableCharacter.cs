@@ -25,11 +25,10 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     private float invinsibleDT;
-    private float invinsibleTime;
+    [SerializeField] protected float invinsibleTime = 1f;
 
     private float alphaChangeDT;
-    private float alphaChangeTime;
-
+    [SerializeField] protected float alphaChangeTime = .05f;
     protected SpriteRenderer spriteRenderer;
     [SerializeField] CharacterControls characterControls;
     [SerializeField] AudioClip damageAudioClip;
@@ -69,9 +68,7 @@ public class PlayableCharacter : MonoBehaviour
         staminaBar.UpdateText($"{stamina}/{maxStamina}");
 
         invinsibleDT = 0f;
-        invinsibleTime = 1f;
         alphaChangeDT = 0f;
-        alphaChangeTime = .05f;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

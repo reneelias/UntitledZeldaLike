@@ -26,7 +26,13 @@ public class ShieldSubObject : MonoBehaviour
     {
         switch(other.gameObject.tag){
             case "Enemy":
-                Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            case "EnemyMagicBarrier":
+                Enemy enemy;
+                if(other.gameObject.tag == "Enemy"){
+                    enemy = other.gameObject.GetComponent<Enemy>();
+                } else {
+                    enemy = other.gameObject.GetComponent<MagicBarrier>().ParentEnemy;
+                }
 
                 Vector2 pushBackForce = (transform.position - other.transform.position).normalized * -enemy.ShieldHitKnockForceMagnitude;
                 enemy.ApplyForce(pushBackForce);

@@ -148,7 +148,7 @@ MonoBehaviour:
   itemSpawnAmount: 1
   enableCollisionDamage: 1
   useTriggerDamageCheck: 0
-  pushForceMagnitude: 0
+  pushForceMagnitude: 30
   floorLevel: 1
   sortingOrderByY: {fileID: 2688191622139328902}
   movementPauseTime: 1.075

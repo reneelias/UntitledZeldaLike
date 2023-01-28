@@ -121,8 +121,7 @@ public class EnemyWavesRoom : Room
         currentWaveNumber++;
 
         if(currentWaveNumber >= waveAmount){
-            waveChallengeFinished = true;
-            UnlockObjects();
+           ChallengeFinished();
             return;
         }
 
@@ -147,14 +146,45 @@ public class EnemyWavesRoom : Room
         }
     }
 
+    protected virtual void ChallengeFinished(){
+        waveChallengeFinished = true;
+        UnlockObjects();
+        GameMaster.Instance.dungeon.PlayDungeonMusic(dungeonMusicRestartDelay);
+        musicPlaying = false;
+        pauseDungeonMusicOnEntrance = false;
+    }
+
     protected virtual void DestroyPreviousEnemies(){
         for(int i = previousEnemies.Count - 1; i >= 0; i--){
             GameObject.Destroy(previousEnemies[i].gameObject);
         }
-        // foreach(Enemy enemy in previousEnemies){
-        //     Debug.Log($"Deleting Enemy: {enemy.gameObject.name}");
-        //     GameObject.Destroy(enemy.gameObject);
-        // }
+
+        previousEnemies.Clear();
+    }
+
+    public override void DeathRoomReset()
+    {
+        base.DeathRoomReset();
+
+        if(waveChallengeFinished){
+            return;
+        }
+
+        waveChallengeActive = false;
+
+        foreach(Brazier brazier in braziersToLight){
+            brazier.SetOff();
+        }
+        
+        for(int i = currentEnemies.Count - 1; i >= 0; i--){
+            GameObject.Destroy(currentEnemies[i].gameObject);
+        }
+
+        currentEnemies.Clear();
+
+        for(int i = previousEnemies.Count - 1; i >= 0; i--){
+            GameObject.Destroy(previousEnemies[i].gameObject);
+        }
 
         previousEnemies.Clear();
     }
@@ -166,6 +196,8 @@ public class EnemyWavesRoom : Room
                 return;
             }
 
+            GameMaster.Instance.dungeon.PlayRoomMusic(roomMusic, musicVolume);
+            musicPlaying = true;
             currentWaveNumber = 0;
             waveChallengeActive = true;
             StartNextWave();

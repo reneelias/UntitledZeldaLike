@@ -31,6 +31,7 @@ TagManager:
   - MechanicalHatch
   - EventTrigger
   - Sword
+  - EnemyMagicBarrier
   layers:
   - Default
   - TransparentFX
