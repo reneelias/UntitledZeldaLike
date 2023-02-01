@@ -38,6 +38,7 @@ public class ShieldSubObject : MonoBehaviour
                 enemy.ApplyForce(pushBackForce);
 
                 parentShield.ShieldHit(enemy.PlayerShieldHitStaminaCost);
+                ControlsManager.Instance.PlayControllerHaptics(.125f, .4f, .2f);
                 break;
         }
     }

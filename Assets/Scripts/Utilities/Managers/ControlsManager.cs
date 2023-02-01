@@ -18,6 +18,9 @@ public class ControlsManager : Singleton<ControlsManager>
         get => currentControlType;
     }
     [SerializeField] GameObject[] controlSwapUI_Array;
+    float hapticsDT = 0f;
+    float hapticsDuration;
+    bool hapticsActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,7 @@ public class ControlsManager : Singleton<ControlsManager>
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateHapticsTimer();
     }
 
     public void SetCurrentControlType(string controllerName){
@@ -58,12 +61,39 @@ public class ControlsManager : Singleton<ControlsManager>
         }
     }
 
+    public void UpdateHapticsTimer(){
+        if(!hapticsActive){
+            return;
+        }
+
+        hapticsDT += Time.deltaTime;
+
+        if(hapticsDT >= hapticsDuration){
+            hapticsActive = false;
+            Gamepad.current.ResetHaptics();
+        }
+    }
+
     public Sprite GetCurrentInteractSprite(){
         return interactSpriteDictionary[currentControlType];
     }
 
     public Sprite GetCurrentBackgroundSprite(){
         return currentControlType == ControlType.KEYBOARD_MOUSE ? keyboardMouse_BackgroundSprite : controller_BackgroundSprite;
+    }
+
+    public void PlayControllerHaptics(float leftMotorIntensity, float rightMotorIntensity, float duration){
+        if(Gamepad.current == null){
+            return;
+        }
+
+        float rumbleModifier = CurrentControlType == ControlType.PLAYSTATION ? 1f : 1.25f;
+        Gamepad.current.SetMotorSpeeds(leftMotorIntensity * rumbleModifier, rightMotorIntensity * rumbleModifier);
+        // Debug.Log("Playing controller haptics");
+
+        hapticsActive = true;
+        hapticsDuration = duration;
+        hapticsDT = 0f;
     }
 }
 

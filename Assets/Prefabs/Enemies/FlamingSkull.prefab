@@ -235,8 +235,8 @@ MonoBehaviour:
   pushForceMagnitude: 30
   floorLevel: 1
   sortingOrderByY: {fileID: -8527895595948383538}
-  movementPauseTime: 0.35
-  lastSwordAndShieldPauseDuration: 3
+  movementPauseTime: 0.5
+  lastSwordAndShieldPauseDuration: 1
   swordHitKnockForceMagnitude: 40
   shieldHitKnockForceMagnitude: 20
   playerShieldHitStaminaCost: 20
@@ -244,6 +244,9 @@ MonoBehaviour:
   playerSwordHitStaminaCost: 10
   explodeOnDeath: 1
   smokeExplosion: {fileID: 1714803650318407811}
+  damageFlashDuration: 0.375
+  damageFlashInterval: 0.09375
+  damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
   spawnCharacterDirection: 0
   hasCharacterDirections: 0
   suspendAnimationUpdate: 0

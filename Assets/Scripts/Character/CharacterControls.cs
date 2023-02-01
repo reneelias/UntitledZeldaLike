@@ -176,6 +176,8 @@ public class CharacterControls : MonoBehaviour
     [Header("Stamina Out Audio")]
     [SerializeField] bool playStaminaOutClip = false;
     [SerializeField] AudioClip staminaOutClip;
+    float staminaOutClipLastPlayed = 0f;
+    float staminaOutClipDuration;
 
     void Awake()
     {
@@ -230,6 +232,8 @@ public class CharacterControls : MonoBehaviour
         // m_Rigidbody2D.drag = normalDrag;
 
         // controls.controlSchemes[0].
+
+        staminaOutClipDuration = staminaOutClip.length;
     }
     
     void OnEnable()
@@ -1138,6 +1142,7 @@ public class CharacterControls : MonoBehaviour
                 
                 if(targetEnemy.HitWithSword(SlashNum, swordForceVector, -swordDamage)){
                     playableCharacter.ChangeStamina(-targetObject.GetComponent<Enemy>().PlayerSwordHitStaminaCost);
+                    ControlsManager.Instance.PlayControllerHaptics(.125f, .5f, .125f);
                 }
                 
                 break;
@@ -1169,9 +1174,11 @@ public class CharacterControls : MonoBehaviour
         }
     }
     public void PlayStaminaOutAudio(){
-        if(!playStaminaOutClip){
+        if(!playStaminaOutClip || Time.realtimeSinceStartup - staminaOutClipLastPlayed < staminaOutClipDuration){
             return;
         }
+
+        staminaOutClipLastPlayed = Time.realtimeSinceStartup;
 
         GameMaster.Instance.audioSource.PlayOneShot(staminaOutClip);
     }

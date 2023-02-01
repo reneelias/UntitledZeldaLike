@@ -125,6 +125,7 @@ public class CorruptedDragonEntrance : EventTrigger
                 .InsertCallback(leftArmDelay, ()=>{
                         GameMaster.Instance.audioSource.PlayOneShot(shakeSound);
                         GameMaster.Instance.dungeon.ActiveCamera.DOShakePosition(shakeDuration, shakeStrength);
+                        ControlsManager.Instance.PlayControllerHaptics(.25f, .75f, .5f);
                     })
             .Append(DOVirtual.DelayedCall(leftArmDelay + fadeInDuration, ()=>{
                 FadeInSubObjects(rightArmParentObj, fadeInDuration, rightArmDelay);
@@ -132,6 +133,7 @@ public class CorruptedDragonEntrance : EventTrigger
                 .InsertCallback(leftArmDelay + rightArmDelay + fadeInDuration, ()=>{
                         GameMaster.Instance.audioSource.PlayOneShot(shakeSound);
                         GameMaster.Instance.dungeon.ActiveCamera.DOShakePosition(shakeDuration, shakeStrength);
+                        ControlsManager.Instance.PlayControllerHaptics(.25f, .75f, .5f);
                     })
             .Append(DOVirtual.DelayedCall(firstLightsDelay, FadeInFirstLights))
             .Append(head.GetComponent<SpriteRenderer>().DOFade(1f, moveUpDuration).SetDelay(headAndBodyDelay))
@@ -147,6 +149,7 @@ public class CorruptedDragonEntrance : EventTrigger
             }))
                 .InsertCallback(leftArmDelay + rightArmDelay + firstLightsDelay + fadeInDuration * 3f, ()=>{
                         GameMaster.Instance.audioSource.PlayOneShot(dragonGrumble, .75f);
+                        ControlsManager.Instance.PlayControllerHaptics(.1f, .3f, 5f);
                     })
             .OnComplete(Finish);
 

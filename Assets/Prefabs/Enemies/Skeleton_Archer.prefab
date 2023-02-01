@@ -332,6 +332,9 @@ MonoBehaviour:
   playerSwordHitStaminaCost: 20
   explodeOnDeath: 1
   smokeExplosion: {fileID: 7846467816236725309}
+  damageFlashDuration: 0.375
+  damageFlashInterval: 0.09375
+  damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
   spawnCharacterDirection: 0
   hasCharacterDirections: 1
   suspendAnimationUpdate: 0

@@ -8,22 +8,17 @@ public class Enemy : MonoBehaviour, IDefeatable
 {
     protected int hp;
     [SerializeField] int maxHP;
-
     [SerializeField] private bool engaged;
     [SerializeField] public bool Engaged{
         get {return engaged;}
         protected set {engaged = value;}
     }
-
     protected Vector3 spawnPosition;
-
     [SerializeField] protected FillBar HPBar;
-
     public bool Alive{
         get;
         protected set;
     }
-
     [SerializeField] protected float engagementRange;
     [SerializeField] protected FollowScript followScript;
     [SerializeField] protected int damageAmount;
@@ -70,6 +65,7 @@ public class Enemy : MonoBehaviour, IDefeatable
     protected MovementTile currentMovementTile;
     [SerializeField] SortingOrderByY sortingOrderByY;
     protected bool movementPaused = false;
+    [Header("Player Damage Interaction")]
     protected float movementPauseDT = 0f;
     [Tooltip("Amount of time enemy pauses movement after being hit by sword or running into player shield.")]
     [SerializeField] protected float movementPauseTime = .5f;
@@ -110,6 +106,13 @@ public class Enemy : MonoBehaviour, IDefeatable
         protected set;
         get;
     }
+    bool damageFlashing = false;
+    [SerializeField] float damageFlashDuration = .375f;
+    float damageFlashDT = 0f;
+    [SerializeField] float damageFlashInterval = .09375f;
+    float damageFlashIntervalDT = 0f;
+    [SerializeField] Color damageFlashColor = Color.red;
+    Color originalColor;
     [SerializeField] CharacterDirection spawnCharacterDirection = CharacterDirection.Down;
     [SerializeField] bool hasCharacterDirections = true;
     protected Dictionary<CharacterDirection, Vector2> directionVectorsDictionary;
@@ -147,6 +150,7 @@ public class Enemy : MonoBehaviour, IDefeatable
 
         SetCharacterDirection(spawnCharacterDirection, true);
         
+        originalColor = spriteRenderer.color;
 
         // Debug.Log($"SpawnPosition:")
     }
@@ -155,13 +159,14 @@ public class Enemy : MonoBehaviour, IDefeatable
     protected virtual void Update()
     {
         UpdateSwordHitPause();
+        UpdateDamageFlash();
+        UpdateWalkAnimation();
+
     }
     protected virtual void FixedUpdate()
     {
         UpdateEngaged();
-        UpdateWalkAnimation();
         UpdateMovementPause();
-
     }    
     
     // protected virtual void UpdateCharacterDirection(){
@@ -258,10 +263,34 @@ public class Enemy : MonoBehaviour, IDefeatable
         }
     }
 
+    protected virtual void UpdateDamageFlash(){
+        if(!damageFlashing){
+            return;
+        }
+
+        damageFlashIntervalDT += Time.deltaTime;
+        if(damageFlashIntervalDT >= damageFlashInterval){
+            spriteRenderer.color = spriteRenderer.color == originalColor ? damageFlashColor : originalColor;
+            damageFlashIntervalDT = 0f;
+        }
+
+        damageFlashDT += Time.deltaTime;
+        if(damageFlashDT >= damageFlashDuration){
+            spriteRenderer.color = originalColor;
+            damageFlashDT = 0f;
+            damageFlashIntervalDT = 0f;
+            damageFlashing = false;
+        }
+    }
+
     public virtual void ChangeHP(int deltaHP){
         hp += deltaHP;
         HPBar.FillPercent = (float)hp/maxHP;
         HPBar.UpdateText($"{hp}/wa{maxHP}");
+
+        if(deltaHP < 0f && hp > 0f){
+            damageFlashing = true;
+        }
     }
 
     public virtual void SetCharacterDirection(CharacterDirection characterDirection, bool setVelocityToZero = false){

@@ -108,8 +108,8 @@ public class Arrow : MonoBehaviour
 
         if(other.tag == "Shield"){
             hitShield = true;
-        }
-        if(other.tag == "Player"){
+            ControlsManager.Instance.PlayControllerHaptics(.1f, .3f, .1f);
+        } else if(other.tag == "Player"){
             Collider2D[] collider2Ds = new Collider2D[10];
             collider2D.OverlapCollider(new ContactFilter2D().NoFilter(), collider2Ds);
             for(int i = 0; i < collider2Ds.Length; i++){
@@ -117,8 +117,13 @@ public class Arrow : MonoBehaviour
                 if(currentCollider2D == null){
                     break;
                 }
+
+                // Debug.Log($"Arrow hit: {currentCollider2D.name}");
+
                 if(currentCollider2D.tag == "Shield"){
                     hitShield = true;
+                    ControlsManager.Instance.PlayControllerHaptics(.1f, .3f, .1f);
+                    // Debug.Log("Arrow hit shield");
                 }
             }
             if(other.gameObject.GetComponent<CharacterControls>().FloorLevel == floorLevel && !hitShield){

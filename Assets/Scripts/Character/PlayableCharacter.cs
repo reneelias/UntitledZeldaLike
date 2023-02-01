@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class PlayableCharacter : MonoBehaviour
 {
@@ -151,6 +152,7 @@ public class PlayableCharacter : MonoBehaviour
             Invinsible = true;
 
             GameMaster.Instance.audioSource.PlayOneShot(damageAudioClip);
+            ControlsManager.Instance.PlayControllerHaptics(.25f, .75f, .25f);
 
             if(hp <= 0 && Alive){
                 GameMaster.Instance.SetGameOver();

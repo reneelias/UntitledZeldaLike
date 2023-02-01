@@ -25,6 +25,8 @@ public class Brazier : LightableObject, ISwitchable
     [SerializeField] GameObject distortionObject;
     [SerializeField] bool useDistortionEffect = true;
     [SerializeField] Material distortionMaterial;
+    [SerializeField] bool useFence = false;
+    [SerializeField] Fence_Brazier fence;
 
     public bool Activated{
         get;
@@ -58,6 +60,8 @@ public class Brazier : LightableObject, ISwitchable
         innerFlameSprite.GetComponent<SpriteRenderer>().color = Utility.GetColorShade(targetColor, innerflameBrightening);
         outerFlameSprite.GetComponent<SpriteRenderer>().color = Utility.GetColorShade(targetColor, outerflameBrightening); 
         light2D.color = Utility.GetColorShade(targetColor, flameLightBrightening);
+
+        fence.gameObject.SetActive(useFence);
     }
 
     public override void SetOn(bool on, bool flipOthers = true){
