@@ -21,6 +21,7 @@ public class ControlsManager : Singleton<ControlsManager>
     float hapticsDT = 0f;
     float hapticsDuration;
     bool hapticsActive = false;
+    bool rumbleEnabled = true;
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +84,7 @@ public class ControlsManager : Singleton<ControlsManager>
     }
 
     public void PlayControllerHaptics(float leftMotorIntensity, float rightMotorIntensity, float duration){
-        if(Gamepad.current == null){
+        if(!rumbleEnabled || Gamepad.current == null){
             return;
         }
 
@@ -94,6 +95,10 @@ public class ControlsManager : Singleton<ControlsManager>
         hapticsActive = true;
         hapticsDuration = duration;
         hapticsDT = 0f;
+    }
+
+    public void EnableRumble(bool enable){
+        rumbleEnabled = enable;
     }
 }
 
