@@ -44,7 +44,6 @@ public class SkullEnemy : Enemy
     
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("WizardBoxCollider").GetComponent<Collider2D>());
 
-
         distortionSprite.SetActive(useDistortionEffect);
     }
 
@@ -103,27 +102,30 @@ public class SkullEnemy : Enemy
         if(useDistortionEffect){
             distortionSprite.SetActive(true);
         }
+        idleScaleTween.Restart();
     }
 
     private void DieAnimation(){
         float targetY = transform.position.y - .25f;
         Tween yTween = transform.DOMoveY(targetY, .5f).SetEase(Ease.OutBounce);
         transform.DORotate(new Vector3(0, 0, -80), .35f);
-        // deathPosition = new Vector3(transform.position.x, targetY, transform.position.z);
-        // transform.parent = null;
-
-        // yTween.OnComplete();
         deactivationTween = DOVirtual.DelayedCall(dieAnimationTime, Deactivate);
-        // transform.DOScaleY(1.475f, .275f)
+        flames.SetActive(false);
+        DOTween.To(()=> light2D.color.a, x => light2D.color.a = x, 0f, .25f);
+        // light2D.color.a = 0;
+        if(useDistortionEffect){
+            distortionSprite.SetActive(false);
+        }
+        idleScaleTween.Pause();
     }
     
     public void Deactivate(){
         EnableRenderer(false);
-        light2D.color.a = 0;
-        flames.SetActive(false);
-        if(useDistortionEffect){
-            distortionSprite.SetActive(false);
-        }
+        // light2D.color.a = 0;
+        // flames.SetActive(false);
+        // if(useDistortionEffect){
+        //     distortionSprite.SetActive(false);
+        // }
         // HPBar.active = false;
         // HPBar.GetComponent<Renderer>().enabled = false;
         // GetComponent<Rigidbody2D>().Sleep();

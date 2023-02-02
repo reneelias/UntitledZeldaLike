@@ -64,6 +64,7 @@ public class Particle : MonoBehaviour, IParticle
     }
 
     public void Activate(float spawnX, float spawnY, float lifeDuration, float fadeInTime, float fadeOutTime, float xOffset, float yOffset, Color color, float scale, bool lightEnabled, bool useSortingOrderByY = false){
+        gameObject.SetActive(true);
         EnableRenderer(true);
         Color tempColor = color;
         tempColor.a = 0f;
@@ -173,6 +174,7 @@ public class Particle : MonoBehaviour, IParticle
         light.color.a = 0f;
         light.enabled = false;
         EnableRenderer(false);
+        gameObject.SetActive(false);
     }
 
     public void EnableRenderer(bool enable){
