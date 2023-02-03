@@ -118,6 +118,18 @@ public class Enemy : MonoBehaviour, IDefeatable
     protected Dictionary<CharacterDirection, Vector2> directionVectorsDictionary;
     public bool suspendAnimationUpdate = false;
 
+    [Header("Checkerboard Materialize Spawn Shader Settings")]
+    [SerializeField] protected bool useSpawnAnimationOnStart = false;
+    [SerializeField] protected Material defaultMaterial;
+    [SerializeField] protected Material spawnMaterial;
+    [SerializeField] protected float checkerChangeRate = 1f;
+    [SerializeField] protected Vector2 startingCheckerSize = new Vector2(3f, 3f);
+    [SerializeField] protected float checkerSizeTarget = 100f;
+    protected Vector2 currentCheckerSize;
+    [SerializeField] protected Vector2 distortionVelocity = new Vector2(0f, 0f);
+    protected bool materializing = false;
+
+
     protected virtual void Start()
     {
         Alive = true;
@@ -152,8 +164,21 @@ public class Enemy : MonoBehaviour, IDefeatable
         
         originalColor = spriteRenderer.color;
 
+        InitializeMaterializeSpawn();
+        if(useSpawnAnimationOnStart){
+            StartCheckerboardMaterializeSpawn();
+        }
+        
         // Debug.Log($"SpawnPosition:")
     }
+
+    protected virtual void InitializeMaterializeSpawn(){
+        if(defaultMaterial == null){
+            defaultMaterial = GetComponent<Renderer>().material;
+        }
+
+        GetComponent<Renderer>().material.SetVector("_DistortionVelocity", distortionVelocity);
+    }    
 
     // Update is called once per frame
     protected virtual void Update()
@@ -167,7 +192,8 @@ public class Enemy : MonoBehaviour, IDefeatable
     {
         UpdateEngaged();
         UpdateMovementPause();
-    }    
+        UpdateCheckerboardMaterializeSpawn();
+    }
     
     // protected virtual void UpdateCharacterDirection(){
 
@@ -280,6 +306,23 @@ public class Enemy : MonoBehaviour, IDefeatable
             damageFlashDT = 0f;
             damageFlashIntervalDT = 0f;
             damageFlashing = false;
+        }
+    }
+
+    protected virtual void UpdateCheckerboardMaterializeSpawn(){
+        if(!materializing){
+            return;
+        }
+        // Debug.Log("Updating Checkerboard Frequency");
+
+        currentCheckerSize += new Vector2(checkerChangeRate, checkerChangeRate);
+        // Debug.Log($"Current checker size: {currentCheckerSize}");
+        GetComponent<Renderer>().material.SetVector("_CheckerBoardFrequency", currentCheckerSize);
+        if(currentCheckerSize.x >= checkerSizeTarget){
+            materializing = false;
+            GetComponent<Renderer>().material = defaultMaterial;
+            Material material = GetComponent<Renderer>().material;
+            // Debug.Log("Spawning finished");
         }
     }
 
@@ -517,6 +560,15 @@ public class Enemy : MonoBehaviour, IDefeatable
 
     public virtual void SetAsHiveEnemy(){
         followScript.enabled = false;
+    }
+
+    public virtual void StartCheckerboardMaterializeSpawn(){
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material = spawnMaterial;
+        renderer.material.SetVector("_CheckerBoardFrequency", startingCheckerSize);
+        renderer.material.SetVector("_DistortionVelocity", distortionVelocity);
+        currentCheckerSize = startingCheckerSize;
+        materializing = true;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision){

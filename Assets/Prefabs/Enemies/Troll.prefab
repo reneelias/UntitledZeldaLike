@@ -166,6 +166,13 @@ MonoBehaviour:
   spawnCharacterDirection: 0
   hasCharacterDirections: 1
   suspendAnimationUpdate: 0
+  useSpawnAnimationOnStart: 0
+  defaultMaterial: {fileID: 2100000, guid: 2cabbddc6804daf47829dfbfdef4ae3b, type: 2}
+  spawnMaterial: {fileID: 2100000, guid: 0315956c25f790b4aa0245f344912a2e, type: 2}
+  checkerChangeRate: 1
+  startingCheckerSize: {x: 3, y: 3}
+  checkerSizeTarget: 100
+  distortionVelocity: {x: 0, y: 0}
   canCharge: 1
   chargeStartTime: 2
   chargingTime: 2

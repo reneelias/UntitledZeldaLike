@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightmapPresets:
     list:
-    - name: Default
+    - name: Rooms
       type: 0
       hdr: 1
       darknessColor: {r: 0, g: 0, b: 0, a: 0.932}
@@ -27,7 +27,7 @@ MonoBehaviour:
         - id: 0
           type: 0
           sorting: 0
-    - name: Lightmap 2
+    - name: CeilingAndRoof
       type: 0
       hdr: 1
       darknessColor: {r: 0, g: 0, b: 0, a: 0.933}

@@ -250,7 +250,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79b4745066811ad42b50dec61b5b02cb, type: 2}
+  - {fileID: 2100000, guid: a656977b0446b2d4b88165046f6e55bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -338,6 +338,13 @@ MonoBehaviour:
   spawnCharacterDirection: 0
   hasCharacterDirections: 1
   suspendAnimationUpdate: 0
+  useSpawnAnimationOnStart: 0
+  defaultMaterial: {fileID: 2100000, guid: 2cabbddc6804daf47829dfbfdef4ae3b, type: 2}
+  spawnMaterial: {fileID: 2100000, guid: 0315956c25f790b4aa0245f344912a2e, type: 2}
+  checkerChangeRate: 1
+  startingCheckerSize: {x: 3, y: 3}
+  checkerSizeTarget: 100
+  distortionVelocity: {x: 0, y: 0}
   shootTime: 3
   isStationary: 0
   objectToAttack: {fileID: 0}

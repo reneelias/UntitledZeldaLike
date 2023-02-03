@@ -18,6 +18,7 @@ public class EnemyWavesRoom : Room
     float enemySpawnDT = 0f;
     float enemySpawnTime;
     bool enemySpawningActive = false;
+    [SerializeField] bool useSpawnMaterialAnimation = true;
     [SerializeField] Brazier[] braziersToLight;
     bool waveChallengeActive = false;
     bool waveChallengeFinished = false;
@@ -136,6 +137,9 @@ public class EnemyWavesRoom : Room
         newEnemy.transform.position = enemySpawnPositions.transform.GetChild(Random.Range(0, enemySpawnPositions.transform.childCount)).transform.position;
         newEnemy.SetSpawnItems(new GameObject[]{spawnableItemsPerRound[currentWaveNumber]}, dropPercentPerRound[currentWaveNumber]);
         newEnemy.SetEngagement(true, GameMaster.Instance.Player, -1);
+        if(useSpawnMaterialAnimation){
+            newEnemy.StartCheckerboardMaterializeSpawn();
+        }
 
         currentEnemies.Add(newEnemy);
 

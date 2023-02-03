@@ -46,6 +46,12 @@ public class SkeletonArcher : Enemy
         
         InitializeArrows();
         Random.seed = System.Environment.TickCount;
+        Renderer renderer = GetComponent<Renderer>();
+        Material material = renderer.material;
+        // Debug.Log("material 'Lit': " + material.GetFloat("_Lit"));
+
+        material.SetFloat("_Lit", .85f);
+        // GetComponent<Material>().SetFloat("Lit", .975f);
     }
 
     void InitializeArrows(){

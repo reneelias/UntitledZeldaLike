@@ -250,11 +250,19 @@ MonoBehaviour:
   spawnCharacterDirection: 0
   hasCharacterDirections: 0
   suspendAnimationUpdate: 0
+  useSpawnAnimationOnStart: 0
+  defaultMaterial: {fileID: 2100000, guid: 2cabbddc6804daf47829dfbfdef4ae3b, type: 2}
+  spawnMaterial: {fileID: 2100000, guid: 0315956c25f790b4aa0245f344912a2e, type: 2}
+  checkerChangeRate: 1
+  startingCheckerSize: {x: 3, y: 3}
+  checkerSizeTarget: 100
+  distortionVelocity: {x: 0, y: 0}
   particleEmitter: {fileID: 4169817654368933440}
   particleEmitterEnabled: 1
   flames: {fileID: 7826550772802741332}
   useDistortionEffect: 1
   distortionSprite: {fileID: 6535398081255061016}
+  flamesMaterial: {fileID: 2100000, guid: bda524050dc78814a9292b0f4ef2f4af, type: 2}
 --- !u!61 &1497666757886139507
 BoxCollider2D:
   m_ObjectHideFlags: 0

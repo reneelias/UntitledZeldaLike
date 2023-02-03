@@ -14,10 +14,11 @@ public class SkullEnemy : Enemy
     [SerializeField] ParticleEmitter particleEmitter;
     [SerializeField] bool particleEmitterEnabled = true;
     Tween deactivationTween;
-    [SerializeField] GameObject flames;
+    [SerializeField] protected GameObject flames;
     [Header("Distortion Sprite")]
-    [SerializeField] bool useDistortionEffect = true;
-    [SerializeField] GameObject distortionSprite;
+    [SerializeField] protected bool useDistortionEffect = true;
+    [SerializeField] protected GameObject distortionSprite;
+    [SerializeField] protected Material flamesMaterial;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -45,7 +46,17 @@ public class SkullEnemy : Enemy
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("WizardBoxCollider").GetComponent<Collider2D>());
 
         distortionSprite.SetActive(useDistortionEffect);
+        // flamesMaterial = flames.GetComponent<Renderer>().material;
     }
+
+    protected override void InitializeMaterializeSpawn(){
+        base.InitializeMaterializeSpawn();
+
+        // if(defaultMaterial == null){
+        //     defaultMaterial = GetComponent<Renderer>().material;
+            // flames.GetComponent<Renderer>().material.SetVector("_DistortionVelocity", distortionVelocity);
+        // }
+    }    
 
     // Update is called once per frame
     protected override void Update()
@@ -61,6 +72,29 @@ public class SkullEnemy : Enemy
 
     protected void UpdateFlames(){
         flames.GetComponent<SpriteRenderer>().sortingOrder = spriteRenderer.sortingOrder - 1;
+    }
+
+    protected override void UpdateCheckerboardMaterializeSpawn()
+    {
+        // base.UpdateCheckerboardMaterializeSpawn();
+        if(!materializing){
+            return;
+        }
+        currentCheckerSize += new Vector2(checkerChangeRate, checkerChangeRate);
+        // Debug.Log($"Current checker size: {currentCheckerSize}");
+        GetComponent<Renderer>().material.SetVector("_CheckerBoardFrequency", currentCheckerSize);
+        if(currentCheckerSize.x >= checkerSizeTarget){
+            materializing = false;
+            GetComponent<Renderer>().material = defaultMaterial;
+            Material material = GetComponent<Renderer>().material;
+            // Debug.Log("Spawning finished");
+        }
+        // Debug.Log("flames spawn update");
+
+        flames.GetComponent<Renderer>().material.SetVector("_CheckerBoardFrequency", currentCheckerSize);
+        if(currentCheckerSize.x >= checkerSizeTarget){
+            flames.GetComponent<Renderer>().material = flamesMaterial;
+        }
     }
 
     public override void ChangeHP(int deltaHP)
@@ -134,6 +168,16 @@ public class SkullEnemy : Enemy
     public override void ApplyForceFromMovementTile(Vector2 force, MovementTile movementTile)
     {
         // base.ApplyForceFromMovementTile(force, movementTile);
+    }
+
+    public override void StartCheckerboardMaterializeSpawn()
+    {
+        base.StartCheckerboardMaterializeSpawn();
+
+        Renderer flamesRenderer = flames.GetComponent<Renderer>();
+        flamesRenderer.material = spawnMaterial;
+        flamesRenderer.material.SetVector("_CheckerBoardFrequency", startingCheckerSize);
+        flamesRenderer.material.SetVector("_DistortionVelocity", distortionVelocity);
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision){

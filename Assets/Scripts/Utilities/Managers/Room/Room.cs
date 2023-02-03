@@ -589,7 +589,7 @@ public class Room : MonoBehaviour
         // float adjustDarknessAmount = darknessColor.a - GameMaster.Instance.DarknessSliderRange / 2f + GameMaster.Instance.DarknessSliderRange * ;
 
         Color targetColor = useGlobalDarkness ? GameMaster.Instance.dungeon.darknessColor : darknessColor;
-        Color targetColor_Pass2 = useGlobalDarkness ? Lighting2D.LightmapPresets[1].darknessColor : darknessColor_Pass2;
+        Color targetColor_Pass2 = useGlobalDarkness ? GameMaster.Instance.dungeon.darknessColor_Pass2 : darknessColor_Pass2;
 
         if(!GameMaster.Instance.dungeon.UseCustomDarknessColor){
             targetColor = Lighting2D.DarknessColor;
