@@ -586,7 +586,7 @@ MonoBehaviour:
   shadowDistanceMin: 0.5
   shadowDistanceMax: 1
   shadowTranslucency: 0
-  maskType: 1
+  maskType: 0
   maskLit: 0
   maskPivot: 0
   maskLayer: 0

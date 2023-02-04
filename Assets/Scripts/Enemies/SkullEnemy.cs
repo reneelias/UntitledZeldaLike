@@ -81,6 +81,9 @@ public class SkullEnemy : Enemy
             return;
         }
         currentCheckerSize += new Vector2(checkerChangeRate, checkerChangeRate);
+        if(increaseChangeRateOverTime){
+            checkerChangeRate += checkerChangeRateIncreaseDelta;
+        }
         // Debug.Log($"Current checker size: {currentCheckerSize}");
         GetComponent<Renderer>().material.SetVector("_CheckerBoardFrequency", currentCheckerSize);
         if(currentCheckerSize.x >= checkerSizeTarget){

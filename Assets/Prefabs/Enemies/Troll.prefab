@@ -152,7 +152,7 @@ MonoBehaviour:
   floorLevel: 1
   sortingOrderByY: {fileID: 2688191622139328902}
   movementPauseTime: 1.075
-  lastSwordAndShieldPauseDuration: 3
+  lastSwordAndShieldPauseDuration: 2
   swordHitKnockForceMagnitude: 40
   shieldHitKnockForceMagnitude: 20
   playerShieldHitStaminaCost: 25
@@ -170,6 +170,8 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 2cabbddc6804daf47829dfbfdef4ae3b, type: 2}
   spawnMaterial: {fileID: 2100000, guid: 0315956c25f790b4aa0245f344912a2e, type: 2}
   checkerChangeRate: 1
+  increaseChangeRateOverTime: 1
+  checkerChangeRateIncreaseDelta: 0.1
   startingCheckerSize: {x: 3, y: 3}
   checkerSizeTarget: 100
   distortionVelocity: {x: 0, y: 0}

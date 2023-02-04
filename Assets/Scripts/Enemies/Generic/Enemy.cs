@@ -122,7 +122,9 @@ public class Enemy : MonoBehaviour, IDefeatable
     [SerializeField] protected bool useSpawnAnimationOnStart = false;
     [SerializeField] protected Material defaultMaterial;
     [SerializeField] protected Material spawnMaterial;
-    [SerializeField] protected float checkerChangeRate = 1f;
+    [SerializeField] protected float checkerChangeRate = .1f;
+    [SerializeField] protected bool increaseChangeRateOverTime = true;
+    [SerializeField] protected float checkerChangeRateIncreaseDelta = .1f;
     [SerializeField] protected Vector2 startingCheckerSize = new Vector2(3f, 3f);
     [SerializeField] protected float checkerSizeTarget = 100f;
     protected Vector2 currentCheckerSize;
@@ -316,6 +318,9 @@ public class Enemy : MonoBehaviour, IDefeatable
         // Debug.Log("Updating Checkerboard Frequency");
 
         currentCheckerSize += new Vector2(checkerChangeRate, checkerChangeRate);
+        if(increaseChangeRateOverTime){
+            checkerChangeRate += checkerChangeRateIncreaseDelta;
+        }
         // Debug.Log($"Current checker size: {currentCheckerSize}");
         GetComponent<Renderer>().material.SetVector("_CheckerBoardFrequency", currentCheckerSize);
         if(currentCheckerSize.x >= checkerSizeTarget){

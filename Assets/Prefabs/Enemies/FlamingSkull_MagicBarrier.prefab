@@ -254,10 +254,12 @@ MonoBehaviour:
   useSpawnAnimationOnStart: 0
   defaultMaterial: {fileID: 2100000, guid: 2cabbddc6804daf47829dfbfdef4ae3b, type: 2}
   spawnMaterial: {fileID: 2100000, guid: 0315956c25f790b4aa0245f344912a2e, type: 2}
-  checkerChangeRate: 1
-  startingCheckerSize: {x: 1, y: 1}
+  checkerChangeRate: 0.025
+  increaseChangeRateOverTime: 1
+  checkerChangeRateIncreaseDelta: 0.025
+  startingCheckerSize: {x: 0, y: 0}
   checkerSizeTarget: 45
-  distortionVelocity: {x: 0.25, y: 0.25}
+  distortionVelocity: {x: 0.125, y: 0.125}
   particleEmitter: {fileID: 4169817654368933440}
   particleEmitterEnabled: 1
   flames: {fileID: 7826550772802741332}
@@ -706,7 +708,7 @@ MonoBehaviour:
   shadowDistanceMin: 0.5
   shadowDistanceMax: 1
   shadowTranslucency: 0
-  maskType: 1
+  maskType: 0
   maskLit: 0
   maskPivot: 0
   maskLayer: 0
@@ -722,7 +724,7 @@ MonoBehaviour:
     spriteRenderer: {fileID: 5449891002530723983}
   mainShape:
     shadowType: 0
-    maskType: 1
+    maskType: 0
     maskPivot: 0
     transform: {fileID: 7961754739629221287}
 --- !u!1001 &1346232254776163541
