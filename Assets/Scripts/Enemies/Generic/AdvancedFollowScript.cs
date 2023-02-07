@@ -8,6 +8,7 @@ public class AdvancedFollowScript : FollowScript
     Vector3 previousPosition;
     float previousDirectionAngle;
     float previousAngleOffset;
+    [Header("Advanced Follow Script")]
     [SerializeField] float angleCheckIncrement;
     [SerializeField] float angleCorrectionIncrement;
     [SerializeField] float thresholdDistance;
@@ -41,9 +42,9 @@ public class AdvancedFollowScript : FollowScript
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     protected override void FixedUpdate()

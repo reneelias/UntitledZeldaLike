@@ -254,6 +254,8 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 2cabbddc6804daf47829dfbfdef4ae3b, type: 2}
   spawnMaterial: {fileID: 2100000, guid: 0315956c25f790b4aa0245f344912a2e, type: 2}
   checkerChangeRate: 1
+  increaseChangeRateOverTime: 1
+  checkerChangeRateIncreaseDelta: 0.1
   startingCheckerSize: {x: 3, y: 3}
   checkerSizeTarget: 100
   distortionVelocity: {x: 0, y: 0}
@@ -310,6 +312,11 @@ MonoBehaviour:
   originPosition: {x: 0, y: 0, z: 0}
   shouldReturnToOrigin: 1
   hasLOS: 0
+  shouldHaveIdleMovement: 1
+  idleMovementRange: 2
+  idleMovementPauseTimeMin: 1
+  idleMovementPauseTimeMax: 3
+  idleMovementSpeed: 2
   angleCheckIncrement: 20
   angleCorrectionIncrement: 5
   thresholdDistance: 2
@@ -602,7 +609,7 @@ MonoBehaviour:
     spriteRenderer: {fileID: 5449891002530723983}
   mainShape:
     shadowType: 0
-    maskType: 1
+    maskType: 0
     maskPivot: 0
     transform: {fileID: 7961754739629221287}
 --- !u!1001 &1346232254776163541
