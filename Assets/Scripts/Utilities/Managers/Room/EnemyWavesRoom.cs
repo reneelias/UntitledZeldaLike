@@ -32,6 +32,7 @@ public class EnemyWavesRoom : Room
     [SerializeField] GameObject[] spawnableItemsPerRound;
     [SerializeField] float[] dropPercentPerRound;
     [SerializeField] AudioClip waveFinishedSound;
+    [SerializeField] AudioClip roundStartBell;
     // [SerializeField] AudioClip 
 
     // Start is called before the first frame update
@@ -108,6 +109,8 @@ public class EnemyWavesRoom : Room
         enemySpawningActive = true;
         enemySpawnDT = 0f;
         enemySpawnTime = Random.Range(enemySpawnTimes_MIN[currentWaveNumber], enemySpawnTimes_MAX[currentWaveNumber]);
+
+        GameMaster.Instance.audioSource.PlayOneShot(roundStartBell);
     }
 
     protected virtual void EndCurrentWave(){
