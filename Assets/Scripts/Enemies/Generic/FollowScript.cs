@@ -16,7 +16,7 @@ public class FollowScript : MonoBehaviour
     public bool shouldReturnToOrigin;
     public bool hasLOS;
     [Header("Idle Movement")]
-    [SerializeField] bool shouldHaveIdleMovement = false;
+    [SerializeField] bool useIdleMovement = false;
     [SerializeField] float idleMovementRange = 2f;
     float idleMovementAngle = 0f;
     [SerializeField] float idleMovementPauseTimeMin = 1f;
@@ -58,7 +58,7 @@ public class FollowScript : MonoBehaviour
     }
 
     protected virtual void UpdateIdleMovement(){
-        if(!shouldHaveIdleMovement || !atOrigin){
+        if(!useIdleMovement || !atOrigin){
             return;
         }
 
@@ -128,5 +128,16 @@ public class FollowScript : MonoBehaviour
             Vector3 targetVelocity = diffVector.normalized * followSpeed;
             transform.position += targetVelocity;
         }
+    }
+
+    public virtual void ResetIdleMovement(){
+        if(!useIdleMovement){
+            return;
+        }
+
+        idleMovementPauseTime = Random.Range(idleMovementPauseTimeMin, idleMovementPauseTimeMax);
+        idleMovementPauseDT = 0f;
+        idleVelocity = Vector3.zero;
+        movingToNewPosition = false;
     }
 }

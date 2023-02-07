@@ -421,11 +421,13 @@ public class Enemy : MonoBehaviour, IDefeatable
         Alive = true;
         Engaged = false;
         m_Rigidbody2D.simulated = true;
+        m_Rigidbody2D.velocity = Vector2.zero;
         GetComponent<SortingOrderByY>().enabled = true;
         if(setOriginPosition){
             if(followScript == null){
                 transform.position = spawnPosition;
             } else {
+                followScript.ResetIdleMovement();
                 transform.position = followScript.originPosition;
             }
         }
