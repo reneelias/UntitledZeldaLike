@@ -274,6 +274,13 @@ MonoBehaviour:
   originPosition: {x: 0, y: 0, z: 0}
   shouldReturnToOrigin: 0
   hasLOS: 0
+  useIdleMovement: 0
+  idleMovementRange: 2
+  idleMovementPauseTimeMin: 1
+  idleMovementPauseTimeMax: 3
+  idleMovementSpeed: 2
+  idleMovementTimeMax: 3
+  constantIdleMoveSpeed: 0
   angleCheckIncrement: 20
   angleCorrectionIncrement: 10
   thresholdDistance: 4

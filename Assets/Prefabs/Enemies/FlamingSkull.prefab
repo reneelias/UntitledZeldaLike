@@ -236,7 +236,7 @@ MonoBehaviour:
   floorLevel: 1
   sortingOrderByY: {fileID: -8527895595948383538}
   movementPauseTime: 0.5
-  lastSwordAndShieldPauseDuration: 1
+  lastSwordAndShieldPauseDuration: 0
   swordHitKnockForceMagnitude: 40
   shieldHitKnockForceMagnitude: 20
   playerShieldHitStaminaCost: 20
@@ -317,6 +317,9 @@ MonoBehaviour:
   idleMovementPauseTimeMin: 1
   idleMovementPauseTimeMax: 3
   idleMovementSpeed: 2
+  idleMovementTimeMax: 3
+  constantIdleMoveSpeed: 0
+  slowestIdleMoveSpeed: 0.25
   angleCheckIncrement: 20
   angleCorrectionIncrement: 5
   thresholdDistance: 2

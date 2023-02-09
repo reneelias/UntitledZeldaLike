@@ -9,7 +9,6 @@ public class Chest : A_Interactable, IUnlocklableObject
     [SerializeField] bool unlocked = false;
     Sequence bounceSequence;
     Sequence scaleSequence;
-    [SerializeField] bool openable = false;
     bool opened = false;
     [SerializeField] GameObject containedItem;
     public GameObject ContainedItem{
@@ -39,7 +38,6 @@ public class Chest : A_Interactable, IUnlocklableObject
         }
 
         InteractableType = Interactable_Type.Chest;
-        Interactable = openable;
         
         // interactText.alpha = 0;
         // interactTextTween = interactText.transform.DOLocalMoveY(interactText.transform.localPosition.y + .2f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
@@ -90,7 +88,7 @@ public class Chest : A_Interactable, IUnlocklableObject
     }
 
     public override bool Interact(){
-        if(!openable || opened){
+        if(!Interactable || opened){
             return false;
         }
 
@@ -114,7 +112,6 @@ public class Chest : A_Interactable, IUnlocklableObject
             .Append(transform.DOPunchPosition(bounceStrengthVector, bounceTime, 10, 0f))
             .Join(transform.DOShakeRotation(bounceTime, rotationStrengthVector, 10, 45f, false))
             .OnComplete(()=>{
-                openable = true;
                 Interactable = true;
                 })
             .Pause();

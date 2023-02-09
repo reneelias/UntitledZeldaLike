@@ -74,7 +74,7 @@ public class Coin : MonoBehaviour, IPickup, I_DiscoverableItem
             case CoinValue.Twenty:
                 colorIndex = 2;
                 break;
-            case CoinValue.OneHundred:
+            case CoinValue.Fifty:
                 colorIndex = 3;
                 break;
         }
@@ -181,5 +181,5 @@ public enum CoinValue{
     One = 1,
     Five = 5,
     Twenty = 20,
-    OneHundred = 100
+    Fifty = 50
 }

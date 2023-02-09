@@ -24,6 +24,11 @@ public class FollowScript : MonoBehaviour
     float idleMovementPauseTime;
     float idleMovementPauseDT;
     [SerializeField] float idleMovementSpeed = 2f;
+    [SerializeField] float idleMovementTimeMax = 3f;
+    [Tooltip("If false, object will slow down as it approaches its resting place.")]
+    [SerializeField] bool constantIdleMoveSpeed = false;
+    [SerializeField] float slowestIdleMoveSpeed = .25f;
+    float idleMovementDT = 0f;
     Vector3 idleTargetPosition;
     Vector3 idleVelocity;
     bool movingToNewPosition = false;
@@ -42,6 +47,7 @@ public class FollowScript : MonoBehaviour
 
         idleMovementPauseTime = Random.Range(idleMovementPauseTimeMin, idleMovementPauseTimeMax);
         idleMovementPauseDT = 0f;
+        idleMovementDT = 0f;
         idleVelocity = Vector3.zero;
     }
 
@@ -62,7 +68,9 @@ public class FollowScript : MonoBehaviour
             return;
         }
 
-        if(!movingToNewPosition){
+        if(movingToNewPosition){
+            idleMovementDT += Time.deltaTime;
+        } else {
             idleMovementPauseDT += Time.deltaTime;
         }
 
@@ -70,19 +78,30 @@ public class FollowScript : MonoBehaviour
             idleMovementAngle = Random.Range(0f, Mathf.PI * 2f);
             idleTargetPosition = originPosition + new Vector3(Mathf.Cos(idleMovementAngle) * Random.Range(0f, idleMovementRange), Mathf.Sin(idleMovementAngle) * Random.Range(0f, idleMovementRange));
             movingToNewPosition = true;
-            Vector3 differenceVector3D = idleTargetPosition - transform.position;
-            idleVelocity = differenceVector3D.normalized * idleMovementSpeed;
         }
 
         if(movingToNewPosition){
+            Vector3 differenceVector3D = idleTargetPosition - transform.position;
+            float actualSpeed;
+
+            if(constantIdleMoveSpeed){
+                actualSpeed = idleMovementSpeed;
+            } else {
+                actualSpeed = Mathf.Clamp(idleMovementSpeed * differenceVector3D.magnitude / (idleMovementRange / 2f), slowestIdleMoveSpeed, idleMovementSpeed);
+            }
+
+            idleVelocity = differenceVector3D.normalized * actualSpeed;
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, idleVelocity, ref m_Velocity, m_MovementSmoothing);
         }
 
-        if(movingToNewPosition && (transform.position - idleTargetPosition).magnitude <= .05f){
+        if(movingToNewPosition && (transform.position - idleTargetPosition).magnitude <= .05f
+            || idleMovementDT >= idleMovementTimeMax){
+
             movingToNewPosition = false;
             m_Rigidbody2D.velocity = Vector2.zero;
             idleMovementPauseDT = 0f;
             idleMovementPauseTime = Random.Range(idleMovementPauseTimeMin, idleMovementPauseTimeMax);
+            idleMovementDT = 0f;
         }
     }
 

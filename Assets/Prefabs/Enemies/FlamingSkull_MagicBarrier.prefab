@@ -236,8 +236,8 @@ MonoBehaviour:
   pushForceMagnitude: 30
   floorLevel: 1
   sortingOrderByY: {fileID: -8527895595948383538}
-  movementPauseTime: 0.35
-  lastSwordAndShieldPauseDuration: 3
+  movementPauseTime: 0.4
+  lastSwordAndShieldPauseDuration: 0.25
   swordHitKnockForceMagnitude: 40
   shieldHitKnockForceMagnitude: 20
   playerShieldHitStaminaCost: 20
@@ -314,6 +314,14 @@ MonoBehaviour:
   originPosition: {x: 0, y: 0, z: 0}
   shouldReturnToOrigin: 1
   hasLOS: 0
+  useIdleMovement: 0
+  idleMovementRange: 2
+  idleMovementPauseTimeMin: 1
+  idleMovementPauseTimeMax: 3
+  idleMovementSpeed: 2
+  idleMovementTimeMax: 3
+  constantIdleMoveSpeed: 0
+  slowestIdleMoveSpeed: 0.25
   angleCheckIncrement: 20
   angleCorrectionIncrement: 5
   thresholdDistance: 2

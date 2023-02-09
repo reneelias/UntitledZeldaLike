@@ -178,6 +178,7 @@ public class EnemyWavesRoom : Room
         }
 
         waveChallengeActive = false;
+        enemySpawningActive = false;
 
         foreach(Brazier brazier in braziersToLight){
             brazier.SetOff();
