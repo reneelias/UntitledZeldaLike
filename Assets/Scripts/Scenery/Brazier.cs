@@ -27,7 +27,6 @@ public class Brazier : LightableObject, ISwitchable
     [SerializeField] Material distortionMaterial;
     [SerializeField] bool useFence = false;
     [SerializeField] Fence_Brazier fence;
-
     public bool Activated{
         get;
     }

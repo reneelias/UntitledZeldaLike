@@ -2596,7 +2596,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2cabbddc6804daf47829dfbfdef4ae3b, type: 2}
     - target: {fileID: 2780821291684454155, guid: d420ca4529643a8429c73528fe9af579, type: 3}
       propertyPath: m_Name
-      value: Torch Flame@128x128
+      value: TorchFlame
       objectReference: {fileID: 0}
     - target: {fileID: 2780821291684454155, guid: d420ca4529643a8429c73528fe9af579, type: 3}
       propertyPath: m_Layer

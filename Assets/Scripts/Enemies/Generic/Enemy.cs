@@ -310,7 +310,7 @@ public class Enemy : MonoBehaviour, IDefeatable
             damageFlashing = false;
         }
     }
-
+    
     protected virtual void UpdateCheckerboardMaterializeSpawn(){
         if(!materializing){
             return;
@@ -385,8 +385,6 @@ public class Enemy : MonoBehaviour, IDefeatable
 		// m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, movementSmoothing);
         m_Rigidbody2D.velocity = targetVelocity;
     }
-
-
 
     private void OnDrawGizmosSelected(){
 		UnityEngine.Gizmos.color = new Color(1f, 0.25f, 0.25f, .25f);

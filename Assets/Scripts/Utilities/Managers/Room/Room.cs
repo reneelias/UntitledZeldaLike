@@ -28,6 +28,7 @@ public class Room : MonoBehaviour
     [SerializeField] GameObject[] unlockableObjects;
     [SerializeField] GameObject[] unlockingEnemies;
     [SerializeField] GameObject[] unlockingPuzzleObjects;
+    [SerializeField] GameObject[] unlockObjectsToActivate;
     public bool active = false;
     [SerializeField] bool lockDoorsOnFirstEntry = false;
     bool firstEntry = true;
@@ -356,6 +357,14 @@ public class Room : MonoBehaviour
         if(unlockableObjects != null){
             foreach(GameObject unlockableObjects in unlockableObjects){
                 unlockableObjects.GetComponent<IUnlocklableObject>().Unlock();
+            }
+        }
+
+        foreach(GameObject gObj in unlockObjectsToActivate){
+            switch(gObj.tag){
+                case "Lightable":
+                    gObj.GetComponent<LightableObject>().SetOn(true, false);
+                break;
             }
         }
 
