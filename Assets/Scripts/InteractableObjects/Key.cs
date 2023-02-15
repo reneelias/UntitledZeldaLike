@@ -78,7 +78,7 @@ public class Key : MonoBehaviour, IUnlocklableObject, I_DiscoverableItem
         }
         gameObject.SetActive(true);
         unlocked = true;
-        GameMaster.Instance.audioSource.PlayOneShot(unlockSound);
+        GameMaster.Instance.audioSource.PlayOneShot(unlockSound, GameMaster.Instance.MasterVolume);
 
         // float originalScale = transform.localScale.x;
         // transform.localScale = new Vector3(originalScale * 2f, originalScale * 2f, 1f);
@@ -109,7 +109,7 @@ public class Key : MonoBehaviour, IUnlocklableObject, I_DiscoverableItem
 
         grabbable = false;
         falling = true;
-        GameMaster.Instance.audioSource.PlayOneShot(fallSound);
+        GameMaster.Instance.audioSource.PlayOneShot(fallSound, GameMaster.Instance.MasterVolume);
 
         transform.DOScale(0f, .5f)
             .OnUpdate(()=>{transform.localEulerAngles += new Vector3(0f, 0f, 1f);})
@@ -153,7 +153,7 @@ public class Key : MonoBehaviour, IUnlocklableObject, I_DiscoverableItem
         gameObject.SetActive(true);
         GameMaster.Instance.dungeon.ModifyKeyCount(1, isMasterKey);
         GetComponent<SortingOrderByY>().enabled = false;
-        // GameMaster.Instance.audioSource.PlayOneShot(pickupSound);
+        // GameMaster.Instance.audioSource.PlayOneShot(pickupSound, GameMaster.Instance.MasterVolume);
         pickedUp = true;
     }
 
@@ -181,7 +181,7 @@ public class Key : MonoBehaviour, IUnlocklableObject, I_DiscoverableItem
                 }
             
                 GameMaster.Instance.dungeon.ModifyKeyCount(1, isMasterKey);
-                GameMaster.Instance.audioSource.PlayOneShot(pickupSound);
+                GameMaster.Instance.audioSource.PlayOneShot(pickupSound, GameMaster.Instance.MasterVolume);
                 pickedUp = true;
                 gameObject.SetActive(false);
                 

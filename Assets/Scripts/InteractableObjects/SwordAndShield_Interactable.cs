@@ -97,7 +97,7 @@ public class SwordAndShield_Interactable : A_Interactable, I_DiscoverableItem
     public void Discover(){
         particleEmitter.activelySpawning = true;
         radialLight.enabled = true;
-        GameMaster.Instance.audioSource.PlayOneShot(pickupSound);
+        GameMaster.Instance.audioSource.PlayOneShot(pickupSound, GameMaster.Instance.MasterVolume);
         spriteObject.SetActive(true);
         // lightCollider2D.enabled = false;
     }

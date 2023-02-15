@@ -21,7 +21,7 @@ public class SpikedFence : MonoBehaviour, IUnlocklableObject
     }
 
     public void Unlock(){
-        GameMaster.Instance.audioSource.PlayOneShot(unlockingSound);
+        GameMaster.Instance.audioSource.PlayOneShot(unlockingSound, GameMaster.Instance.MasterVolume);
         gameObject.SetActive(false);
     }
 }
