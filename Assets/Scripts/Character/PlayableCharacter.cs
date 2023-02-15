@@ -151,12 +151,12 @@ public class PlayableCharacter : MonoBehaviour
             alphaChangeDT = 0f;
             Invinsible = true;
 
-            GameMaster.Instance.audioSource.PlayOneShot(damageAudioClip);
+            GameMaster.Instance.audioSource.PlayOneShot(damageAudioClip, GameMaster.Instance.MasterVolume);
             ControlsManager.Instance.PlayControllerHaptics(.25f, .75f, .25f);
 
             if(hp <= 0 && Alive){
                 GameMaster.Instance.SetGameOver();
-                GameMaster.Instance.audioSource.PlayOneShot(deathAudioClip);
+                GameMaster.Instance.audioSource.PlayOneShot(deathAudioClip, GameMaster.Instance.MasterVolume);
                 Alive = false;
                 // GameMaster.Instance.dungeon.CurrentRoom.DeathRoomReset();
                 characterControls.NormalControlsSuspended = true;

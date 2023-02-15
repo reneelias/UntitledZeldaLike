@@ -124,7 +124,7 @@ public class Skull : A_ItemDropper, IBreakable, I_Respawnable
         Broken = true;
         Breakable = false;
         Active = false;
-        GameMaster.Instance.audioSource.PlayOneShot(breakSound);
+        GameMaster.Instance.audioSource.PlayOneShot(breakSound, GameMaster.Instance.MasterVolume);
 
         if(immediateRespawn){
             immediateRespawningActive = true;
@@ -151,7 +151,7 @@ public class Skull : A_ItemDropper, IBreakable, I_Respawnable
 
         Breakable = false;
         falling = true;
-        GameMaster.Instance.audioSource.PlayOneShot(fallSound);
+        GameMaster.Instance.audioSource.PlayOneShot(fallSound, GameMaster.Instance.MasterVolume);
 
         transform.DOScale(0f, fallDuration)
             .OnUpdate(()=>{transform.localEulerAngles += new Vector3(0f, 0f, 1f);})

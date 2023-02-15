@@ -114,6 +114,6 @@ public class SmokeExplosion : MonoBehaviour
         animDT = 0f;
         exploding = true;
         alpha = maxAlpha;
-        GameMaster.Instance.audioSource.PlayOneShot(explosionSound);
+        GameMaster.Instance.audioSource.PlayOneShot(explosionSound, GameMaster.Instance.MasterVolume);
     }
 }

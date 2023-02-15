@@ -249,7 +249,7 @@ public class Room : MonoBehaviour
             randomLightningFlashingDT = 0f;
             thunderSoundDT = 0f;
             if(playThunderSound){
-                roomAudioSource.PlayOneShot(thunderSound);
+                roomAudioSource.PlayOneShot(thunderSound, GameMaster.Instance.MasterVolume);
             }
 
             foreach(Light2D light in lightsToFlash){
@@ -281,13 +281,13 @@ public class Room : MonoBehaviour
                     break;
                 }
                 if(i == musicEngageEnemies.Length - 1){
-                    GameMaster.Instance.dungeon.PlayDungeonMusic(dungeonMusicRestartDelay);
+                    GameMaster.Instance.dungeon.PlayDungeonMusic(dungeonMusicRestartDelay, GameMaster.Instance.MasterVolume);
                     musicPlaying = false;
                     musicEnemiesKilled = true;
                     playRoomMusicOnEntrance = false;
                     pauseDungeonMusicOnEntrance = false;
                     if(enemyDefeatSound != null && playEnemyDefeatSound){
-                        GameMaster.Instance.audioSource.PlayOneShot(enemyDefeatSound);
+                        GameMaster.Instance.audioSource.PlayOneShot(enemyDefeatSound, GameMaster.Instance.MasterVolume);
                     }
                 }
             }
@@ -296,7 +296,7 @@ public class Room : MonoBehaviour
             foreach(Enemy enemy in musicEngageEnemies){
                 if(enemy.Engaged){
                     musicPlaying = true;
-                    GameMaster.Instance.dungeon.PlayRoomMusic(roomMusic, musicVolume);
+                    GameMaster.Instance.dungeon.PlayRoomMusic(roomMusic, musicVolume * GameMaster.Instance.MasterVolume);
                     break;
                 }
             }
@@ -351,7 +351,7 @@ public class Room : MonoBehaviour
                 door.UnlockDoor();
             }
 
-            GameMaster.Instance.audioSource.PlayOneShot(unlockSound);
+            GameMaster.Instance.audioSource.PlayOneShot(unlockSound, GameMaster.Instance.MasterVolume);
         }
         
         if(unlockableObjects != null){
@@ -391,18 +391,18 @@ public class Room : MonoBehaviour
         }
 
         if(playRainSound){
-            roomAudioSource.DOFade(1f, 1f);
+            roomAudioSource.DOFade(GameMaster.Instance.MasterVolume, 1f);
             roomAudioSource.Play();
             // roomAudioSource.loop = true;
         }
 
         if(playRoomMusicOnEntrance){
-            GameMaster.Instance.dungeon.PlayRoomMusic(roomMusic, musicVolume);
+            GameMaster.Instance.dungeon.PlayRoomMusic(roomMusic, musicVolume * GameMaster.Instance.MasterVolume);
             musicPlaying = true;
         } else if(pauseDungeonMusicOnEntrance){
             GameMaster.Instance.dungeon.PauseDungeonMusic();
         } else{
-            GameMaster.Instance.dungeon.PlayDungeonMusic();
+            GameMaster.Instance.dungeon.PlayDungeonMusic(0f, GameMaster.Instance.MasterVolume);
         }
 
         if(firstRoomActivation){
@@ -613,5 +613,9 @@ public class Room : MonoBehaviour
 
         DOTween.To(()=> Lighting2D.DarknessColor, x=> Lighting2D.DarknessColor = x, targetColor, RoomTransitionTime);
         DOTween.To(()=> Lighting2D.LightmapPresets[1].darknessColor, x=> Lighting2D.LightmapPresets[1].darknessColor = x, targetColor_Pass2, RoomTransitionTime);
+    }
+
+    public void SetAudioVolume(float volume){
+        roomAudioSource.volume = musicVolume * volume;
     }
 }

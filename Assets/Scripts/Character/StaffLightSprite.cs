@@ -351,7 +351,7 @@ public class StaffLightSprite : MonoBehaviour
         beamParticle.damagePts = mainBeamDamage;
         onCooldown = true;
 
-        GameMaster.Instance.audioSource.PlayOneShot(beamAudioClip);
+        GameMaster.Instance.audioSource.PlayOneShot(beamAudioClip, GameMaster.Instance.MasterVolume);
         // Debug.Log("Staff beam created");
         return true;
     }

@@ -142,7 +142,8 @@ public class TrollEnemy : Enemy
             chargeDT = 0f;
             followScript.shouldFollow = false;
             chargingVelocity = (Vector2)(followScript.objectToFollow.transform.position - transform.position).normalized * chargeSpeed;
-            GameMaster.Instance.audioSource.PlayOneShot(chargeRoar, volume);
+            GameMaster.Instance.audioSource.PlayOneShot(chargeRoar, volume * GameMaster.Instance.MasterVolume);
+            audioSource.volume = volume  * GameMaster.Instance.MasterVolume;
             audioSource.Play();
             // Debug.Log("Charging");
         } else {

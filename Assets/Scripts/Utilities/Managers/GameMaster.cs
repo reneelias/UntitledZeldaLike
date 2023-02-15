@@ -58,6 +58,11 @@ public class GameMaster : Singleton<GameMaster>
     public float DarknessSliderRange{
         get => darknessSliderRange;
     }
+    [SerializeField] float masterVolume = 1f;
+    public float MasterVolume{
+        get => masterVolume;
+        protected set => masterVolume = value;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +74,8 @@ public class GameMaster : Singleton<GameMaster>
             Application.targetFrameRate = -1;
             // QualitySettings.vSyncCount = 1;
         }
+
+        audioSource.volume = masterVolume;
     }
 
     // Update is called once per frame
@@ -265,5 +272,11 @@ public class GameMaster : Singleton<GameMaster>
                     blackOverlay.gameObject.SetActive(false);
                 }
             });
+    }
+
+    public void SetVolume(float volume){
+        MasterVolume = volume;
+        dungeon.SetAudioVolume(volume);
+        dungeon.CurrentRoom.SetAudioVolume(volume);
     }
 }

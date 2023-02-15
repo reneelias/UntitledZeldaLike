@@ -115,7 +115,7 @@ public class Door : MonoBehaviour
         lockedDoorObject.gameObject.SetActive(true);
         
         if(!initialSetup){
-            GameMaster.Instance.audioSource.PlayOneShot(lockDoorAudioClip);
+            GameMaster.Instance.audioSource.PlayOneShot(lockDoorAudioClip, GameMaster.Instance.MasterVolume);
         }
 
         if(nonKeyLock){
@@ -127,7 +127,7 @@ public class Door : MonoBehaviour
         lockedDoorObject.gameObject.SetActive(false);
 
         if(!initialSetup && playAudio){
-            GameMaster.Instance.audioSource.PlayOneShot(unlockDoorAudioClip);
+            GameMaster.Instance.audioSource.PlayOneShot(unlockDoorAudioClip, GameMaster.Instance.MasterVolume);
         }
     }
 }

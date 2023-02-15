@@ -138,7 +138,7 @@ public class Coin : MonoBehaviour, IPickup, I_DiscoverableItem
         if(Pickupable){
             Deactivate();
 
-            GameMaster.Instance.audioSource.PlayOneShot(pickUpSound);
+            GameMaster.Instance.audioSource.PlayOneShot(pickUpSound, GameMaster.Instance.MasterVolume);
             GameMaster.Instance.UpdateCoinCount(value);
             return true;
         }

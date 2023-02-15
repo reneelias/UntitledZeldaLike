@@ -97,7 +97,7 @@ public class Switch : MonoBehaviour, ISwitchable
         unpressedSprite.SetActive(!Activated);
         pressedSprite.SetActive(Activated);
         if(playSound){
-            GameMaster.Instance.audioSource.PlayOneShot(switchSound);
+            GameMaster.Instance.audioSource.PlayOneShot(switchSound, GameMaster.Instance.MasterVolume);
         }
     }
 

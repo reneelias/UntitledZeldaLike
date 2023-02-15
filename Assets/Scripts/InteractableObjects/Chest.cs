@@ -83,8 +83,8 @@ public class Chest : A_Interactable, IUnlocklableObject
         Interactable = false;
         HideInteractionPrompt(true);
         opened = true;
-        GameMaster.Instance.audioSource.PlayOneShot(chestOpenSound);
-        DOVirtual.DelayedCall(.25f, ()=>{GameMaster.Instance.audioSource.PlayOneShot(itemGetSound);});
+        GameMaster.Instance.audioSource.PlayOneShot(chestOpenSound, GameMaster.Instance.MasterVolume);
+        DOVirtual.DelayedCall(.25f, ()=>{GameMaster.Instance.audioSource.PlayOneShot(itemGetSound, GameMaster.Instance.MasterVolume);});
     }
 
     public override bool Interact(){

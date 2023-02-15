@@ -397,7 +397,7 @@ public class Enemy : MonoBehaviour, IDefeatable
 
         m_Rigidbody2D.simulated = false;
         GetComponent<SortingOrderByY>().enabled = false;
-        GameMaster.Instance.audioSource.PlayOneShot(deathAudioClip);
+        GameMaster.Instance.audioSource.PlayOneShot(deathAudioClip, GameMaster.Instance.MasterVolume);
         sortingOrderByY.enabled = false;
         spriteRenderer.sortingLayerName = "Walls";
         spriteRenderer.sortingOrder = 1000;

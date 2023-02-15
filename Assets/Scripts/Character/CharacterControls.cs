@@ -178,6 +178,7 @@ public class CharacterControls : MonoBehaviour
     [SerializeField] AudioClip staminaOutClip;
     float staminaOutClipLastPlayed = 0f;
     float staminaOutClipDuration;
+    [SerializeField] AudioClip staminaBrokenClip;
 
     void Awake()
     {
@@ -314,6 +315,7 @@ public class CharacterControls : MonoBehaviour
         }
 
         if(playableCharacter.Stamina <= 0){
+            GameMaster.Instance.audioSource.PlayOneShot(staminaBrokenClip, .65f * GameMaster.Instance.MasterVolume);
             UnShield();
         }
     }
@@ -705,7 +707,7 @@ public class CharacterControls : MonoBehaviour
         animator.SetBool("SwordSlashing", swordSlashing);
         // m_Rigidbody2D.velocity = Vector2.zero;
         weapon.gameObject.SetActive(false);
-        GameMaster.Instance.audioSource.PlayOneShot(swordSound);
+        GameMaster.Instance.audioSource.PlayOneShot(swordSound, GameMaster.Instance.MasterVolume);
 
         swordHitboxes.SetActive(true);
         currentSwordColliderParent = swordHitboxes.transform.Find($"SlashHitboxes_{CharacterDirection.ToString()}").gameObject;
@@ -934,7 +936,7 @@ public class CharacterControls : MonoBehaviour
         // Debug.Log("Falling");
         Falling = true;
         NormalControlsSuspended = true;
-        GameMaster.Instance.audioSource.PlayOneShot(fallSound);
+        GameMaster.Instance.audioSource.PlayOneShot(fallSound, GameMaster.Instance.MasterVolume);
         boxCollider_Trigger.characterFalling = true;
 
         transform.DOScale(0f, .5f)
@@ -1180,7 +1182,7 @@ public class CharacterControls : MonoBehaviour
 
         staminaOutClipLastPlayed = Time.realtimeSinceStartup;
 
-        GameMaster.Instance.audioSource.PlayOneShot(staminaOutClip);
+        GameMaster.Instance.audioSource.PlayOneShot(staminaOutClip, GameMaster.Instance.MasterVolume);
     }
 
     public void ChangeFloorLevel(int floorLevel){

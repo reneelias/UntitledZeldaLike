@@ -75,7 +75,7 @@ public class Heart : MonoBehaviour, IPickup
         if(Pickupable){
             Deactivate();
 
-            GameMaster.Instance.audioSource.PlayOneShot(pickUpSound);
+            GameMaster.Instance.audioSource.PlayOneShot(pickUpSound, GameMaster.Instance.MasterVolume);
             return true;
         }
 

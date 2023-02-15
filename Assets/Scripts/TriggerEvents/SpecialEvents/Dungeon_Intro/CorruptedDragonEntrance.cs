@@ -123,7 +123,7 @@ public class CorruptedDragonEntrance : EventTrigger
                 FadeInSubObjects(leftArmParentObj, fadeInDuration, leftArmDelay);
             }))
                 .InsertCallback(leftArmDelay, ()=>{
-                        GameMaster.Instance.audioSource.PlayOneShot(shakeSound);
+                        GameMaster.Instance.audioSource.PlayOneShot(shakeSound, GameMaster.Instance.MasterVolume);
                         GameMaster.Instance.dungeon.ActiveCamera.DOShakePosition(shakeDuration, shakeStrength);
                         ControlsManager.Instance.PlayControllerHaptics(.25f, .75f, .5f);
                     })
@@ -131,7 +131,7 @@ public class CorruptedDragonEntrance : EventTrigger
                 FadeInSubObjects(rightArmParentObj, fadeInDuration, rightArmDelay);
             }))
                 .InsertCallback(leftArmDelay + rightArmDelay + fadeInDuration, ()=>{
-                        GameMaster.Instance.audioSource.PlayOneShot(shakeSound);
+                        GameMaster.Instance.audioSource.PlayOneShot(shakeSound, GameMaster.Instance.MasterVolume);
                         GameMaster.Instance.dungeon.ActiveCamera.DOShakePosition(shakeDuration, shakeStrength);
                         ControlsManager.Instance.PlayControllerHaptics(.25f, .75f, .5f);
                     })
@@ -148,7 +148,7 @@ public class CorruptedDragonEntrance : EventTrigger
                 corruptedDragonPuppet.AnimateHead(new Vector3(0f, bodyTranslateY, 0f), moveUpDuration, 0f);
             }))
                 .InsertCallback(leftArmDelay + rightArmDelay + firstLightsDelay + fadeInDuration * 3f, ()=>{
-                        GameMaster.Instance.audioSource.PlayOneShot(dragonGrumble, .75f);
+                        GameMaster.Instance.audioSource.PlayOneShot(dragonGrumble, .75f * GameMaster.Instance.MasterVolume);
                         ControlsManager.Instance.PlayControllerHaptics(.1f, .3f, 5f);
                     })
             .OnComplete(Finish);

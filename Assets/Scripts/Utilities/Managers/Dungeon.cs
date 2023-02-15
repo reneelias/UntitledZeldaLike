@@ -153,7 +153,7 @@ public class Dungeon : MonoBehaviour
         audioSource_Music.Play();
     }
 
-    public void PlayDungeonMusic(float delay = 0f){
+    public void PlayDungeonMusic(float delay = 0f, float volume = 1f){
         if(!playDungeonMusic || (audioSource_Music.clip == dungeonMusic && audioSource_Music.isPlaying)){
             return;
         }  
@@ -162,7 +162,7 @@ public class Dungeon : MonoBehaviour
         DOVirtual.DelayedCall(delay, ()=>{
             audioSource_Music.clip = dungeonMusic;
             audioSource_Music.loop = true;
-            audioSource_Music.volume = musicVolume;
+            audioSource_Music.volume = musicVolume * volume;
             audioSource_Music.Play();
         });
     }
@@ -204,5 +204,10 @@ public class Dungeon : MonoBehaviour
     public void SetDarknessValue(float darknessMultiplier){
         // darknessColor.a = originalDarknessAmount - GameMaster.Instance.DarknessSliderRange / 2f + GameMaster.Instance.DarknessSliderRange * darknessMultiplier;
         // CurrentRoom
+    }
+    
+    public void SetAudioVolume(float volume){
+        audioSource_Ambient.volume = ambientVolume * volume;
+        audioSource_Music.volume = musicVolume * volume;
     }
 }

@@ -110,7 +110,7 @@ public class EnemyWavesRoom : Room
         enemySpawnDT = 0f;
         enemySpawnTime = Random.Range(enemySpawnTimes_MIN[currentWaveNumber], enemySpawnTimes_MAX[currentWaveNumber]);
 
-        GameMaster.Instance.audioSource.PlayOneShot(roundStartBell);
+        GameMaster.Instance.audioSource.PlayOneShot(roundStartBell, GameMaster.Instance.MasterVolume);
     }
 
     protected virtual void EndCurrentWave(){
@@ -129,7 +129,7 @@ public class EnemyWavesRoom : Room
             return;
         }
 
-        GameMaster.Instance.audioSource.PlayOneShot(waveFinishedSound);
+        GameMaster.Instance.audioSource.PlayOneShot(waveFinishedSound, GameMaster.Instance.MasterVolume);
         pausedBetweenWaves = true;
         wavePauseDT = 0f;
     }
@@ -156,7 +156,7 @@ public class EnemyWavesRoom : Room
     protected virtual void ChallengeFinished(){
         waveChallengeFinished = true;
         UnlockObjects();
-        GameMaster.Instance.dungeon.PlayDungeonMusic(dungeonMusicRestartDelay);
+        GameMaster.Instance.dungeon.PlayDungeonMusic(dungeonMusicRestartDelay, GameMaster.Instance.MasterVolume);
         musicPlaying = false;
         pauseDungeonMusicOnEntrance = false;
     }
@@ -204,7 +204,7 @@ public class EnemyWavesRoom : Room
                 return;
             }
 
-            GameMaster.Instance.dungeon.PlayRoomMusic(roomMusic, musicVolume);
+            GameMaster.Instance.dungeon.PlayRoomMusic(roomMusic, musicVolume * GameMaster.Instance.MasterVolume);
             musicPlaying = true;
             currentWaveNumber = 0;
             waveChallengeActive = true;

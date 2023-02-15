@@ -154,7 +154,7 @@ public class SkeletonArcher : Enemy
                 arrowIndex = 0;
             }
 
-            GameMaster.Instance.audioSource.PlayOneShot(arrowSound);
+            GameMaster.Instance.audioSource.PlayOneShot(arrowSound, GameMaster.Instance.MasterVolume);
             hasShot = true;
 
             

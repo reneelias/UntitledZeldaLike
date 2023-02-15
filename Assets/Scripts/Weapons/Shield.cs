@@ -54,7 +54,7 @@ public class Shield : MonoBehaviour
 
         switch(characterControls.CharacterDirection){
             case CharacterDirection.Down:
-                sortingDiff = 1;
+                sortingDiff = 2;
                 break;
             case CharacterDirection.Up:
                 sortingDiff = -2;
