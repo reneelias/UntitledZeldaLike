@@ -53,7 +53,11 @@ public class SmokeExplosion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateExplosion();    
+        // UpdateExplosion();
+    }
+
+    void FixedUpdate(){
+        UpdateExplosion();
     }
     
     void UpdateExplosion(){

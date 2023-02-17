@@ -227,6 +227,37 @@ float4 SL2D_Pass(float4 color, int id, float2 world)
     return color;
 }
 
+float4 SL2D_Pass_Lit(float4 color, int id, float2 world, float lit)
+{
+    float4 rect = internal_GameRect(id);
+    float rotation = internal_GameRotation(id);
+    float2 cameraSize = float2(rect.z, rect.w);
+    float2 localPosition = internal_WorldToLocal(world - float2(rect.x, rect.y), rotation);
+    bool draw = (rect.z > 0) * internal_InCamera(localPosition, cameraSize);
+
+    color.rgb = lerp(color.rgb, internal_GameLightmap(id, (localPosition + cameraSize / 2) / cameraSize), draw);
+
+    rect = internal_SceneRect(id);
+    rotation = internal_SceneRotation(id);
+    cameraSize = float2(rect.z, rect.w);
+    localPosition = internal_WorldToLocal(world - float2(rect.x, rect.y), rotation);
+    draw = (rect.z > 0) * internal_InCamera(localPosition, cameraSize);
+
+    color.rgb = lerp(color.rgb, internal_SceneLightmap(id, (localPosition + cameraSize / 2) / cameraSize), 1 - lit);
+
+    return color;
+}
+
+float4 SL2D_Pass_Lit_Light(int id, float2 world, float lit)
+{
+    float4 color = float4(0, 0, 0, 1);
+    color.rgb = lerp(0, 1, _OffScreen);
+
+    color = SL2D_Pass_Lit(color, id, world, lit);
+
+    return color;
+}
+
 float4 SL2D_Pass_Light(int id, float2 world)
 {
     float4 color = float4(0, 0, 0, 1);
@@ -297,6 +328,8 @@ void SL2D_Depth_float(float2 world, float depth, float strength, out float4 colo
     color = min(color, lerp(float4(1, 1, 1, 1), float4(1 - strength, 1 - strength, 1 - strength, 1), step(depth, SL2D_Pass_Depth(3, world))));
     color = min(color, lerp(float4(1, 1, 1, 1), float4(1 - strength, 1 - strength, 1 - strength, 1), step(depth, SL2D_Pass_Depth(4, world))));
 }
+
+void SL2D_Light_Lit_1_float(float2 world, float lit, out float4 color) { color = SL2D_Pass_Lit_Light(1, world, lit); }
 
 void SL2D_Light_1_float(float2 world, out float4 color) { color = SL2D_Pass_Light(1, world); }
 void SL2D_Light_2_float(float2 world, out float4 color) { color = SL2D_Pass_Light(2, world); }

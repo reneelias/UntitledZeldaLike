@@ -830,13 +830,18 @@ public class CharacterControls : MonoBehaviour
     }
 
     void SpawnDodgeTrailSprite(){
-        {
+        do{
             if(++dodgeTrailIndex >= dodgeTrailSprites.Length){
                 dodgeTrailIndex = 0;
             }
-        }while(dodgeTrailSprites[dodgeTrailIndex].Active)
+        }while(dodgeTrailSprites[dodgeTrailIndex].Active);
+
+        // if(++dodgeTrailIndex >= dodgeTrailSprites.Length){
+        //     dodgeTrailIndex = 0;
+        // }
 
         // Debug.Log($"dodgeTrailIndex: {dodgeTrailIndex}");
+        // Debug.Log($"wizard coords: {transform.position.x}, {transform.position.y}");
         dodgeTrailSprites[dodgeTrailIndex].Activate(spriteRenderer.sprite, transform.position, dodgeSpriteStartingAlpha, dodgeTrailFadeDur, spriteRenderer.sortingLayerName, spriteRenderer.sortingOrder, transform.localScale, dodgeSpriteColor);
     }
 

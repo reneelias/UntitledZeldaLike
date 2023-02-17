@@ -26,6 +26,7 @@ public class DodgeTrailSprite : MonoBehaviour
         gameObject.SetActive(true);
         Active = true;
 
+        Debug.Log("HERE");
         spriteRenderer.sprite = sprite;
         Color newColor = color ?? Color.white;
         newColor.a = startingAlpha;
@@ -36,6 +37,9 @@ public class DodgeTrailSprite : MonoBehaviour
         transform.position = position;
 
         spriteRenderer.DOFade(0f, fadeDuration)
+            // .OnUpdate(()=>{
+            //     Debug.Log($"dodge sprite coords: {transform.position.x}, {transform.position.y}");
+            // })
             .OnComplete(()=>{
                 Active = false;
                 gameObject.SetActive(false);
