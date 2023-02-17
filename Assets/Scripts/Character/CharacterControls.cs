@@ -143,11 +143,13 @@ public class CharacterControls : MonoBehaviour
     protected DodgeTrailSprite[] dodgeTrailSprites;
     protected int dodgeTrailIndex = -1;
     [SerializeField] protected Color dodgeSpriteColor = Color.white;
-    [SerializeField] protected Collider2D boxCollider;
-    [SerializeField] protected Collider2D boxColliderTrigger;
+    [SerializeField] protected AudioClip dodgeAudioClip;
+    [SerializeField] protected float dodgeVolume = .75f;
     protected Tween physicalDodgeTween;
     protected Tween timerDodgeTween;
     protected Dictionary<CharacterDirection, Vector2> directionVectorsDictionary;
+    [SerializeField] protected Collider2D boxCollider;
+    [SerializeField] protected Collider2D boxColliderTrigger;
     public int SortingOrder{
         get => spriteRenderer.sortingOrder;
     }
@@ -796,6 +798,8 @@ public class CharacterControls : MonoBehaviour
                 currentDodgeMagnitude = raycastHit.distance - .25f;
                 break;
             }
+
+            GameMaster.Instance.audioSource.PlayOneShot(dodgeAudioClip, GameMaster.Instance.MasterVolume * dodgeVolume);
         }
 
         if(beingMovedByTile){

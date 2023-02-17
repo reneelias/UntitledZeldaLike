@@ -41,6 +41,7 @@ Material:
     - _AlphaSpeed: 1
     - _Lit: 0.5
     - _NoiseScale: 4
+    - _Pass: 1
     - _SmoothstepContrast_1: 0.8
     - _SmoothstepContrast_2: 0.8
     m_Colors:

@@ -328,7 +328,7 @@ void SL2D_Depth_float(float2 world, float depth, float strength, out float4 colo
     color = min(color, lerp(float4(1, 1, 1, 1), float4(1 - strength, 1 - strength, 1 - strength, 1), step(depth, SL2D_Pass_Depth(3, world))));
     color = min(color, lerp(float4(1, 1, 1, 1), float4(1 - strength, 1 - strength, 1 - strength, 1), step(depth, SL2D_Pass_Depth(4, world))));
 }
-
+void SL2D_Light_Lit_float(float2 world, float id, float lit, out float4 color) { color = SL2D_Pass_Lit_Light(id, world, lit); }
 void SL2D_Light_Lit_1_float(float2 world, float lit, out float4 color) { color = SL2D_Pass_Lit_Light(1, world, lit); }
 
 void SL2D_Light_1_float(float2 world, out float4 color) { color = SL2D_Pass_Light(1, world); }
