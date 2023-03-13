@@ -104,6 +104,7 @@ public class SmokeExplosion : MonoBehaviour
             GameObject smokeObj = smokeObjPool[i];
             float randomScaleModifier = Random.Range(0f, spriteScaleVariance) * (Random.Range(0, 1) * 2 - 1);
             smokeObj.transform.localScale = new Vector3(spriteScale + randomScaleModifier, spriteScale + randomScaleModifier, 1f);
+            smokeObj.transform.localPosition = Vector3.zero;
             smokeObj.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, maxAlpha);
             smokeObj.GetComponent<SpriteRenderer>().sortingLayerName = layerName;
             smokeObjects.Add(smokeObj);
