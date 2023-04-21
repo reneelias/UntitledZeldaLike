@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Beach_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 57c1e1dd765401842a6f824aa017790d, type: 3}
+    - {fileID: 102900000, guid: c9dcb06404c28734bbc3fb5dfd05afac, type: 3}
+    - {fileID: 102900000, guid: c5a429b67ee330a4faf1e47bf1091fd1, type: 3}
+    - {fileID: 102900000, guid: bee9c6ddccc072b4db4f55732c30e8d8, type: 3}
+    - {fileID: 102900000, guid: 3797f6c532beb4b4dada250a6891bf68, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 8044b300cb91e4846b21abec1f6e489c, type: 3}
+  - {fileID: 21300000, guid: 3c94ed106e39cea4492dbbdad67981c6, type: 3}
+  - {fileID: 21300000, guid: e700b0406669b5f4589d716ea4127a2e, type: 3}
+  - {fileID: 21300000, guid: 31d781a0d1afa294f81679c1a7f0aca9, type: 3}
+  - {fileID: 21300000, guid: fc20d4a069312e8418ab86d818bf36f9, type: 3}
+  - {fileID: 21300000, guid: 857afcc0a1c883247af109835aac84ca, type: 3}
+  - {fileID: 21300000, guid: 2257a261b97f36e448a2aa2c3dd7bf66, type: 3}
+  - {fileID: 21300000, guid: 8f3d756183a66514796488825cc3fb39, type: 3}
+  - {fileID: 21300000, guid: d658ad91f0992cf42823c8ef149ddeda, type: 3}
+  - {fileID: 21300000, guid: 4af290b283f5e5444ae469bbd1161580, type: 3}
+  - {fileID: 21300000, guid: eb8127e2c4ce455418a291116a128a52, type: 3}
+  - {fileID: 21300000, guid: 1f5a4113a582431408dcb30510267554, type: 3}
+  - {fileID: 21300000, guid: 6467a7531f4541147916d31549d33587, type: 3}
+  - {fileID: 21300000, guid: 29a301c31efcd504ca5e18fd40793b6d, type: 3}
+  - {fileID: 21300000, guid: 7ac1adc3bd4c17e41a4c94aa40520a18, type: 3}
+  - {fileID: 21300000, guid: ed80cc34738513d438082ef82211956e, type: 3}
+  - {fileID: 21300000, guid: edb8ca442eee02f45b460b702bf18a94, type: 3}
+  - {fileID: 21300000, guid: d5786c748f2efa14ea439df05da301d4, type: 3}
+  - {fileID: 21300000, guid: a3928e8495f242e4ab72466c6326d83a, type: 3}
+  - {fileID: 21300000, guid: 14023125786f394468e19508e0f7782f, type: 3}
+  - {fileID: 21300000, guid: 3650467567a7d7f499da03b679532795, type: 3}
+  - {fileID: 21300000, guid: ab87dba520d9f6b4990276f366703da0, type: 3}
+  - {fileID: 21300000, guid: 2020efc52d1537645a9d5dd807c4eb91, type: 3}
+  - {fileID: 21300000, guid: 5d80c63654669984092c8b9721d29cb0, type: 3}
+  - {fileID: 21300000, guid: 17b7da3620658e04d82983512a9a6144, type: 3}
+  - {fileID: 21300000, guid: 52f432565e3b3a242ac711ce0fc1190c, type: 3}
+  - {fileID: 21300000, guid: bfb08556d9c8ba442bb049f08407008f, type: 3}
+  - {fileID: 21300000, guid: 7fbad776aa3db2d4da4923612d3c2890, type: 3}
+  - {fileID: 21300000, guid: e6497b96e306b664bb74e82d3cb21d56, type: 3}
+  - {fileID: 21300000, guid: b5e1f707e579603429b70413ca1314eb, type: 3}
+  - {fileID: 21300000, guid: d51c7517499b85d48ba031d0af98cb77, type: 3}
+  - {fileID: 21300000, guid: 16a31817d5240c84dba8bc9db2045798, type: 3}
+  - {fileID: 21300000, guid: 7a7f9b97fc2a3f741b1c2b44f45476e4, type: 3}
+  - {fileID: 21300000, guid: d8c2c3f741527c54b88e8d17142a79b3, type: 3}
+  - {fileID: 21300000, guid: fc68d738a22ed6a468ba0e4b2d4709f7, type: 3}
+  - {fileID: 21300000, guid: b88c73c8c2de5914687af17f16355481, type: 3}
+  - {fileID: 21300000, guid: 64d54bd8d909b0d4b9a6df81b5ea7e97, type: 3}
+  - {fileID: 21300000, guid: 074305d91d24d6e45b5283161fc3b1dd, type: 3}
+  - {fileID: 21300000, guid: 6df82efa30cfb4842bf82b253badf147, type: 3}
+  - {fileID: 21300000, guid: e4e7910bdaf621d4bba33410ccef6b58, type: 3}
+  - {fileID: 21300000, guid: 9c49ec1b3c144204181ea0c3e3f53384, type: 3}
+  - {fileID: 21300000, guid: b00abe1b6800ec246ba6f615cf480ea7, type: 3}
+  - {fileID: 21300000, guid: 3053d93b0be16ac4f83a6aa7956e8917, type: 3}
+  - {fileID: 21300000, guid: 945495bbdd27d8e40a047ea0f931169c, type: 3}
+  - {fileID: 21300000, guid: e3c687cb78eb3bb478e5980ad5752ace, type: 3}
+  - {fileID: 21300000, guid: f7017e4c128093f45815c09ec554a7fc, type: 3}
+  - {fileID: 21300000, guid: 2512d3ac40a8d2c4ca2a1b1500fa0fc7, type: 3}
+  - {fileID: 21300000, guid: 10a1a6bc023564b4788e51dc3fa23924, type: 3}
+  - {fileID: 21300000, guid: 1d8d5dcc85a565a40af911c96a2a291e, type: 3}
+  - {fileID: 21300000, guid: a4712b4d3a4b6634882d082e7b46a807, type: 3}
+  - {fileID: 21300000, guid: ae92ee6dda8146b45b36910d0ef4c7d8, type: 3}
+  - {fileID: 21300000, guid: f350712e9a9fb0f4c8395ec2b1f51595, type: 3}
+  - {fileID: 21300000, guid: e4bc5fbe247048e408de1e6022ccaea5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - BeachFuzz_03_01
+  - shell 2
+  - sand 6
+  - water 3-1
+  - rock 3
+  - rock 4
+  - sand 1
+  - palmtree 1 no shadow
+  - water 4-2
+  - water 2-1
+  - sand 5
+  - BeachFuzz_00_01
+  - palmtree 3 no shadow
+  - BeachFuzz_04_00
+  - rock 1
+  - BeachFuzz_01_01
+  - palmtree 3 with shadow
+  - palmtree 1 with shadow
+  - sand 4
+  - BeachFuzz_02_00
+  - Frame 3
+  - BeachFuzz_02_01
+  - water 3-2
+  - sand 2
+  - BeachFuzz_03_00
+  - BeachFuzz_00_00
+  - Frame 1
+  - sand 7
+  - rock 2
+  - sand 3
+  - rock 5
+  - water 7-1
+  - BeachFuzz_05_01
+  - starfish 1
+  - water 4-1
+  - BeachFuzz_05_00
+  - water 7-2
+  - water 1-1
+  - water 2-2
+  - water 5-1
+  - BeachFuzz_06_00
+  - BeachFuzz_06_01
+  - BeachFuzz_01_00
+  - shells 1
+  - water 6
+  - Frame 2
+  - Frame 4
+  - palmtree 2 no shadow
+  - shell 3
+  - water 1-2
+  - BeachFuzz_04_01
+  - palmtree 2 with shadow
+  - water 5-2
+  m_RenderDataMap: {}
+  m_Tag: Beach_Atlas
+  m_IsVariant: 0
