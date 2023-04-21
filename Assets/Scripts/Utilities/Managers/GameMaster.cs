@@ -11,6 +11,11 @@ using TMPro;
 public class GameMaster : Singleton<GameMaster>
 {
     public Dungeon dungeon;
+    [SerializeField] WorldState worldState = WorldState.Dungeon;
+    public WorldState WorldState{
+        get => worldState;
+        protected set => worldState = value;
+    }
     public AudioSource audioSource;
     [SerializeField] SpriteOverlay blackOverlay;
     [SerializeField] GameObject[] UI_canvasGroupsToFadeOut_gameOver;
@@ -279,4 +284,10 @@ public class GameMaster : Singleton<GameMaster>
         dungeon.SetAudioVolume(volume);
         dungeon.CurrentRoom.SetAudioVolume(volume);
     }
+}
+
+public enum WorldState{
+    Dungeon,
+    Overworld,
+    House
 }

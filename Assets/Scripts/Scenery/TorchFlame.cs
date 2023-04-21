@@ -68,7 +68,7 @@ public class TorchFlame : LightableObject, ISwitchable
             distortionObject.SetActive(on);
         }
         
-        if(GameMaster.Instance.dungeon.CurrentRoom == null){
+        if(GameMaster.Instance.WorldState != WorldState.Dungeon || (GameMaster.Instance.WorldState == WorldState.Dungeon && GameMaster.Instance.dungeon.CurrentRoom == null)){
             return;
         }
 

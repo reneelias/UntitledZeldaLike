@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3215089238748548017}
   - component: {fileID: 6961297793404275111}
   - component: {fileID: 8415083822095312791}
+  - component: {fileID: 6020027168897136392}
   m_Layer: 0
   m_Name: Torch Flame@128x128
   m_TagString: Lightable
@@ -145,6 +146,19 @@ MonoBehaviour:
   outerflameBrightening: -0.3
   distortionObject: {fileID: 4331679239131543695}
   useDistortionEffect: 1
+--- !u!114 &6020027168897136392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2780821291684454155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf3b285b1906fc4d919b5ef0f29e563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceObject: {fileID: 0}
 --- !u!1 &3874188407286409696
 GameObject:
   m_ObjectHideFlags: 0

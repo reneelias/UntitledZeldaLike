@@ -17,7 +17,7 @@ MonoBehaviour:
     - name: Rooms
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 0.439}
+      darknessColor: {r: 0.24705882, g: 0.16988184, b: 0, a: 0.89}
       depth: -100
       resolution: 1
       dayLayers:
@@ -30,7 +30,7 @@ MonoBehaviour:
     - name: CeilingAndRoof
       type: 0
       hdr: 1
-      darknessColor: {r: 0, g: 0, b: 0, a: 0.933}
+      darknessColor: {r: 1, g: 1, b: 1, a: 1}
       depth: -100
       resolution: 1
       dayLayers:
@@ -83,9 +83,9 @@ MonoBehaviour:
     coreAxis: 0
     projection: 0
   dayLightingSettings:
-    direction: 322
-    ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    height: 2.84
+    direction: 186.48
+    ShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    height: 0.1
     bumpMap:
       height: 0.89
       strength: 1.55
