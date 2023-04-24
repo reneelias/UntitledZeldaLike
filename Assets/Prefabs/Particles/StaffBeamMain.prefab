@@ -338,7 +338,7 @@ MonoBehaviour:
   damagePts: 0
   collisionParticleDisplaceMax_X: -0.75
   collisionParticleDisplaceMax_Y: -0.9
-  collisionParticleAngleRange: 40
+  collisionParticleAngleRange: 140
   particleEmitter: {fileID: 898951190895135832}
   circleCollider: {fileID: 5161172995534213904}
   rigidbody2D: {fileID: 5803158479104349712}
