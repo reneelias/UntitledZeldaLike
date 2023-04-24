@@ -110,6 +110,7 @@ MonoBehaviour:
   particlePrefab: {fileID: 5377741126164537002, guid: 37fdd76c16178d442a4bef1f27ef7ed6, type: 3}
   objectToFollow: {fileID: 180266867665156540}
   orderParentObject: {fileID: 4463427417955125374}
+  particleSprites: []
   alternateMaterial: {fileID: 2100000, guid: 79b4745066811ad42b50dec61b5b02cb, type: 2}
   color: {r: 0.9960785, g: 0.8000001, b: 0.37254903, a: 0}
   keepParticlesBehindObject: 0
@@ -126,6 +127,10 @@ MonoBehaviour:
   xDisplacementRangeMax: 0
   yDisplacementRangeMin: 0
   yDisplacementRangeMax: 0.5
+  angleOrigin: 90
+  angleRange: 0
+  maxDisplacement: 0.75
+  minDisplacement: 0.25
   particleFadeInTimePercentage: 0.5
   activelySpawning: 1
   particleScale: 0.5
@@ -243,6 +248,7 @@ MonoBehaviour:
   particlePrefab: {fileID: 5377741126164537002, guid: 37fdd76c16178d442a4bef1f27ef7ed6, type: 3}
   objectToFollow: {fileID: 1146406080329651467}
   orderParentObject: {fileID: 4463427417955125374}
+  particleSprites: []
   alternateMaterial: {fileID: 2100000, guid: 79b4745066811ad42b50dec61b5b02cb, type: 2}
   color: {r: 0.9960785, g: 0.8000001, b: 0.37254903, a: 0}
   keepParticlesBehindObject: 0
@@ -259,6 +265,10 @@ MonoBehaviour:
   xDisplacementRangeMax: 0
   yDisplacementRangeMin: 0
   yDisplacementRangeMax: 0.5
+  angleOrigin: 90
+  angleRange: 0
+  maxDisplacement: 0.75
+  minDisplacement: 0.25
   particleFadeInTimePercentage: 0.5
   activelySpawning: 1
   particleScale: 0.5

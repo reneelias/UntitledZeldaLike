@@ -8,8 +8,8 @@ public class ParticleEmitter : MonoBehaviour
     [SerializeField] Particle particlePrefab;
     [SerializeField] GameObject objectToFollow;
     [SerializeField] GameObject orderParentObject;
+    [SerializeField] Sprite[] particleSprites;
     [SerializeField] Material alternateMaterial;
-
     [SerializeField] public Color color;
     [SerializeField] bool keepParticlesBehindObject = true;
     [SerializeField] bool spawnInFrontOfObject = false;
@@ -34,6 +34,10 @@ public class ParticleEmitter : MonoBehaviour
     public float xDisplacementRangeMax = .5f;
     public float yDisplacementRangeMin = 0f;
     public float yDisplacementRangeMax = .5f;
+    public float angleOrigin = 90f;
+    public float angleRange = 0f;
+    public float maxDisplacement = .75f;
+    public float minDisplacement = .25f;
     float base_xDisplacementRangeMin;
     float base_xDisplacementRangeMax;
     float base_yDisplacementRangeMin;
@@ -140,7 +144,16 @@ public class ParticleEmitter : MonoBehaviour
                 float xDisplacement = Random.Range(xDisplacementRangeMin, xDisplacementRangeMax);
                 float yDisplacement = Random.Range(yDisplacementRangeMin, yDisplacementRangeMax);
 
-                particles[particleIndex].Activate(startX, startY, particleLifeDuration, particleLifeDuration * particleFadeInTimePercentage, particleLifeDuration * (1f - particleFadeInTimePercentage), xDisplacement, yDisplacement, color, particleTransformScale, particleLightsEnabled, useSortingOrderByY);
+                float randAngle = angleOrigin - angleRange / 2f + Random.Range(0f, angleRange);
+                randAngle *= Mathf.Deg2Rad;
+                float randMagnitude = Random.Range(minDisplacement, maxDisplacement);
+                Vector2 displacementVector = new Vector2(Mathf.Cos(randAngle) * randMagnitude, Mathf.Sin(randAngle) * randMagnitude);
+                xDisplacement = displacementVector.x;
+                yDisplacement = displacementVector.y;
+
+                Sprite particleSprite = (particleSprites == null || particleSprites.Length == 0) ? null : particleSprites[Random.Range(0, particleSprites.Length - 1)];
+
+                particles[particleIndex].Activate(startX, startY, particleLifeDuration, particleLifeDuration * particleFadeInTimePercentage, particleLifeDuration * (1f - particleFadeInTimePercentage), xDisplacement, yDisplacement, color, particleTransformScale, particleLightsEnabled, particleSprite, useSortingOrderByY);
                 if(spawnInFrontOfObject){
                     particles[particleIndex].SetSortingOrder(orderParentObject.GetComponent<SpriteRenderer>().sortingOrder + 1);
                 }
@@ -195,7 +208,7 @@ public class ParticleEmitter : MonoBehaviour
     //     // particleEmitter.SetSpawnRange(circleCollider.radius * spawnRangeModifier, circleCollider.radius * spawnRangeModifier);
     // }
 
-        void CalculateRotationDisplacements(){
+    void CalculateRotationDisplacements(){
         Vector2 particleTrajectoryLimit_00 = new Vector2(base_xDisplacementRangeMin, base_yDisplacementRangeMin);
         Vector2 particleTrajectoryLimit_01 = new Vector2(base_xDisplacementRangeMin, base_yDisplacementRangeMax);
         

@@ -39,6 +39,7 @@ public class StaffBeamMain : MonoBehaviour, IParticle
 
     public float collisionParticleDisplaceMax_X = -.75f;
     public float collisionParticleDisplaceMax_Y = -.75f;
+    public float collisionParticleAngleRange = 30f;
 
     const float BASE_SPEED = 14f;
 
@@ -205,13 +206,16 @@ public class StaffBeamMain : MonoBehaviour, IParticle
         float newAngle_00 = ogAngle_00 + currentAngle;
         float newAngle_01 = ogAngle_01 + currentAngle;
 
-        Vector2 newTrajectoryLimit_00 = new Vector2(Mathf.Cos(newAngle_00) * collisionParticleDisplaceMax_X, Mathf.Sin(newAngle_00) * collisionParticleDisplaceMax_Y);
-        Vector2 newTrajectoryLimit_01 = new Vector2(Mathf.Cos(newAngle_01) * collisionParticleDisplaceMax_X, Mathf.Sin(newAngle_01) * collisionParticleDisplaceMax_Y);
+        // Vector2 newTrajectoryLimit_00 = new Vector2(Mathf.Cos(newAngle_00) * collisionParticleDisplaceMax_X, Mathf.Sin(newAngle_00) * collisionParticleDisplaceMax_Y);
+        // Vector2 newTrajectoryLimit_01 = new Vector2(Mathf.Cos(newAngle_01) * collisionParticleDisplaceMax_X, Mathf.Sin(newAngle_01) * collisionParticleDisplaceMax_Y);
 
-        particleEmitter.xDisplacementRangeMin = Mathf.Min(newTrajectoryLimit_00.x, newTrajectoryLimit_01.x);
-        particleEmitter.xDisplacementRangeMax = Mathf.Max(newTrajectoryLimit_00.x, newTrajectoryLimit_01.x);
-        particleEmitter.yDisplacementRangeMin = Mathf.Min(newTrajectoryLimit_00.y, newTrajectoryLimit_01.y);
-        particleEmitter.yDisplacementRangeMax = Mathf.Max(newTrajectoryLimit_00.y, newTrajectoryLimit_01.y);
+        // particleEmitter.xDisplacementRangeMin = Mathf.Min(newTrajectoryLimit_00.x, newTrajectoryLimit_01.x);
+        // particleEmitter.xDisplacementRangeMax = Mathf.Max(newTrajectoryLimit_00.x, newTrajectoryLimit_01.x);
+        // particleEmitter.yDisplacementRangeMin = Mathf.Min(newTrajectoryLimit_00.y, newTrajectoryLimit_01.y);
+        // particleEmitter.yDisplacementRangeMax = Mathf.Max(newTrajectoryLimit_00.y, newTrajectoryLimit_01.y);
+
+        particleEmitter.angleOrigin = currentAngle * Mathf.Rad2Deg - 180;
+        particleEmitter.angleRange = collisionParticleAngleRange;
 
         particleEmitter.spawnOffsetX = Mathf.Cos(currentAngle) * circleCollider.radius;
         particleEmitter.spawnOffsetY = Mathf.Sin(currentAngle) * circleCollider.radius;
