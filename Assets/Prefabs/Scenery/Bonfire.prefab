@@ -279,12 +279,96 @@ PrefabInstance:
     m_TransformParent: {fileID: 8658950032004328185}
     m_Modifications:
     - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: timeBase
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: timeRange
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: angleRange
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: changesScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: particleScale
+      value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: objectToFollow
+      value: 
+      objectReference: {fileID: 7305144417072225391}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: maxDisplacement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: minDisplacement
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: activelySpawning
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: endParticleScale
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: alternateMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: a4d9cb6b7bf72f04f8017e8a1bdfd1ef, type: 2}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: orderParentObject
       value: 
       objectReference: {fileID: 7305144417072225391}
     - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: particleSpawnTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: particleScaleRange
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: startParticleScale
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: particleSpawnAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: spawnInFrontOfObject
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: particleLightsEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: particleSprites.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: particleFadeInTimePercentage
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: particleSprites.Array.data[0]

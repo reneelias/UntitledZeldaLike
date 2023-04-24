@@ -63,7 +63,7 @@ public class Particle : MonoBehaviour, IParticle
         UpdateFadeOut();
     }
 
-    public void Activate(float spawnX, float spawnY, float lifeDuration, float fadeInTime, float fadeOutTime, float xDisplacement, float yDisplacement, Color color, float scale, bool lightEnabled, Sprite alternateSprite, bool useSortingOrderByY = false){
+    public void Activate(float spawnX, float spawnY, float lifeDuration, float fadeInTime, float fadeOutTime, float xDisplacement, float yDisplacement, Color color, float startScale, float endScale, bool lightEnabled, Sprite alternateSprite, bool useSortingOrderByY = false){
         gameObject.SetActive(true);
         EnableRenderer(true);
         Color tempColor = color;
@@ -71,7 +71,8 @@ public class Particle : MonoBehaviour, IParticle
         spriteRenderer.color = tempColor;
         this.color = tempColor;
 
-        transform.localScale = new Vector3(scale, scale, 1f);
+        transform.localScale = new Vector3(startScale, startScale, 1f);
+        transform.DOScale(new Vector3(endScale, endScale, 1f), lifeDuration);
 
         fadingIn = true;
         fadeInStep = (1f - tempColor.a) / fadeInTime * Time.deltaTime;
@@ -98,7 +99,7 @@ public class Particle : MonoBehaviour, IParticle
             light.enabled = true;
             light.color = color;
             light.color.a = 0;
-            light.size = originalLightSize * (scale / originalScale);
+            light.size = originalLightSize * (endScale / originalScale);
         }
         
         sortingOrderByY.enabled = useSortingOrderByY;

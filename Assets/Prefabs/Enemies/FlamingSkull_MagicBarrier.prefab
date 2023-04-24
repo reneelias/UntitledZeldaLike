@@ -834,6 +834,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 911028749272479948}
     - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: maxDisplacement
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+      propertyPath: minDisplacement
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: activelySpawning
       value: 1
       objectReference: {fileID: 0}

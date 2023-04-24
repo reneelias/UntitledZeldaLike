@@ -129,11 +129,13 @@ MonoBehaviour:
   yDisplacementRangeMax: 0.5
   angleOrigin: 90
   angleRange: 0
-  maxDisplacement: 0.75
-  minDisplacement: 0.25
+  maxDisplacement: 0.5
+  minDisplacement: 0.1
   particleFadeInTimePercentage: 0.5
   activelySpawning: 1
-  particleScale: 0.5
+  changesScale: 0
+  startParticleScale: 0.5
+  endParticleScale: 0.5
   particleScaleRange: 0.26
   particleLightsEnabled: 0
   considerObjectRotation: 1
@@ -267,11 +269,13 @@ MonoBehaviour:
   yDisplacementRangeMax: 0.5
   angleOrigin: 90
   angleRange: 0
-  maxDisplacement: 0.75
-  minDisplacement: 0.25
+  maxDisplacement: 0.5
+  minDisplacement: 0.1
   particleFadeInTimePercentage: 0.5
   activelySpawning: 1
-  particleScale: 0.5
+  changesScale: 0
+  startParticleScale: 0.5
+  endParticleScale: 0.5
   particleScaleRange: 0.26
   particleLightsEnabled: 0
   considerObjectRotation: 1

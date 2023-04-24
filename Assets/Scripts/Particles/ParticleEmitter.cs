@@ -43,13 +43,14 @@ public class ParticleEmitter : MonoBehaviour
     float base_yDisplacementRangeMin;
     float base_yDisplacementRangeMax;
     [Range(0.01f, 1)] public float particleFadeInTimePercentage = .5f;
-
     public bool activelySpawning;
-    [Range(0.1f, 5f)] public float particleScale = 1f;
+    public bool changesScale = false;
+    [Range(0.1f, 10f)] public float startParticleScale = 1f;
+    [Range(0.1f, 10f)] public float endParticleScale = 1f;
     float baseScale;
     [Range(0, 10)] [SerializeField] float particleScaleRange = .5f;
     public bool particleLightsEnabled = true;
-    float particleTransformScale;
+    float endParticleTransformScale;
     [SerializeField] bool considerObjectRotation = true;
     [SerializeField] bool useSortingOrderByY = false;
     // [SerializeField] bool keepInFront
@@ -69,8 +70,8 @@ public class ParticleEmitter : MonoBehaviour
             }
         }
 
-        baseScale = particles[0].transform.localScale.x * particleScale;
-        particleTransformScale = baseScale;
+        baseScale = particles[0].transform.localScale.x * endParticleScale;
+        endParticleTransformScale = baseScale;
         // Debug.Log($"color: {color}");
 
         
@@ -139,21 +140,25 @@ public class ParticleEmitter : MonoBehaviour
 
                 float particleLifeDuration = timeBase + Random.value * timeRange;
 
-                particleTransformScale = baseScale + baseScale * particleScaleRange * Random.value * (Random.value < .5f ? 1 : -1);
+                endParticleTransformScale = baseScale + baseScale * particleScaleRange * Random.value * (Random.value < .5f ? 1 : -1);
+                float startParticleTransformScale = changesScale ? startParticleScale : endParticleTransformScale; 
 
-                float xDisplacement = Random.Range(xDisplacementRangeMin, xDisplacementRangeMax);
-                float yDisplacement = Random.Range(yDisplacementRangeMin, yDisplacementRangeMax);
+                // float xDisplacement = Random.Range(xDisplacementRangeMin, xDisplacementRangeMax);
+                // float yDisplacement = Random.Range(yDisplacementRangeMin, yDisplacementRangeMax);
 
                 float randAngle = angleOrigin - angleRange / 2f + Random.Range(0f, angleRange);
+                if(considerObjectRotation){
+                    randAngle += transform.eulerAngles.z;
+                }
                 randAngle *= Mathf.Deg2Rad;
                 float randMagnitude = Random.Range(minDisplacement, maxDisplacement);
                 Vector2 displacementVector = new Vector2(Mathf.Cos(randAngle) * randMagnitude, Mathf.Sin(randAngle) * randMagnitude);
-                xDisplacement = displacementVector.x;
-                yDisplacement = displacementVector.y;
+                float xDisplacement = displacementVector.x;
+                float yDisplacement = displacementVector.y;
 
                 Sprite particleSprite = (particleSprites == null || particleSprites.Length == 0) ? null : particleSprites[Random.Range(0, particleSprites.Length - 1)];
-
-                particles[particleIndex].Activate(startX, startY, particleLifeDuration, particleLifeDuration * particleFadeInTimePercentage, particleLifeDuration * (1f - particleFadeInTimePercentage), xDisplacement, yDisplacement, color, particleTransformScale, particleLightsEnabled, particleSprite, useSortingOrderByY);
+                // Debug.Log(transform.parent.name);
+                particles[particleIndex].Activate(startX, startY, particleLifeDuration, particleLifeDuration * particleFadeInTimePercentage, particleLifeDuration * (1f - particleFadeInTimePercentage), xDisplacement, yDisplacement, color, startParticleTransformScale, endParticleTransformScale, particleLightsEnabled, particleSprite, useSortingOrderByY);
                 if(spawnInFrontOfObject){
                     particles[particleIndex].SetSortingOrder(orderParentObject.GetComponent<SpriteRenderer>().sortingOrder + 1);
                 }
