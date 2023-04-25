@@ -173,45 +173,6 @@ public class ParticleEmitter : MonoBehaviour
         }
     }
 
-    // void CalculateRotationDisplacements(){
-    //     Vector2 particleTrajectoryLimit_00 = new Vector2(base_xDisplacementRangeMin, 0f);
-    //     Vector2 particleTrajectoryLimit_01 = new Vector2(base_xDisplacementRangeMin, 0f);
-    //     Vector2 particleTrajectoryLimit_02 = new Vector2(0f, base_yDisplacementRangeMin);
-    //     Vector2 particleTrajectoryLimit_03 = new Vector2(0f, base_yDisplacementRangeMax);
-        
-    //     float ogAngle_00 = Mathf.Atan2(particleTrajectoryLimit_00.y, particleTrajectoryLimit_00.x);
-    //     float ogAngle_01 = Mathf.Atan2(particleTrajectoryLimit_01.y, particleTrajectoryLimit_01.x);
-    //     float ogAngle_02 = Mathf.Atan2(particleTrajectoryLimit_02.y, particleTrajectoryLimit_02.x);
-    //     float ogAngle_03 = Mathf.Atan2(particleTrajectoryLimit_03.y, particleTrajectoryLimit_03.x);
-
-    //     float currentAngle = transform.eulerAngles.z * Mathf.Deg2Rad;
-
-    //     float newAngle_00 = ogAngle_00 + currentAngle;
-    //     float newAngle_01 = ogAngle_01 + currentAngle;
-    //     float newAngle_02 = ogAngle_02 + currentAngle;
-    //     float newAngle_03 = ogAngle_03 + currentAngle;
-
-    //     // Vector2 newTrajectoryLimit_00 = new Vector2(Mathf.Cos(newAngle_00) * xDisplacementRangeMin, Mathf.Sin(newAngle_00) * yDisplacementRangeMin);
-    //     // Vector2 newTrajectoryLimit_01 = new Vector2(Mathf.Cos(newAngle_01) * xDisplacementRangeMax, Mathf.Sin(newAngle_01) * yDisplacementRangeMax);
-    //     // Vector2 newTrajectoryLimit_02 = new Vector2(Mathf.Cos(newAngle_02) * xDisplacementRangeMin, Mathf.Sin(newAngle_02) * yDisplacementRangeMin);
-    //     // Vector2 newTrajectoryLimit_03 = new Vector2(Mathf.Cos(newAngle_03) * xDisplacementRangeMax, Mathf.Sin(newAngle_03) * yDisplacementRangeMax);
-
-    //     // xDisplacementRangeMin = Mathf.Min(newTrajectoryLimit_00.x, newTrajectoryLimit_01.x);
-    //     // xDisplacementRangeMax = Mathf.Max(newTrajectoryLimit_00.x, newTrajectoryLimit_01.x);
-    //     // yDisplacementRangeMin = Mathf.Min(newTrajectoryLimit_00.y, newTrajectoryLimit_01.y);
-    //     // yDisplacementRangeMax = Mathf.Max(newTrajectoryLimit_00.y, newTrajectoryLimit_01.y);
-        
-    //     xDisplacementRangeMin = Mathf.Cos(newAngle_00) * base_xDisplacementRangeMin;
-    //     xDisplacementRangeMax = Mathf.Cos(newAngle_01) * base_xDisplacementRangeMax;
-    //     yDisplacementRangeMin = Mathf.Sin(newAngle_02) * base_yDisplacementRangeMin;
-    //     yDisplacementRangeMax = Mathf.Sin(newAngle_03) * base_yDisplacementRangeMax;
-
-    //     spawnOffsetX = Mathf.Cos(currentAngle) * base_spawnOffsetX;
-    //     spawnOffsetY = Mathf.Sin(currentAngle) * base_spawnOffsetY;
-
-    //     // float spawnRangeModifier = 0;
-    //     // particleEmitter.SetSpawnRange(circleCollider.radius * spawnRangeModifier, circleCollider.radius * spawnRangeModifier);
-    // }
 
     void CalculateRotationDisplacements(){
         Vector2 particleTrajectoryLimit_00 = new Vector2(base_xDisplacementRangeMin, base_yDisplacementRangeMin);
