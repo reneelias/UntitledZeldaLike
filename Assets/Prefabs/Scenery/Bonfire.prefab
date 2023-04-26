@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8658950032004328185}
   - component: {fileID: 3548151644029944616}
+  - component: {fileID: 1418965055306273860}
   - component: {fileID: 596421179739683105}
   - component: {fileID: 7547443353451915703}
   - component: {fileID: 770051124896851983}
@@ -89,6 +90,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1418965055306273860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7305144417072225391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d2321f4c07201641be5cd965a46e133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smokeEmitter: {fileID: 8838621368633892852}
+  emitSmoke: 0
+  flameObject: {fileID: 1913913743386106489}
+  flameOn: 1
 --- !u!60 &596421179739683105
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -248,6 +265,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6020027168897136392, guid: d420ca4529643a8429c73528fe9af579, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6020027168897136392, guid: d420ca4529643a8429c73528fe9af579, type: 3}
       propertyPath: sortingGroup
       value: 
       objectReference: {fileID: 1169502272282867782}
@@ -264,6 +285,11 @@ PrefabInstance:
 --- !u!210 &1169502272282867782 stripped
 SortingGroup:
   m_CorrespondingSourceObject: {fileID: 3180113414497975604, guid: d420ca4529643a8429c73528fe9af579, type: 3}
+  m_PrefabInstance: {fileID: 4330457693097919858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1913913743386106489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2780821291684454155, guid: d420ca4529643a8429c73528fe9af579, type: 3}
   m_PrefabInstance: {fileID: 4330457693097919858}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3251802301270976812 stripped
@@ -324,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: activelySpawning
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: endParticleScale
@@ -380,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 868ae8b31caca5141a8a538f9facd956, type: 3}
     - target: {fileID: 3716782804542092960, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: m_Name
-      value: ParticleEmitter
+      value: SmokeEmitter
       objectReference: {fileID: 0}
     - target: {fileID: 3908602661212236097, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
       propertyPath: m_RootOrder
@@ -433,3 +459,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3908602661212236097, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
   m_PrefabInstance: {fileID: 7022398287124098359}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8838621368633892852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2007907550658196163, guid: 8b6c19d9d8aff504db351dd747b250ea, type: 3}
+  m_PrefabInstance: {fileID: 7022398287124098359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f395c1b84145f204db98e797e9125608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

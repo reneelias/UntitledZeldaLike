@@ -54,6 +54,11 @@ public class GameMaster : Singleton<GameMaster>
         protected set => eventSystem = value;
         get => eventSystem;
     }
+    EventTrigger onLoadEvent;
+    public EventTrigger OnLoadEvent{
+        get => onLoadEvent;
+        protected set => onLoadEvent = value;
+    }
     public bool UI_FadedOut{
         protected set;
         get;
@@ -67,6 +72,15 @@ public class GameMaster : Singleton<GameMaster>
     public float MasterVolume{
         get => masterVolume;
         protected set => masterVolume = value;
+    }
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    protected override void Awake()
+    {
+        base.Awake();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Start is called before the first frame update
@@ -170,6 +184,19 @@ public class GameMaster : Singleton<GameMaster>
 
     public void SetDarknessMultiplier(float darknessMultiplier){
         dungeon.SetDarknessValue(darknessMultiplier);
+    }
+
+    public void LoadNewScene(string sceneName, EventTrigger onLoadEvent, string settingsStringJSON){
+        SceneManager.LoadScene(sceneName);
+        OnLoadEvent = onLoadEvent;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("OnSceneLoaded: " + scene.name);
+        Debug.Log(mode);
+        if(onLoadEvent != null){
+            onLoadEvent.Trigger();
+        }
     }
 
     public void ResetScene(){
