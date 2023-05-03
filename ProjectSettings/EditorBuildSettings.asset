@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/OLD/(OLD_SL2D)WizardCastleTest_SL2D 1.unity
     guid: 967f9522b8ac4a4459a471cbf6289f9e
+  - enabled: 1
+    path: Assets/Scenes/Beach_Awakening.unity
+    guid: 19e9360402f9b5e429276cbb0774202d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 10ee0090b905f894c96ae01ed648195f, type: 2}

@@ -11,6 +11,7 @@ public class CorruptedDragonBite : EventTrigger
     [SerializeField] float bodyTranslateY = -.125f;
     [SerializeField] float headTranslateY = -1.5f;
     [SerializeField] float headMovementDuration = 1f;
+    [SerializeField] EventTrigger nextSceneEvent;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -43,6 +44,7 @@ public class CorruptedDragonBite : EventTrigger
         base.Finish();
 
         GameMaster.Instance.SetBlackOverlay();
-        GameMaster.Instance.EndOfDemo();
+        // GameMaster.Instance.EndOfDemo();
+        GameMaster.Instance.LoadNewScene("Beach_Awakening", nextSceneEvent, null);
     }
 }

@@ -147,14 +147,14 @@ public class CameraBehavior : MonoBehaviour
         cameraBounds = new Bounds(transform.position, new Vector3(activeCamera.orthographicSize * 2f * activeCamera.aspect, activeCamera.orthographicSize * 2f, 0f));
     }
 
-    public void TransitionToNewPosition(Vector3 newPosition, float transitionTime){
+    public Tween TransitionToNewPosition(Vector3 newPosition, float transitionTime){
         if(skipTransitionPositionTween){
             skipTransitionPositionTween = false;
-            return;
+            return null;
         }
 
         transitioning = true;
-        transform.DOMove(newPosition, transitionTime)
+        return transform.DOMove(newPosition, transitionTime)
             // .OnUpdate(()=>{Debug.Log("transition camera to new position");})
             .OnComplete(()=> transitioning = false);
     }
@@ -199,28 +199,34 @@ public class CameraBehavior : MonoBehaviour
         return cameraBounds.Intersects(otherBounds);
     }
 
-    public void ZoomInFocusObject(float newSize = 3f, float zoomTime = .5f){
+    public Tween ZoomInFocusObject(float newSize = 3f, float zoomTime = .5f){
         // activeCamera.orthographicSize = newSize;
-        activeCamera.DOOrthoSize(newSize, zoomTime);
+        Tween zoomTween = activeCamera.DOOrthoSize(newSize, zoomTime);
 
         float temp_minX_Bound = leftBound.bounds.min.x + newSize * activeCamera.aspect;
         float temp_maxX_Bound = rightBound.bounds.max.x - newSize * activeCamera.aspect;
         float temp_minY_Bound = bottomBound.bounds.min.y + newSize;
         float temp_maxY_Bound = topBound.bounds.max.y - newSize;
         
-        Vector3 targetPosition = Vector3.zero;
-        targetPosition.x = Mathf.Clamp(objectToFollow.transform.position.x, temp_minX_Bound, temp_maxX_Bound);
-        targetPosition.y = Mathf.Clamp(objectToFollow.transform.position.y, temp_minY_Bound, temp_maxY_Bound);
-        targetPosition.z = transform.position.z;
-        activeCamera.transform.DOMove(targetPosition, zoomTime);
+        if(followObject){
+            Vector3 targetPosition = Vector3.zero;
+            targetPosition.x = Mathf.Clamp(objectToFollow.transform.position.x, temp_minX_Bound, temp_maxX_Bound);
+            targetPosition.y = Mathf.Clamp(objectToFollow.transform.position.y, temp_minY_Bound, temp_maxY_Bound);
+            targetPosition.z = transform.position.z;
+            activeCamera.transform.DOMove(targetPosition, zoomTime);
+        }
         transitioning = true;
+
+        return zoomTween;
     }
     
-    public void ZoomOutOriginalSize(float zoomTime = .5f){
-        activeCamera.DOOrthoSize(originalOrthographicSize, zoomTime)
+    public Tween ZoomOutOriginalSize(float zoomTime = .5f){
+        Tween zoomTween = activeCamera.DOOrthoSize(originalOrthographicSize, zoomTime)
             .OnUpdate(UpdateBounds)
             .OnComplete(()=>{transitioning = false;});
         
         transitioning = false;
+
+        return zoomTween;
     }
 }

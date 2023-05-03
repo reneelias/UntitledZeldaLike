@@ -1338,6 +1338,15 @@ public class CharacterControls : MonoBehaviour
         m_Rigidbody2D.velocity = (eventMoveActions[eventMoveIndex].movePosition.transform.position - gameObject.transform.position).normalized * eventMoveActions[eventMoveIndex].moveSpeed;
     }
 
+    public void EventTriggered(EventTrigger eventTrigger, bool suspendControls = true){
+        if(suspendControls){
+            NormalControlsSuspended = true;
+            eventControlsSuspended = true;
+            staffLightSprite.SuspendShooting = true;
+            currentEventTrigger = eventTrigger;
+        }
+    }
+
     public void Respawn(int floorLevel){
         FloorLevel = floorLevel;
         switch(CurrentWeaponType){

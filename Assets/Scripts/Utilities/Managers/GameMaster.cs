@@ -194,8 +194,9 @@ public class GameMaster : Singleton<GameMaster>
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
-        if(onLoadEvent != null){
-            onLoadEvent.Trigger();
+        if(OnLoadEvent != null){
+            // SetBlackOverlay(false);
+            OnLoadEvent.Trigger();
         }
     }
 

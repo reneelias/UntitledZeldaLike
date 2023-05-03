@@ -57,20 +57,27 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
         get => giveControlBackToPlayer;
     }
     [SerializeField] protected bool fadeOutUiStart = true;
+    [SerializeField] protected float uiFadeOutDuration = 1f;
     [SerializeField] protected bool fadeInUiEnd = true;
+    [Header("Camera Controls")]
+    [SerializeField] protected CameraBehavior camera;
+    [SerializeField] protected bool initialZoomTweenTriggers = true;
     [SerializeField] protected bool overrideCurrentCameraZoom = false;
     [SerializeField] protected float initialCameraZoom = 6.5f;
+    [SerializeField] protected float initialCameraZoomAnimDur = 1f;
     [SerializeField] protected float[] cameraZoomLevels;
     [SerializeField] protected float[] cameraZoomAnimDurs;
     [SerializeField] protected float[] cameraZoomPauseDurs;
-    int cameraZoomIndex = 0;
+    protected int cameraZoomIndex = 0;
+    protected bool cameraZoomsFinished = false;
     [SerializeField] protected bool overrideCurrentCameraPosition = false;
     [SerializeField] protected Vector2 initialCameraPosition;
+    [SerializeField] protected float initialCameraMoveAnimDur = 1f;
     [SerializeField] protected Vector2[] cameraPositions;
     [SerializeField] protected float[] cameraPositionAnimDurs;
     [SerializeField] protected float[] cameraPositionPauseDurs;
-    int cameraPositionIndex = 0;
-    [SerializeField] protected CameraBehavior camera;
+    protected int cameraPositionIndex = 0;
+    protected bool cameraMovesFinished = false;
     
  
     // Start is called before the first frame update
@@ -94,11 +101,6 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
                     camera = Camera.main.GetComponent<CameraBehavior>();
                 }
 
-                if(overrideCurrentCameraPosition){
-                    camera.TransitionToNewPosition(initialCameraPosition, 0f);
-                    camera.ZoomInFocusObject(initialCameraZoom, 0f);
-                }
-
                 break;
         }
 
@@ -110,7 +112,13 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
     // Update is called once per frame
     protected virtual void Update()
     {
-        
+        UpdateCameraAnimation();
+    }
+
+    protected virtual void UpdateCameraAnimation(){
+        if(!finished && cameraMovesFinished && cameraZoomsFinished){
+            Finish();
+        }
     }
 
     public virtual void Trigger(){
@@ -132,13 +140,59 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
                     GameMaster.Instance.Player.GetComponent<CharacterControls>().MovementEventTriggered(this, true);
                 }
                 break;
+            case TriggerType.CameraAnimation:
+                if(!useCollider){
+                    GameMaster.Instance.Player.GetComponent<CharacterControls>().EventTriggered(this, true);
+                }
+
+                BeginCameraAnimation();
+                break;
             default:
                 break;
         }
 
         if(fadeOutUiStart){
-            GameMaster.Instance.FadeOutUI();
+            GameMaster.Instance.FadeOutUI(uiFadeOutDuration);
         }
+    }
+
+    protected virtual void BeginCameraAnimation(){
+        float moveDur = overrideCurrentCameraPosition ? 0 : initialCameraMoveAnimDur;
+        float zoomDur = overrideCurrentCameraZoom ? 0 : initialCameraZoomAnimDur;
+
+        Tween positionTween = camera.TransitionToNewPosition(initialCameraPosition, moveDur);
+        Tween zoomTween = camera.ZoomInFocusObject(initialCameraZoom, zoomDur);
+
+        positionTween.OnComplete(NextCameraMoveAnim);
+        zoomTween.OnComplete(NextCameraZoomAnim);
+    }
+
+    protected virtual void NextCameraMoveAnim(){
+        if(cameraPositionIndex >= cameraPositions.Length){
+            cameraMovesFinished = true;
+            return;
+        }
+
+        Tween positionTween;
+        DOVirtual.DelayedCall(cameraPositionPauseDurs[cameraPositionIndex], ()=>{
+            positionTween = camera.TransitionToNewPosition(cameraPositions[cameraPositionIndex], cameraPositionAnimDurs[cameraPositionIndex]);
+            positionTween.OnComplete(NextCameraMoveAnim);
+            cameraPositionIndex++;
+        });
+    }
+
+    protected virtual void NextCameraZoomAnim(){
+        if(cameraZoomIndex >= cameraZoomLevels.Length){
+            cameraZoomsFinished = true;
+            return;
+        }
+
+        Tween zoomTween;
+        DOVirtual.DelayedCall(cameraZoomPauseDurs[cameraZoomIndex], ()=>{
+            zoomTween = camera.ZoomInFocusObject(cameraZoomLevels[cameraZoomIndex], cameraZoomAnimDurs[cameraZoomIndex]);
+            zoomTween.OnComplete(NextCameraZoomAnim);
+            cameraZoomIndex++;
+        });
     }
 
     public virtual void Finish(){
