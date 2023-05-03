@@ -23,7 +23,7 @@ public class CameraBehavior : MonoBehaviour
     bool transitioning = false;
 
     private Bounds cameraBounds;
-
+    public bool followObject = true;
     public GameObject objectToFollow;
     private Vector3 previousObjectPosition;
     [Header("Centered Follow")]
@@ -66,7 +66,7 @@ public class CameraBehavior : MonoBehaviour
     }
 
     void FollowObject(){
-        if(transitioning || cameraLeads){
+        if(transitioning || cameraLeads || !followObject){
             return;
         }
         // float xAxisValue = Input.GetAxis("Horizontal") * cameraSpeed;
@@ -92,7 +92,7 @@ public class CameraBehavior : MonoBehaviour
     }
 
     void FollowObjectLeading(){
-        if(transitioning || !cameraLeads){
+        if(transitioning || !cameraLeads || !followObject){
             return;
         }
         

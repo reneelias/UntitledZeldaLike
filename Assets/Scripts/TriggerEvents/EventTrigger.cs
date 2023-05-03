@@ -58,7 +58,21 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
     }
     [SerializeField] protected bool fadeOutUiStart = true;
     [SerializeField] protected bool fadeInUiEnd = true;
-
+    [SerializeField] protected bool overrideCurrentCameraZoom = false;
+    [SerializeField] protected float initialCameraZoom = 6.5f;
+    [SerializeField] protected float[] cameraZoomLevels;
+    [SerializeField] protected float[] cameraZoomAnimDurs;
+    [SerializeField] protected float[] cameraZoomPauseDurs;
+    int cameraZoomIndex = 0;
+    [SerializeField] protected bool overrideCurrentCameraPosition = false;
+    [SerializeField] protected Vector2 initialCameraPosition;
+    [SerializeField] protected Vector2[] cameraPositions;
+    [SerializeField] protected float[] cameraPositionAnimDurs;
+    [SerializeField] protected float[] cameraPositionPauseDurs;
+    int cameraPositionIndex = 0;
+    [SerializeField] protected CameraBehavior camera;
+    
+ 
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -76,6 +90,15 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
                 }
                 break;
             case TriggerType.CameraAnimation:
+                if(camera == null){
+                    camera = Camera.main.GetComponent<CameraBehavior>();
+                }
+
+                if(overrideCurrentCameraPosition){
+                    camera.TransitionToNewPosition(initialCameraPosition, 0f);
+                    camera.ZoomInFocusObject(initialCameraZoom, 0f);
+                }
+
                 break;
         }
 
