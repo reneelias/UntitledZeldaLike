@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class GameMaster : Singleton<GameMaster>
+public class GameMaster : PersistantSingleton<GameMaster>
 {
     public Dungeon dungeon;
     [SerializeField] WorldState worldState = WorldState.Dungeon;
@@ -54,11 +54,6 @@ public class GameMaster : Singleton<GameMaster>
         protected set => eventSystem = value;
         get => eventSystem;
     }
-    EventTrigger onLoadEvent;
-    public EventTrigger OnLoadEvent{
-        get => onLoadEvent;
-        protected set => onLoadEvent = value;
-    }
     public bool UI_FadedOut{
         protected set;
         get;
@@ -80,7 +75,6 @@ public class GameMaster : Singleton<GameMaster>
     protected override void Awake()
     {
         base.Awake();
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Start is called before the first frame update
@@ -186,31 +180,7 @@ public class GameMaster : Singleton<GameMaster>
         dungeon.SetDarknessValue(darknessMultiplier);
     }
 
-    public void LoadNewScene(string sceneName, EventTrigger onLoadEvent, string settingsStringJSON){
-        SceneManager.LoadScene(sceneName);
-        OnLoadEvent = onLoadEvent;
-    }
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
-        if(OnLoadEvent != null){
-            // SetBlackOverlay(false);
-            OnLoadEvent.Trigger();
-        }
-    }
 
-    public void ResetScene(){
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-
-        
-        // if(Application.platform == RuntimePlatform.Android) {
-        //     Camera.main.orthographicSize = 5f;
-        // } else {
-        //     GameObject.Find("JoystickCanvas").SetActive(false);
-        // }
-    }
 
     public void InputSchemeChange(string scheme){
         // if(scheme == "Gamepad"){

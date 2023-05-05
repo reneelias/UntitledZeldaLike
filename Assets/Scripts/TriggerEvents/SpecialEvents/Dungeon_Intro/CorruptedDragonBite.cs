@@ -45,6 +45,6 @@ public class CorruptedDragonBite : EventTrigger
 
         GameMaster.Instance.SetBlackOverlay();
         // GameMaster.Instance.EndOfDemo();
-        GameMaster.Instance.LoadNewScene("Beach_Awakening", nextSceneEvent, null);
+        SceneTransferManager.Instance.LoadNewScene("Beach_Awakening", nextSceneEvent, null);
     }
 }

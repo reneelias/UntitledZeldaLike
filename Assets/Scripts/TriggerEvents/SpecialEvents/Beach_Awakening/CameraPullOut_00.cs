@@ -16,4 +16,10 @@ public class CameraPullOut_00 : EventTrigger
     {
         
     }
+
+    public override void Trigger() {
+        base.Trigger();
+
+        Debug.Log("Beach awakening event trigger activated");
+    }
 }

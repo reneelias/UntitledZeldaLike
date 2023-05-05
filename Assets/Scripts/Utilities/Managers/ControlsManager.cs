@@ -40,6 +40,9 @@ public class ControlsManager : Singleton<ControlsManager>
     }
 
     public void SetCurrentControlType(string controllerName){
+        if(controlSwapUI_Array == null) {
+            return;
+        }
         switch(controllerName){
             case "DualShock4GamepadHID":
             case "DualSenseGamepadHID":
@@ -57,7 +60,11 @@ public class ControlsManager : Singleton<ControlsManager>
                 break;
         }
 
+        
         foreach(GameObject controlsSwapUI in controlSwapUI_Array){
+            if(controlsSwapUI == null) {  
+                continue; 
+            }
             controlsSwapUI.GetComponent<I_ControlsSwapUI>().UpdateControlsUI();
         }
     }
