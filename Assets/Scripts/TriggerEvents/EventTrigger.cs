@@ -145,6 +145,9 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
                     GameMaster.Instance.Player.GetComponent<CharacterControls>().EventTriggered(this, true);
                 }
 
+                if(camera == null) {
+                    camera = Camera.main.GetComponent<CameraBehavior>();
+                }
                 BeginCameraAnimation();
                 break;
             default:

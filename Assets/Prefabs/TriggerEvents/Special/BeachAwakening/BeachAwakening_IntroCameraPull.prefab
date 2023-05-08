@@ -58,20 +58,22 @@ MonoBehaviour:
   pauseBeforeNextAction: 0
   giveControlBackToPlayer: 1
   fadeOutUiStart: 1
-  fadeInUiEnd: 1
+  uiFadeOutDuration: 0
+  fadeInUiEnd: 0
+  camera: {fileID: 0}
+  initialZoomTweenTriggers: 1
   overrideCurrentCameraZoom: 1
   initialCameraZoom: 2.5
   initialCameraZoomAnimDur: 1
   cameraZoomLevels:
   - 6.5
   cameraZoomAnimDurs:
-  - 3
+  - 5
   cameraZoomPauseDurs:
-  - 3
+  - 8
   overrideCurrentCameraPosition: 0
   initialCameraPosition: {x: 0, y: 0}
   initialCameraMoveAnimDur: 0
   cameraPositions: []
   cameraPositionAnimDurs: []
   cameraPositionPauseDurs: []
-  camera: {fileID: 0}

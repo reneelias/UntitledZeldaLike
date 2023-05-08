@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraPullOut_00 : EventTrigger
 {
@@ -20,6 +21,7 @@ public class CameraPullOut_00 : EventTrigger
     public override void Trigger() {
         base.Trigger();
 
-        Debug.Log("Beach awakening event trigger activated");
+        GameMaster.Instance.SetBlackOverlay(true);
+        GameMaster.Instance.FadeOutSpriteOverlay(2f, 2f);
     }
 }

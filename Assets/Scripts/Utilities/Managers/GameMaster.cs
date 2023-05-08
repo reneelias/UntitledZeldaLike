@@ -197,30 +197,31 @@ public class GameMaster : PersistantSingleton<GameMaster>
         coinCountText.text = ":" + coinCount.ToString();
     }
 
-    public void FadeOutUI(float fadeTime = 1f){
+    public void FadeOutUI(float fadeTime = 1f, float delay = 0f){
         foreach(GameObject gameObject in UI_canvasGroupsToFadeOut_gameOver){
-            gameObject.GetComponent<CanvasGroup>().DOFade(0f, fadeTime);
+            gameObject.GetComponent<CanvasGroup>().DOFade(0f, fadeTime).SetDelay(delay);
         }
 
         foreach(GameObject gameObject in UI_spritesToFadeOut_gameOver){
-            gameObject.GetComponent<SpriteRenderer>().DOFade(0f, fadeTime);
+            gameObject.GetComponent<SpriteRenderer>().DOFade(0f, fadeTime).SetDelay(delay);
         }
 
-        crosshair.GetComponent<SpriteRenderer>().DOFade(0f, fadeTime);
+        crosshair.GetComponent<SpriteRenderer>().DOFade(0f, fadeTime).SetDelay(delay);
         UI_FadedOut = true;
     }
 
-    public void FadeInUI(float fadeTime = 1f){
+    public void FadeInUI(float fadeTime = 1f, float delay = 0f){
         foreach(GameObject gameObject in UI_canvasGroupsToFadeOut_gameOver){
-            gameObject.GetComponent<CanvasGroup>().DOFade(1f, fadeTime);
+            gameObject.GetComponent<CanvasGroup>().DOFade(1f, fadeTime).SetDelay(delay);
         }
 
         foreach(GameObject gameObject in UI_spritesToFadeOut_gameOver){
-            gameObject.GetComponent<SpriteRenderer>().DOFade(1f, fadeTime);
+            gameObject.GetComponent<SpriteRenderer>().DOFade(1f, fadeTime).SetDelay(delay);
         }
 
-        crosshair.GetComponent<SpriteRenderer>().DOFade(1f, fadeTime);
+        crosshair.GetComponent<SpriteRenderer>().DOFade(1f, fadeTime).SetDelay(delay);
         UI_FadedOut = false;
+        
     }
 
     public void FadeInUI_GameOver(float fadeTime = 1f){
@@ -259,17 +260,18 @@ public class GameMaster : PersistantSingleton<GameMaster>
         });
     }
 
-    public Tween FadeInSpriteOverlay(float fadeTime, bool setToScreenSize = true){
+    public Tween FadeInSpriteOverlay(float fadeTime, float delay = 0f, bool setToScreenSize = true){
+        
         if(setToScreenSize){
             blackOverlay.transform.localScale = new Vector3(Screen.width * 2f, Screen.height * 2f, 1f);
             // gameOverOverlay.transform.position = Camera.main.transform.position;
         }
         blackOverlay.gameObject.SetActive(true);
-        return blackOverlay.TweenIn(fadeTime);  
+        return blackOverlay.TweenIn(fadeTime).SetDelay(delay);  
     }
 
-    public Tween FadeOutSpriteOverlay(float fadeTime, bool deactivateObject = true){
-        return blackOverlay.TweenOut(fadeTime)
+    public Tween FadeOutSpriteOverlay(float fadeTime, float delay = 0f, bool deactivateObject = true){
+        return blackOverlay.TweenOut(fadeTime).SetDelay(delay)
             .OnComplete(()=>{
                 if(deactivateObject){
                     blackOverlay.gameObject.SetActive(false);
