@@ -80,14 +80,16 @@ public class GameMaster : PersistantSingleton<GameMaster>
     // Start is called before the first frame update
     void Start()
     {
-        if(Application.platform == RuntimePlatform.Android) {
+        // if(Application.platform == RuntimePlatform.Android) {
             Camera.main.orthographicSize = 5f;
-        } else {
-            // GameObject.Find("JoystickCanvas").SetActive(false);
-            Application.targetFrameRate = -1;
-            // QualitySettings.vSyncCount = 1;
+        // } else {
+        //     // GameObject.Find("JoystickCanvas").SetActive(false);
+        //     Application.targetFrameRate = -1;
+        //     // QualitySettings.vSyncCount = 1;
+        // }
+        if(Application.platform == RuntimePlatform.Android) {
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
         }
-
         audioSource.volume = masterVolume;
     }
 
