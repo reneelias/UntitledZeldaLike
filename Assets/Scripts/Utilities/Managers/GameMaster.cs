@@ -81,7 +81,7 @@ public class GameMaster : PersistantSingleton<GameMaster>
     void Start()
     {
         // if(Application.platform == RuntimePlatform.Android) {
-            Camera.main.orthographicSize = 5f;
+            // Camera.main.orthographicSize = 5f;
         // } else {
         //     // GameObject.Find("JoystickCanvas").SetActive(false);
         //     Application.targetFrameRate = -1;
