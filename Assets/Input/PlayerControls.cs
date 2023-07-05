@@ -568,7 +568,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard_Mouse"",
                     ""action"": ""Scroll Wheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
