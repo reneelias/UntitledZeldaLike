@@ -179,8 +179,8 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
         Tween positionTween;
         DOVirtual.DelayedCall(cameraPositionPauseDurs[cameraPositionIndex], ()=>{
             positionTween = camera.TransitionToNewPosition(cameraPositions[cameraPositionIndex], cameraPositionAnimDurs[cameraPositionIndex]);
-            positionTween.OnComplete(NextCameraMoveAnim);
             cameraPositionIndex++;
+            positionTween.OnComplete(NextCameraMoveAnim);
         });
     }
 
@@ -193,8 +193,8 @@ public class EventTrigger : MonoBehaviour, I_Triggerable
         Tween zoomTween;
         DOVirtual.DelayedCall(cameraZoomPauseDurs[cameraZoomIndex], ()=>{
             zoomTween = camera.ZoomInFocusObject(cameraZoomLevels[cameraZoomIndex], cameraZoomAnimDurs[cameraZoomIndex]);
-            zoomTween.OnComplete(NextCameraZoomAnim);
             cameraZoomIndex++;
+            zoomTween.OnComplete(NextCameraZoomAnim);
         });
     }
 
